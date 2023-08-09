@@ -24,3 +24,9 @@ export const createAntena = async (req: Request, res: Response) => {
 
   return res.json(antena);
 }
+
+export const getAllAntenas = async (req:Request, res: Response) => {
+  const antenas = await prisma.antena.findMany()
+
+  return res.json(antenas)
+}
