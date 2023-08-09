@@ -117,10 +117,10 @@ model Checklist {
 
 model Tarefa {
   id              String     @id @default(uuid())
-  created_at      DateTime   @default(now())
   description     String
   verificado      Boolean
   foto_verificado Boolean
+  created_at      DateTime   @default(now())
   updated_at      DateTime   @updatedAt
   Checklist       Checklist? @relation(fields: [checklistId], references: [id])
   checklistId     String?
