@@ -6,7 +6,6 @@ import { createTipoEquipamento, getAllTipoEquipamentos } from "./controllers/Tip
 import { createTarefa, getAllTarefas } from "./controllers/TarefaController";
 import { createChecklist, getAllChecklists } from "./controllers/ChecklistController";
 
-
 export const router = Router()
 
 router.post("/user", createUser)
