@@ -3,7 +3,7 @@ import { prisma } from "../database/prisma";
 // import path from 'path';
 
 export const createAntena = async (req: Request, res: Response) => {
-  const { codigo, marca, modelo, categoria, status, gain, tipos_antena, posicao_torre, vr, tipo_equipamento } = req.body;
+  const { codigo, marca, modelo, categoria, status, gain, tipos_antena, posicao_torre, vr, tipo_equipamento, station } = req.body;
   // const requestDocuments = req.files as Express.Multer.File[];
 
   // const documentos = requestDocuments.map((doc) => {
@@ -26,6 +26,11 @@ export const createAntena = async (req: Request, res: Response) => {
     data: { codigo,marca, modelo, categoria, status, gain, tipos_antena, posicao_torre, vr, TipoEquipamento: {
       connect: {
         name: tipo_equipamento
+      },
+    },
+    Station: {
+      connect: {
+        id: station
       }
     }
   }

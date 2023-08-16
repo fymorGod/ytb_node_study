@@ -3,7 +3,7 @@ import { Request, Response } from "express"
 import { prisma } from "../database/prisma";
 
 export const createCabo = async (req: Request, res: Response) => {
-  const { codigo, marca, modelo, categoria, status, tipos_cabo, tamanho, tipo_equipamento} = req.body;
+  const { codigo, marca, modelo, categoria, status, tipos_cabo, tamanho, tipo_equipamento } = req.body;
  
   const isCaboCodigoUnique = await prisma.cabo.findUnique({
     where: {

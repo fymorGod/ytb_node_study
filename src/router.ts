@@ -5,6 +5,7 @@ import { createAntena, getAllAntenas } from "./controllers/AntenaController";
 import { createTipoEquipamento, getAllTipoEquipamentos } from "./controllers/TipoEquipamentoController";
 import { createTarefa, getAllTarefas } from "./controllers/TarefaController";
 import { createChecklist, getAllChecklists } from "./controllers/ChecklistController";
+import { createStation } from "./controllers/StationController";
 
 export const router = Router()
 
@@ -24,3 +25,5 @@ router.get("/tipo-equipamentos", getAllTipoEquipamentos)
 
 router.post("/checklist", createChecklist)
 router.get("/checklists", getAllChecklists)
+
+router.post("/station", createStation)
