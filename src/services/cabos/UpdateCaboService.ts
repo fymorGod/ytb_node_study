@@ -44,6 +44,7 @@ export class UpdateCaboService {
         modelo,
         categoria,
         status,
+        status_anterior,
         tipos_cabo,
         tamanho,
         tipo_equipamento,

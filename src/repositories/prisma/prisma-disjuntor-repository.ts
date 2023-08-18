@@ -1,5 +1,6 @@
+
 import { prisma } from "../../database/prisma";
-import { CaboCreateData, CaboDelete, CaboFind, CaboFindByCodigo, CaboRepository, CaboUpdate } from "../interfaces/cabo/cabo-repository";
+import { DisjuntorCreateData, DisjuntorDelete, DisjuntorFind, DisjuntorFindByCodigo, DisjuntorRepository, DisjuntorUpdate } from "../interfaces/disjuntor/disjuntor-repository";
 
 export const isStationIdValid = async ({ id }: any) => {
   const stationID = await prisma.station.findUnique({
@@ -10,22 +11,23 @@ export const isStationIdValid = async ({ id }: any) => {
   return !!stationID;
 }
 
-export class PrismaCaboRepository implements CaboRepository {
-  async create({ codigo, marca, modelo, categoria, status, tamanho, tipos_cabo, tipo_equipamento, station_id}: CaboCreateData) {
+export class PrismaDisjuntorRepository implements DisjuntorRepository {
+  
+  async create({ codigo, marca, modelo, categoria, status, corrente_maxima, tipo_equipamento, station_id }: DisjuntorCreateData) {
     const data: any = {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        tipos_cabo,
-        tamanho,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          }
-        },
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      corrente_maxima,
+      TipoEquipamento: {
+        connect: {
+          name: tipo_equipamento
+        }
+      },
     };
+  
     if (station_id && (await isStationIdValid({ id: station_id}))) {
       data.Station = {
         connect: {
@@ -33,20 +35,22 @@ export class PrismaCaboRepository implements CaboRepository {
         }
       };
     }
-
-    return await prisma.cabo.create({ data });
+  
+    return await prisma.disjuntor.create({
+      data
+    });
   }
 
   async get() {
-    const cabos = await prisma.cabo.findMany({
+    const disjuntores = await prisma.disjuntor.findMany({
       select: {
+        id:true,
         codigo: true,
         marca: true,
         modelo: true,
         categoria: true,
         status: true,
-        tipos_cabo: true,
-        tamanho: true,
+        corrente_maxima: true,
         TipoEquipamento: {
           select: {
             name: true
@@ -59,14 +63,13 @@ export class PrismaCaboRepository implements CaboRepository {
         },
       }
     });
-
-    return cabos;
+    return disjuntores;
   }
 
-  async find({ id }: CaboFind) {
-    const cabos = await prisma.cabo.findUnique({
+  async find({ id }: DisjuntorFind) {
+    const disjuntores = await prisma.disjuntor.findUnique({
       where: {
-        id
+        id,
       },
       select: {
         codigo: true,
@@ -74,8 +77,7 @@ export class PrismaCaboRepository implements CaboRepository {
         modelo: true,
         categoria: true,
         status: true,
-        tipos_cabo: true,
-        tamanho: true,
+        corrente_maxima: true,
         TipoEquipamento: {
           select: {
             name: true
@@ -85,31 +87,32 @@ export class PrismaCaboRepository implements CaboRepository {
           select: {
             name: true
           }
-        },
-      }
+        },       
+      },
     });
-    return cabos;
+    return disjuntores;
   }
 
-  async findByCodigo({codigo}: CaboFindByCodigo) {
-    const cabo = await prisma.cabo.findFirst({
+  async findByCodigo ({ codigo }: DisjuntorFindByCodigo) {
+    const disjuntores = await prisma.disjuntor.findFirst({
       where: {
         codigo
       }
-    });
+    })
 
-    return cabo
+    return disjuntores
   }
-  async delete({ id }: CaboDelete) {
-    await prisma.cabo.delete({
+
+  async delete({ id }: DisjuntorDelete) {
+    await prisma.disjuntor.delete({
       where: {
         id,
-      }
+      },
     });
   }
 
-  async update({id, codigo, marca, modelo, categoria, status,tamanho, tipos_cabo, tipo_equipamento, station_id}: CaboUpdate) {
-    await prisma.cabo.update({
+  async update({ id, codigo, marca, modelo, categoria, corrente_maxima,station_id, tipo_equipamento, status, }: DisjuntorUpdate) {
+    await prisma.disjuntor.update({
       where: {
         id,
       },
@@ -119,8 +122,7 @@ export class PrismaCaboRepository implements CaboRepository {
         modelo,
         categoria,
         status,
-        tipos_cabo,
-        tamanho,
+        corrente_maxima,
         TipoEquipamento: {
           connect: {
             id: tipo_equipamento
@@ -134,5 +136,5 @@ export class PrismaCaboRepository implements CaboRepository {
       }
     });
   }
-  
+
 }

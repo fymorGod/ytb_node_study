@@ -29,6 +29,7 @@ export interface CaboUpdate {
   modelo?: string;
   categoria?: caboCategoria;
   status?: caboStatus;
+  status_anterior?: caboStatus;
   tipos_cabo?: tiposCabos;
   tamanho?: number;
   tipo_equipamento?: string;

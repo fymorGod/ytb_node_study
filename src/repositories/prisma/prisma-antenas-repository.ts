@@ -30,7 +30,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
       vr,
     };
   
-    if (station_id && (await isStationIdValid(station_id))) {
+    if (station_id && (await isStationIdValid({ id: station_id}))) {
       data.Station = {
         connect: {
           id: station_id
@@ -39,7 +39,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
     }
   
     return await prisma.antena.create({
-      data
+      data,
     });
   }
 

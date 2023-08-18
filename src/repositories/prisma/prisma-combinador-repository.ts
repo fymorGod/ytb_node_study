@@ -25,7 +25,7 @@ export class PrismaCombinadorRepository implements CombinadorRepository {
       },
     };
 
-    if (station_id && (await isStationIdValid(station_id))) {
+    if (station_id && (await isStationIdValid({ id: station_id}))) {
       data.Station = {
         connect: {
           id: station_id

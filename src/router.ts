@@ -15,6 +15,17 @@ import { CreateArcondicionadoController } from "./controllers/arcondicionados/Cr
 import { FindArcondicionadoController } from "./controllers/arcondicionados/FindArcondicionadoController";
 import { UpdateArcondicionadoController } from "./controllers/arcondicionados/UpdateArcondicionadoController";
 import { DeleteArcondicionadoController } from "./controllers/arcondicionados/DeleteArcondicionadoController";
+import { GetCaboController } from "./controllers/cabos/GetCaboController";
+import { CreateCaboController } from "./controllers/cabos/CreateCaboController";
+import { FindCaboController } from "./controllers/cabos/FindCaboController";
+import { UpdateCaboController } from "./controllers/cabos/UpdateCaboController";
+import { DeleteCaboController } from "./controllers/cabos/DeleteCaboController";
+import { AuthController } from "./controllers/AuthController";
+import { GetCombinadorController } from "./controllers/combinador/GetCombinadorController";
+import { CreateCombinadorControler } from "./controllers/combinador/CreateCombinadorController";
+import { FindCombinadorController } from "./controllers/combinador/FindCombinadorController";
+import { UpdateCombinadorController } from "./controllers/combinador/UpdateCombinadorController";
+import { DeleteCombinadorController } from "./controllers/combinador/DeleteCombinadorController";
 
 export const router = Router()
 
@@ -44,6 +55,33 @@ router
   .get(new FindArcondicionadoController().handle)
   .put(new UpdateArcondicionadoController().handle)
   .delete(new DeleteArcondicionadoController().handle)
+
+//Rotas para Cabos
+router
+  .route("/cabos")
+  .get(new GetCaboController().handle)
+  .post(new CreateCaboController().handle)
+router
+  .route("/cabos/:id")
+  .get(new FindCaboController().handle)
+  .put(new UpdateCaboController().handle)
+  .delete(new DeleteCaboController().handle)
+
+//Rotas para Combinadores
+router
+  .route("/combinador")
+  .get(new GetCombinadorController().handle)
+  .post(new CreateCombinadorControler().handle)
+router
+  .route("/combinador/:id")
+  .get(new FindCombinadorController().handle)
+  .put(new UpdateCombinadorController().handle)
+  .delete(new DeleteCombinadorController().handle)
+  
+//Rotas para Authenticate
+router
+  .route("/auth")
+  .post(new AuthController().authenticate)
 
 router.post("/tarefa", createTarefa)
 router.get("/tarefas", getAllTarefas)
