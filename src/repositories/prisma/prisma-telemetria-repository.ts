@@ -1,6 +1,5 @@
-
 import { prisma } from "../../database/prisma";
-import { DisjuntorCreateData, DisjuntorDelete, DisjuntorFind, DisjuntorFindByCodigo, DisjuntorRepository, DisjuntorUpdate } from "../interfaces/disjuntor/disjuntor-repository";
+import { TelemetriaCreateData, TelemetriaDelete, TelemetriaFind, TelemetriaFindByCodigo, TelemetriaRepository, TelemetriaUpdate } from "../interfaces/telemetria/telemetria-repository";
 
 export const isStationIdValid = async ({ id }: any) => {
   const stationID = await prisma.station.findUnique({
@@ -11,23 +10,21 @@ export const isStationIdValid = async ({ id }: any) => {
   return !!stationID;
 }
 
-export class PrismaDisjuntorRepository implements DisjuntorRepository {
-  
-  async create({ codigo, marca, modelo, categoria, status, corrente_maxima, tipo_equipamento, station_id }: DisjuntorCreateData) {
+export class PrismaTelemetriaRepository implements TelemetriaRepository {
+  async create({ codigo, marca, modelo, categoria, status, tipo_equipamento, station_id }: TelemetriaCreateData) {
     const data: any = {
       codigo,
       marca,
       modelo,
       categoria,
       status,
-      corrente_maxima,
       TipoEquipamento: {
         connect: {
           name: tipo_equipamento
         }
       },
     };
-  
+
     if (station_id && (await isStationIdValid({ id: station_id}))) {
       data.Station = {
         connect: {
@@ -35,14 +32,13 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
         }
       };
     }
-  
-    return await prisma.disjuntor.create({
+    return await prisma.telemetria.create({
       data
     });
   }
 
   async get() {
-    const disjuntores = await prisma.disjuntor.findMany({
+    const telemetria = await prisma.telemetria.findMany({
       select: {
         id:true,
         codigo: true,
@@ -50,7 +46,6 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
         modelo: true,
         categoria: true,
         status: true,
-        corrente_maxima: true,
         TipoEquipamento: {
           select: {
             name: true
@@ -60,14 +55,14 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
           select: {
             name: true
           }
-        },
+        }
       }
     });
-    return disjuntores;
+    return telemetria;
   }
 
-  async find({ id }: DisjuntorFind) {
-    const disjuntores = await prisma.disjuntor.findUnique({
+  async find({ id }: TelemetriaFind) {
+    const telemetria = await prisma.telemetria.findUnique({
       where: {
         id,
       },
@@ -77,7 +72,6 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
         modelo: true,
         categoria: true,
         status: true,
-        corrente_maxima: true,
         TipoEquipamento: {
           select: {
             name: true
@@ -87,32 +81,33 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
           select: {
             name: true
           }
-        },       
+        },
+      
       },
     });
-    return disjuntores;
+    return telemetria;
   }
 
-  async findByCodigo ({ codigo }: DisjuntorFindByCodigo) {
-    const disjuntores = await prisma.disjuntor.findFirst({
+  async findByCodigo ({ codigo }: TelemetriaFindByCodigo) {
+    const telemetria = await prisma.telemetria.findFirst({
       where: {
         codigo
       }
     })
 
-    return disjuntores
+    return telemetria
   }
 
-  async delete({ id }: DisjuntorDelete) {
-    await prisma.disjuntor.delete({
+  async delete({ id }: TelemetriaDelete) {
+    await prisma.telemetria.delete({
       where: {
         id,
       },
     });
   }
 
-  async update({ id, codigo, marca, modelo, categoria, corrente_maxima,station_id, tipo_equipamento, status }: DisjuntorUpdate) {
-    await prisma.disjuntor.update({
+  async update({ id, codigo, marca, modelo, categoria, station_id, tipo_equipamento, status }: TelemetriaUpdate) {
+    await prisma.telemetria.update({
       where: {
         id,
       },
@@ -122,7 +117,6 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
         modelo,
         categoria,
         status,
-        corrente_maxima,
         TipoEquipamento: {
           connect: {
             id: tipo_equipamento
@@ -136,5 +130,4 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
       }
     });
   }
-
 }

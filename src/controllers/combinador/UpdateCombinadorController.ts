@@ -8,7 +8,7 @@ class UpdateCombinadorController {
 
     const { id } = req.params;
 
-    const { codigo,marca,modelo, categoria,status,gain,tipos_Combinador,posicao_torre,vr,tipo_equipamento,station_id } = req.body;
+    const { codigo,marca,modelo, categoria,status,tipo_equipamento,station_id } = req.body;
 
     const prismaCombinadorRepository = new PrismaCombinadorRepository()
 

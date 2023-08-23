@@ -3,7 +3,7 @@ import { PrismaDisjuntorRepository } from "../../repositories/prisma/prisma-disj
 import { DeleteDisjuntorService } from "../../services/disjuntor/DeleteDisjuntorService";
 
 
-class DeleteDisjjuntorController {
+class DeleteDisjuntorController {
 
   async handle(req: Request, res: Response) {
     const { id } = req.params;
@@ -24,4 +24,4 @@ class DeleteDisjjuntorController {
   }
 }
 
-export { DeleteDisjjuntorController };
+export { DeleteDisjuntorController };

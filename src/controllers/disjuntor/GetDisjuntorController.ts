@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { PrismaDisjuntorRepository } from "../../repositories/prisma/prisma-disjuntor-repository";
 import { GetDisjuntorService } from "../../services/disjuntor/GetDisjuntorService";
 
-class GetDisjuntoController {
+class GetDisjuntorController {
   async handle(req: Request, res: Response) {
 
     const prismaDisjuntorRepository = new PrismaDisjuntorRepository();
@@ -19,4 +19,4 @@ class GetDisjuntoController {
   }
 }
 
-export { GetDisjuntoController };
+export { GetDisjuntorController };
