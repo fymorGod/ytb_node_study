@@ -419,7 +419,8 @@ model Transmissor {
   canal_virtual     Float
   acoplador_one     String
   acoplador_two     String
-  receptor          Receptor         @relation(fields: [receptorId], references: [id])
+  Receptor          Receptor?         @relation(fields: [receptorId], references: [id])
+  receptorId        String?
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
   Antena            Antena?          @relation(fields: [antenaId], references: [id])
@@ -428,5 +429,5 @@ model Transmissor {
   tipoEquipamentoId String?
   Station           Station?         @relation(fields: [stationId], references: [id])
   stationId         String?
-  receptorId        String
+ 
 }

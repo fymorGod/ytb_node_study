@@ -56,6 +56,21 @@ import { CreateReceptorControler } from "./controllers/receptor/CreateReceptorCo
 import { FindReceptorController } from "./controllers/receptor/FindReceptorController";
 import { UpdateReceptorController } from "./controllers/receptor/UpdateReceptorController";
 import { DeleteReceptorController } from "./controllers/receptor/DeleteReceptorController";
+import { GetSwitchController } from "./controllers/switch/GetSwitchController";
+import { CreateSwitchControler } from "./controllers/switch/CreateSwitchController";
+import { FindSwitchController } from "./controllers/switch/FindSwitchController";
+import { UpdateSwitchController } from "./controllers/switch/UpdateSwitchController";
+import { DeleteSwitchController } from "./controllers/switch/DeleteSwitchController";
+import { GetTorreController } from "./controllers/torre/GetTorreController";
+import { CreateTorreControler } from "./controllers/torre/CreateTorreController";
+import { FindTorreController } from "./controllers/torre/FindTorreController";
+import { UpdateTorreController } from "./controllers/torre/UpdateTorreController";
+import { DeleteTorreController } from "./controllers/torre/DeleteTorreController";
+import { GetTransmissorController } from "./controllers/transmissor/GetTransmissorController";
+import { CreateTransmissorControler } from "./controllers/transmissor/CreateTransmissorController";
+import { FindTransmissorController } from "./controllers/transmissor/FindTransmissorController";
+import { DeleteTransmissorController } from "./controllers/transmissor/DeleteTransmissorController";
+import { UpdateTransmissorController } from "./controllers/transmissor/UpdateTransmissorController";
 
 export const router = Router()
 
@@ -173,6 +188,40 @@ router
 .get(new FindReceptorController().handle)
 .put(new UpdateReceptorController().handle)
 .delete(new DeleteReceptorController().handle)
+
+
+//Rotas para Switch
+router
+.route("/switch")
+.get(new GetSwitchController().handle)
+.post(new CreateSwitchControler().handle)
+router
+.route("/switch/:id")
+.get(new FindSwitchController().handle)
+.put(new UpdateSwitchController().handle)
+.delete(new DeleteSwitchController().handle)
+
+//Rotas para Torre
+router
+.route("/torre")
+.get(new GetTorreController().handle)
+.post(new CreateTorreControler().handle)
+router
+.route("/torre/:id")
+.get(new FindTorreController().handle)
+.put(new UpdateTorreController().handle)
+.delete(new DeleteTorreController().handle)
+
+//Rotas para Transmissor
+router
+.route("/transmissor")
+.get(new GetTransmissorController().handle)
+.post(new CreateTransmissorControler().handle)
+router
+.route("/transmissor/:id")
+.get(new FindTransmissorController().handle)
+.put(new UpdateTransmissorController().handle)
+.delete(new DeleteTransmissorController().handle)
 
 //Rotas para Authenticate
 router
