@@ -33,7 +33,7 @@ class CreateNobreakControler {
     //return message to user
     return res.status(201).send(
       {
-        message: "Nobreak criada com sucesso!",
+        message: "Nobreak criado com sucesso!",
         nobreak
       }
     );

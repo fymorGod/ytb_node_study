@@ -4,7 +4,6 @@ import { createAccess, getAllAccesses } from "./controllers/AcessController";
 import { createTipoEquipamento, getAllTipoEquipamentos } from "./controllers/TipoEquipamentoController";
 import { createTarefa, getAllTarefas } from "./controllers/TarefaController";
 import { createChecklist, getAllChecklists } from "./controllers/ChecklistController";
-import { createStation } from "./controllers/StationController";
 import { CreateAntenaControler } from "./controllers/antenas/CreateAntenaController";
 import { GetAntenaController } from "./controllers/antenas/GetAntenaController";
 import { FindAntenaController } from "./controllers/antenas/FindAntenaController";
@@ -71,6 +70,22 @@ import { CreateTransmissorControler } from "./controllers/transmissor/CreateTran
 import { FindTransmissorController } from "./controllers/transmissor/FindTransmissorController";
 import { DeleteTransmissorController } from "./controllers/transmissor/DeleteTransmissorController";
 import { UpdateTransmissorController } from "./controllers/transmissor/UpdateTransmissorController";
+import { GetQuadroController } from "./controllers/quadro/GetQuadroController";
+import { CreateQuadroControler } from "./controllers/quadro/CreateQuadroController";
+import { FindQuadroController } from "./controllers/quadro/FindQuadroController";
+import { UpdateQuadroController } from "./controllers/quadro/UpdateQuadroController";
+import { DeleteQuadroController } from "./controllers/quadro/DeleteQuadroController";
+import { GetStationController } from "./controllers/station/GetStationController";
+import { CreateStationControler } from "./controllers/station/CreateStationController";
+import { FindStationController } from "./controllers/station/FindStationController";
+import { UpdateStationController } from "./controllers/station/UpdateStationController";
+import { DeleteStationController } from "./controllers/station/DeleteStationController";
+import { GetTelemetriaController } from "./controllers/telemetria/GetTelemetriaController";
+import { CreateTelemetriaControler } from "./controllers/telemetria/CreateTelemetriaController";
+import { FindTelemetriaController } from "./controllers/telemetria/FindTelemetriaController";
+import { UpdateTelemetriaController } from "./controllers/telemetria/UpdateTelemetriaController";
+import { DeleteTelemetriaController } from "./controllers/telemetria/DeleteTelemetriaController";
+import { GetAllController } from "./controllers/All/GetAllControllers";
 
 export const router = Router()
 
@@ -223,6 +238,44 @@ router
 .put(new UpdateTransmissorController().handle)
 .delete(new DeleteTransmissorController().handle)
 
+//Rotas para Quadro
+router
+.route("/quadro")
+.get(new GetQuadroController().handle)
+.post(new CreateQuadroControler().handle)
+router
+.route("/quadro/:id")
+.get(new FindQuadroController().handle)
+.put(new UpdateQuadroController().handle)
+.delete(new DeleteQuadroController().handle)
+
+//Rotas para Station
+router
+.route("/station")
+.get(new GetStationController().handle)
+.post(new CreateStationControler().handle)
+router
+.route("/station/:id")
+.get(new FindStationController().handle)
+.put(new UpdateStationController().handle)
+.delete(new DeleteStationController().handle)
+
+//Rotas para Telemetria
+router
+.route("/telemetria")
+.get(new GetTelemetriaController().handle)
+.post(new CreateTelemetriaControler().handle)
+router
+.route("/telemetria/:id")
+.get(new FindTelemetriaController().handle)
+.put(new UpdateTelemetriaController().handle)
+.delete(new DeleteTelemetriaController().handle)
+
+//Rotas para Telemetria
+router
+.route("/all")
+.get(new GetAllController().handle)
+
 //Rotas para Authenticate
 router
   .route("/auth")
@@ -236,5 +289,3 @@ router.get("/tipo-equipamentos", getAllTipoEquipamentos)
 
 router.post("/checklist", createChecklist)
 router.get("/checklists", getAllChecklists)
-
-router.post("/station", createStation)

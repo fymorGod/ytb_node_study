@@ -9,9 +9,19 @@ export const isStationIdValid = async ({ id }: any) => {
   })
   return !!stationID;
 }
+
+export const isQuadroIdValid = async ({ id }: any) => {
+  const quadroID = await prisma.quadro.findUnique({
+    where: {
+      id
+    }
+  })
+  return !!quadroID;
+}
+
 export class PrismaDpsRepository implements DpsRepository {
 
-  async create({ codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, tipo_equipamento, station_id }: DpsCreateData) {
+  async create({ codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, quadro, tipo_equipamento, station_id }: DpsCreateData) {
     const data: any = {
       codigo,
       marca,
@@ -26,7 +36,13 @@ export class PrismaDpsRepository implements DpsRepository {
         }
       },
     };
-  
+    if (quadro && (await isQuadroIdValid({ id: quadro}))) {
+      data.Quadro = {
+        connect: {
+          id: quadro
+        }
+      };
+    }
     if (station_id && (await isStationIdValid({ id: station_id}))) {
       data.Station = {
         connect: {
@@ -49,7 +65,11 @@ export class PrismaDpsRepository implements DpsRepository {
         modelo: true,
         categoria: true,
         status: true,
-
+        Quadro: {
+          select: {
+            codigo: true
+          }
+        },
         TipoEquipamento: {
           select: {
             name: true
@@ -78,6 +98,11 @@ export class PrismaDpsRepository implements DpsRepository {
         status: true,
         corrente_maxima: true,
         classe_dps: true,
+        Quadro: {
+          select: {
+            codigo: true
+          }
+        },
         TipoEquipamento: {
           select: {
             name: true
@@ -111,7 +136,7 @@ export class PrismaDpsRepository implements DpsRepository {
     });
   }
 
-  async update({ id,codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, tipo_equipamento, station_id }: DpsUpdate) {
+  async update({ id,codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, quadro, tipo_equipamento, station_id }: DpsUpdate) {
     await prisma.dps.update({
       where: {
         id,
@@ -124,6 +149,11 @@ export class PrismaDpsRepository implements DpsRepository {
         status,
         corrente_maxima,
         classe_dps,
+        Quadro: {
+          connect: {
+            codigo: quadro
+          }
+        },
         TipoEquipamento: {
           connect: {
             id: tipo_equipamento

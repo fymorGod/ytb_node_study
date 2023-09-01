@@ -11,8 +11,8 @@ export interface TransmissorCreateData {
   programmed: number;
   canal_fisico: number;
   canal_virtual: number;
-  acoplador_one: string;
-  acoplador_two: string;
+  acoplador_one?: string;
+  acoplador_two?: string;
   tipo_equipamento: string;
   receptor?: string;
   antena?: string;

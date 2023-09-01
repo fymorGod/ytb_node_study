@@ -8,6 +8,7 @@ interface CreateDisjuntorRequest {
   categoria: disjuntorCategoria;
   status: disjuntorStatus;
   corrente_maxima: number;
+  quadro?: string;
   tipo_equipamento: string;
   station_id?: string;
 }
@@ -20,7 +21,7 @@ export class CreateDisjuntorService {
   async execute(request: CreateDisjuntorRequest) {
     
     //Dados do service
-    const { codigo, marca, modelo, categoria, status, corrente_maxima, tipo_equipamento, station_id }= request;
+    const { codigo, marca, modelo, categoria, status, corrente_maxima, quadro, tipo_equipamento, station_id }= request;
 
     try {
       return await this.disjuntorRepository.create({
@@ -30,6 +31,7 @@ export class CreateDisjuntorService {
          categoria,
          status,
          corrente_maxima,
+         quadro,
          tipo_equipamento,
          station_id
       })

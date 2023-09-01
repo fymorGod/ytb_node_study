@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaTorreRepository } from "../../repositories/prisma/prisma-torre-repository";
-import { GetTorreService } from "../../services/transmissor/GetTransmissorService";
+import { GetTorreService } from "../../services/torre/GetTorreService";
 
 class GetTorreController {
   async handle(req: Request, res: Response) {

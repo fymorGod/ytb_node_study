@@ -138,6 +138,7 @@ model TipoEquipamento {
   torre          Torre[]
   transmissor    Transmissor[]
   checklist      Checklist[]
+  quadro         Quadro[]
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
 }
@@ -243,6 +244,23 @@ model Disjuntor {
   tipoEquipamentoId String?
   Station           Station?         @relation(fields: [stationId], references: [id])
   stationId         String?
+  Quadro            Quadro?          @relation(fields: [quadroId], references: [id])
+  quadroId          String?
+}
+
+model Quadro {
+  id                String           @id @default(uuid())
+  codigo            String           @unique
+  categoria         TypeCategoria
+  status            TypeStatus
+  Dps               Dps[]
+  Disjuntor         Disjuntor[]
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+  TipoEquipamento   TipoEquipamento? @relation(fields: [tipoEquipamentoId], references: [id])
+  tipoEquipamentoId String?
+  Station           Station?         @relation(fields: [stationId], references: [id])
+  stationId         String?
 }
 
 model Dps {
@@ -260,6 +278,8 @@ model Dps {
   tipoEquipamentoId String?
   Station           Station?         @relation(fields: [stationId], references: [id])
   stationId         String?
+  Quadro            Quadro?          @relation(fields: [quadroId], references: [id])
+  quadroId          String?
 }
 
 model Exaustor {
@@ -319,6 +339,7 @@ model Receptor {
   modelo            String
   categoria         TypeCategoria
   status            TypeStatus
+  channel           Float
   frequencia        Int
   symbol_rate       Int
   created_at        DateTime         @default(now())
@@ -354,6 +375,7 @@ model Station {
   telemetria     Telemetria[]
   torre          Torre[]
   transmissor    Transmissor[]
+  quadro         Quadro[]
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
 }
@@ -417,9 +439,9 @@ model Transmissor {
   programmed        Float
   canal_fisico      Float
   canal_virtual     Float
-  acoplador_one     String
-  acoplador_two     String
-  Receptor          Receptor?         @relation(fields: [receptorId], references: [id])
+  acoplador_one     String?
+  acoplador_two     String?
+  Receptor          Receptor?        @relation(fields: [receptorId], references: [id])
   receptorId        String?
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
@@ -429,5 +451,4 @@ model Transmissor {
   tipoEquipamentoId String?
   Station           Station?         @relation(fields: [stationId], references: [id])
   stationId         String?
- 
 }

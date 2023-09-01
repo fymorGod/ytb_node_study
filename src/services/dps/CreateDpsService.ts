@@ -8,6 +8,7 @@ interface CreateDpsRequest {
   status: dpsStatus;
   classe_dps: classDps;
   corrente_maxima: number;
+  quadro?: string;
   tipo_equipamento: string;
   station_id?: string;
 }
@@ -20,7 +21,7 @@ export class CreateDpsService {
   async execute(request: CreateDpsRequest) {
     
     //Dados do service
-    const {  codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, tipo_equipamento, station_id }= request;
+    const {  codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, quadro, tipo_equipamento, station_id }= request;
 
     try {
       return await this.dpsRepository.create({
@@ -31,8 +32,9 @@ export class CreateDpsService {
         status,
         corrente_maxima,
         classe_dps,
-         tipo_equipamento,
-         station_id
+        quadro,
+        tipo_equipamento,
+        station_id
       })
     } catch (error) {
       return error

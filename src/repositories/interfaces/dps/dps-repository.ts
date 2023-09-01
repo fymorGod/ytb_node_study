@@ -11,6 +11,7 @@ export interface DpsCreateData {
   status: dpsStatus;
   classe_dps: classDps;
   corrente_maxima: number;
+  quadro?: string;
   tipo_equipamento: string;
   station_id?: string;
 }
@@ -33,6 +34,7 @@ export interface DpsUpdate {
   status_anterior?: dpsStatus;
   classe_dps?: classDps;
   corrente_maxima?: number;
+  quadro?: string;
   tipo_equipamento?: string;
   station_id?: string;
 }
