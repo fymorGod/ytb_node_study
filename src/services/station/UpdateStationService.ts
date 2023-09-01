@@ -1,4 +1,4 @@
-import { StationRepository } from "../../repositories/interfaces/station/station-repository";
+import { StationRepository, stationStatus } from "../../repositories/interfaces/station/station-repository";
 
 
 interface UpdateStationRequest {
@@ -8,7 +8,7 @@ interface UpdateStationRequest {
   longitude?: string;
   address?: string;
   link_grafana?: string;
-  status: string;
+  status: stationStatus;
   antena?: string;
   arcondicionado?: string;
   cabo?: string;

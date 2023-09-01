@@ -6,20 +6,20 @@ export interface StationCreateData {
   address: string
   link_grafana: string
   status: stationStatus
-  antena?: string;
-  arcondicionado?: string;
-  cabo?: string;
-  combinador?: string;
-  disjuntor?: string;
-  dps?: string;
-  exaustor?: string;
-  nobreak?: string;
-  quadro?: string;
-  receptor?: string;
-  switchies?: string;
-  telemetria?: string;
-  torre?: string;
-  transmissor?: string;
+  // antena?: string;
+  // arcondicionado?: string;
+  // cabo?: string;
+  // combinador?: string;
+  // disjuntor?: string;
+  // dps?: string;
+  // exaustor?: string;
+  // nobreak?: string;
+  // quadro?: string;
+  // receptor?: string;
+  // switchies?: string;
+  // telemetria?: string;
+  // torre?: string;
+  // transmissor?: string;
 }
 
 export interface StationFind {
@@ -39,20 +39,20 @@ export interface StationUpdate {
   link_grafana?: string;
   status?: stationStatus
   status_anterior?: stationStatus
-  antena?: string;
-  arcondicionado?: string;
-  cabo?: string;
-  combinador?: string;
-  disjuntor?: string;
-  dps?: string;
-  exaustor?: string;
-  nobreak?: string;
-  quadro?: string;
-  receptor?: string;
-  switchies?: string;
-  telemetria?: string;
-  torre?: string;
-  transmissor?: string;
+  // antena?: string;
+  // arcondicionado?: string;
+  // cabo?: string;
+  // combinador?: string;
+  // disjuntor?: string;
+  // dps?: string;
+  // exaustor?: string;
+  // nobreak?: string;
+  // quadro?: string;
+  // receptor?: string;
+  // switchies?: string;
+  // telemetria?: string;
+  // torre?: string;
+  // transmissor?: string;
 }
 
 export interface StationFindByName {

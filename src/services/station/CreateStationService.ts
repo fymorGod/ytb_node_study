@@ -8,7 +8,7 @@ import { ExaustorRepository } from "../../repositories/interfaces/exaustor/exaus
 import { NobreakRepository } from "../../repositories/interfaces/nobreak/nobreak-repository"
 import { QuadroRepository } from "../../repositories/interfaces/quadro/quadro-repository"
 import { ReceptorRepository } from "../../repositories/interfaces/receptor/receptor-repository"
-import { StationRepository } from "../../repositories/interfaces/station/station-repository"
+import { StationRepository, stationStatus } from "../../repositories/interfaces/station/station-repository"
 import { SwitchRepository } from "../../repositories/interfaces/switchies/switchies-repository"
 import { TelemetriaRepository } from "../../repositories/interfaces/telemetria/telemetria-repository"
 import { TorreRepository } from "../../repositories/interfaces/torre/torre-repository"
@@ -20,7 +20,7 @@ interface CreateStationRequest {
   longitude: string
   address: string
   link_grafana: string;
-  status: string;
+  status: stationStatus;
   antena?: string;
   arcondicionado?: string;
   cabo?: string;

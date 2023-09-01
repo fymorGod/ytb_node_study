@@ -1,9 +1,17 @@
 import { prisma } from "../../database/prisma";
 import { StationCreateData, StationDelete, StationFind, StationFindByName, StationRepository, StationUpdate } from "../interfaces/station/station-repository";
 
+export const isAntenaIdValid = async ({ id }: any) => {
+  const antenaID = await prisma.antena.findUnique({
+    where: {
+      id
+    }
+  })
+  return !!antenaID;
+}
 export class PrismaStationRepository implements StationRepository {
 
-  async create({ name, address, latitude, link_grafana, longitude, status,antena, arcondicionado, cabo, combinador, disjuntor, dps,exaustor,nobreak,quadro,receptor,switchies,telemetria,torre,transmissor }: StationCreateData) {
+  async create({ name, address, latitude, link_grafana, longitude, status }: StationCreateData) {
     const data: any = {
       name,
       address,
@@ -11,20 +19,6 @@ export class PrismaStationRepository implements StationRepository {
       link_grafana,
       longitude,
       status,
-      antena, 
-      arcondicionado, 
-      cabo, 
-      combinador, 
-      disjuntor, 
-      dps,
-      exaustor,
-      nobreak,
-      quadro,
-      receptor,
-      switchies,
-      telemetria,
-      torre,
-      transmissor
     };
 
     return await prisma.station.create({
@@ -112,7 +106,7 @@ export class PrismaStationRepository implements StationRepository {
     });
   }
 
-  async update({ id, name, address, latitude, link_grafana, longitude, status, antena, arcondicionado, cabo, combinador, disjuntor, dps, exaustor, nobreak, quadro, receptor, switchies, telemetria, torre, transmissor}: StationUpdate) {
+  async update({ id, name, address, latitude, link_grafana, longitude, status}: StationUpdate) {
     await prisma.station.update({
       where: {
         id,
@@ -124,76 +118,76 @@ export class PrismaStationRepository implements StationRepository {
         link_grafana,
         longitude,
         status,
-        antena: {
-          connect: {
-            id: antena
-          }
-        }, 
-        arcondicionado: {
-          connect: {
-            id: arcondicionado
-          }
-        }, 
-        cabo: {
-          connect: {
-            id: cabo
-          }
-        }, 
-        combinador: {
-          connect: {
-            id: combinador
-          }
-        }, 
-        disjuntor: {
-          connect: {
-            id: disjuntor
-          }
-        }, 
-        dps: {
-          connect: {
-            id: dps
-          }
-        },
-        exaustor: {
-          connect: {
-            id: exaustor
-          }
-        },
-        nobreak: {
-          connect: {
-            id: nobreak
-          }
-        },
-        quadro: {
-          connect: {
-            id: quadro
-          }
-        },
-        receptor: {
-          connect: {
-            id: receptor
-          }
-        },
-        switchies: {
-          connect: {
-            id: switchies
-          }
-        },
-        telemetria: {
-          connect: {
-            id: telemetria
-          }
-        },
-        torre: {
-          connect: {
-            id: torre
-          }
-        },
-        transmissor: {
-          connect: {
-            id: transmissor
-          }
-        }
+        // antena: {
+        //   connect: {
+        //     id: antena
+        //   }
+        // }, 
+        // arcondicionado: {
+        //   connect: {
+        //     id: arcondicionado
+        //   }
+        // }, 
+        // cabo: {
+        //   connect: {
+        //     id: cabo
+        //   }
+        // }, 
+        // combinador: {
+        //   connect: {
+        //     id: combinador
+        //   }
+        // }, 
+        // disjuntor: {
+        //   connect: {
+        //     id: disjuntor
+        //   }
+        // }, 
+        // dps: {
+        //   connect: {
+        //     id: dps
+        //   }
+        // },
+        // exaustor: {
+        //   connect: {
+        //     id: exaustor
+        //   }
+        // },
+        // nobreak: {
+        //   connect: {
+        //     id: nobreak
+        //   }
+        // },
+        // quadro: {
+        //   connect: {
+        //     id: quadro
+        //   }
+        // },
+        // receptor: {
+        //   connect: {
+        //     id: receptor
+        //   }
+        // },
+        // switchies: {
+        //   connect: {
+        //     id: switchies
+        //   }
+        // },
+        // telemetria: {
+        //   connect: {
+        //     id: telemetria
+        //   }
+        // },
+        // torre: {
+        //   connect: {
+        //     id: torre
+        //   }
+        // },
+        // transmissor: {
+        //   connect: {
+        //     id: transmissor
+        //   }
+        // }
       }
     }
     );
