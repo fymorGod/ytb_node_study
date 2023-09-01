@@ -3,13 +3,14 @@ import { StationCreateData, StationDelete, StationFind, StationFindByName, Stati
 
 export class PrismaStationRepository implements StationRepository {
 
-  async create({ name, address, latitude, link_grafana, longitude, antena, arcondicionado, cabo, combinador, disjuntor, dps,exaustor,nobreak,quadro,receptor,switchies,telemetria,torre,transmissor }: StationCreateData) {
+  async create({ name, address, latitude, link_grafana, longitude, status,antena, arcondicionado, cabo, combinador, disjuntor, dps,exaustor,nobreak,quadro,receptor,switchies,telemetria,torre,transmissor }: StationCreateData) {
     const data: any = {
       name,
       address,
       latitude,
       link_grafana,
       longitude,
+      status,
       antena, 
       arcondicionado, 
       cabo, 
@@ -40,6 +41,7 @@ export class PrismaStationRepository implements StationRepository {
         latitude: true,
         longitude: true,
         link_grafana: true,
+        status: true,
         antena: true,
         arcondicionado: true,
         cabo: true,
@@ -71,6 +73,7 @@ export class PrismaStationRepository implements StationRepository {
         latitude: true,
         longitude: true,
         link_grafana: true,
+        status: true,
         antena: true,
         arcondicionado: true,
         cabo: true,
@@ -109,7 +112,7 @@ export class PrismaStationRepository implements StationRepository {
     });
   }
 
-  async update({ id, name, address, latitude, link_grafana, longitude, antena, arcondicionado, cabo, combinador, disjuntor, dps, exaustor, nobreak, quadro, receptor, switchies, telemetria, torre, transmissor}: StationUpdate) {
+  async update({ id, name, address, latitude, link_grafana, longitude, status, antena, arcondicionado, cabo, combinador, disjuntor, dps, exaustor, nobreak, quadro, receptor, switchies, telemetria, torre, transmissor}: StationUpdate) {
     await prisma.station.update({
       where: {
         id,
@@ -120,6 +123,7 @@ export class PrismaStationRepository implements StationRepository {
         latitude,
         link_grafana,
         longitude,
+        status,
         antena: {
           connect: {
             id: antena

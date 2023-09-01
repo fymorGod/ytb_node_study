@@ -7,7 +7,7 @@ class UpdateStationController {
 
     const { id } = req.params;
 
-    const { name, address, latitude, link_grafana, longitude } = req.body;
+    const { name, address, latitude, link_grafana, longitude, status } = req.body;
 
     const prismaStationRepository = new PrismaStationRepository()
 
@@ -19,7 +19,8 @@ class UpdateStationController {
       address,
       latitude,
       link_grafana,
-      longitude
+      longitude,
+      status
     });
 
     if(station instanceof Error) {

@@ -6,7 +6,7 @@ import { CreateStationService } from "../../services/station/CreateStationServic
 class CreateStationControler {
   
   async handle(req: Request, res: Response) {
-    const { name, address, latitude, link_grafana, longitude, antena, arcondicionado, cabo, combinador, disjuntor, dps, exaustor, nobreak, quadro, receptor, switchies, telemetria, torre, transmissor } = req.body;
+    const { name, address, latitude, link_grafana, longitude, status, antena, arcondicionado, cabo, combinador, disjuntor, dps, exaustor, nobreak, quadro, receptor, switchies, telemetria, torre, transmissor } = req.body;
 
     const prismaStationRepository = new PrismaStationRepository();
 
@@ -20,6 +20,7 @@ class CreateStationControler {
       latitude,
       link_grafana,
       longitude,
+      status,
       antena, 
       arcondicionado, 
       cabo, 

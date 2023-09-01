@@ -1,10 +1,11 @@
-
+export type stationStatus = "FUNCIONANDO" | "STAND_BY" | "DEFEITO" | "MANUTENCAO";
 export interface StationCreateData {
   name: string
   latitude: string
   longitude: string
   address: string
   link_grafana: string
+  status: stationStatus
   antena?: string;
   arcondicionado?: string;
   cabo?: string;
@@ -36,6 +37,8 @@ export interface StationUpdate {
   longitude?: string;
   address?: string;
   link_grafana?: string;
+  status?: stationStatus
+  status_anterior?: stationStatus
   antena?: string;
   arcondicionado?: string;
   cabo?: string;
