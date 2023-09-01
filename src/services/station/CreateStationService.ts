@@ -21,20 +21,6 @@ interface CreateStationRequest {
   address: string
   link_grafana: string;
   status: stationStatus;
-  antena?: string;
-  arcondicionado?: string;
-  cabo?: string;
-  combinador?: string;
-  disjuntor?: string;
-  dps?: string;
-  exaustor?: string;
-  nobreak?: string;
-  quadro?: string;
-  receptor?: string;
-  switchies?: string;
-  telemetria?: string;
-  torre?: string;
-  transmissor?: string;
 }
 
 export class CreateStationService {
@@ -59,7 +45,7 @@ export class CreateStationService {
   async execute(request: CreateStationRequest) {
     
     //Dados do service
-    const { name, address, latitude, link_grafana, longitude, status,antena, arcondicionado, cabo, combinador, disjuntor, dps, exaustor, nobreak, quadro, receptor, switchies, telemetria, torre, transmissor }= request;
+    const { name, address, latitude, link_grafana, longitude, status }= request;
     
     // const condensadora = await this.antenaRepository.find({ id:antena });
 
@@ -70,21 +56,7 @@ export class CreateStationService {
         latitude,
         link_grafana,
         longitude,
-        status,
-        antena, 
-        arcondicionado, 
-        cabo, 
-        combinador, 
-        disjuntor, 
-        dps,
-        exaustor,
-        nobreak,
-        quadro,
-        receptor,
-        switchies,
-        telemetria,
-        torre,
-        transmissor
+        status
       })
     } catch (error) {
       return error

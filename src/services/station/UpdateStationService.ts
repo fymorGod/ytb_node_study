@@ -32,7 +32,7 @@ export class UpdateStationService {
   ) {}
 
   async execute(request: UpdateStationRequest) {
-    const {id, name, address, latitude, link_grafana, longitude, status, antena, arcondicionado, cabo, combinador, disjuntor, dps, exaustor, nobreak, quadro, receptor, switchies, telemetria, torre, transmissor} = request;
+    const {id, name, address, latitude, link_grafana, longitude, status } = request;
 
     const station = await this.stationRepository.find({id});
 
@@ -53,21 +53,7 @@ export class UpdateStationService {
         latitude,
         link_grafana,
         longitude,
-        status,
-        antena, 
-        arcondicionado, 
-        cabo, 
-        combinador, 
-        disjuntor, 
-        dps,
-        exaustor,
-        nobreak,
-        quadro,
-        receptor,
-        switchies,
-        telemetria,
-        torre,
-        transmissor
+        status
       })
     } catch (error) {
       return error
