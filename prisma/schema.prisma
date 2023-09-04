@@ -138,6 +138,7 @@ model TipoEquipamento {
   torre          Torre[]
   transmissor    Transmissor[]
   checklist      Checklist[]
+  quadro         Quadro[]
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
 }
@@ -243,6 +244,23 @@ model Disjuntor {
   tipoEquipamentoId String?
   Station           Station?         @relation(fields: [stationId], references: [id])
   stationId         String?
+  Quadro            Quadro?          @relation(fields: [quadroId], references: [id])
+  quadroId          String?
+}
+
+model Quadro {
+  id                String           @id @default(uuid())
+  codigo            String           @unique
+  status            TypeStatus
+  categoria         TypeCategoria
+  Dps               Dps[]
+  Disjuntor         Disjuntor[]
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+  Station           Station?         @relation(fields: [stationId], references: [id])
+  stationId         String?
+  TipoEquipamento   TipoEquipamento? @relation(fields: [tipoEquipamentoId], references: [id])
+  tipoEquipamentoId String?
 }
 
 model Dps {
@@ -260,6 +278,8 @@ model Dps {
   tipoEquipamentoId String?
   Station           Station?         @relation(fields: [stationId], references: [id])
   stationId         String?
+  Quadro            Quadro?          @relation(fields: [quadroId], references: [id])
+  quadroId          String?
 }
 
 model Exaustor {
@@ -354,6 +374,7 @@ model Station {
   telemetria     Telemetria[]
   torre          Torre[]
   transmissor    Transmissor[]
+  quadro         Quadro[]
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
 }
@@ -419,7 +440,7 @@ model Transmissor {
   canal_virtual     Float
   acoplador_one     String
   acoplador_two     String
-  Receptor          Receptor?         @relation(fields: [receptorId], references: [id])
+  Receptor          Receptor?        @relation(fields: [receptorId], references: [id])
   receptorId        String?
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
@@ -429,5 +450,4 @@ model Transmissor {
   tipoEquipamentoId String?
   Station           Station?         @relation(fields: [stationId], references: [id])
   stationId         String?
- 
 }
