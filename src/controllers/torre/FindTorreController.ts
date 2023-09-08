@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaTorreRepository } from "../../repositories/prisma/prisma-torre-repository";
-import { FindTorreService } from "../../services/transmissor/FindTransmissorService";
+import { FindTorreService } from "../../services/torre/FindTorreService";
 
 
 class FindTorreController {

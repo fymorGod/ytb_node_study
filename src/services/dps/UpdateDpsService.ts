@@ -11,6 +11,7 @@ interface UpdateDpsRequest {
   status?: dpsStatus;
   classe_dps?: classDps;
   corrente_maxima?: number;
+  quadro?: string;
   tipo_equipamento?: string;
   station_id?: string;
 }
@@ -22,12 +23,12 @@ export class UpdateDpsService {
   ) {}
 
   async execute(request: UpdateDpsRequest) {
-    const {id,codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, tipo_equipamento, station_id} = request;
+    const {id,codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, quadro, tipo_equipamento, station_id} = request;
 
     const dps = await this.dpsRepository.find({id});
 
     if(!dps) {
-      return new Error("Antena inexistente!")
+      return new Error("Dps inexistente!")
     }
     if(codigo) {
       if(await this.dpsRepository.findByCodigo({ codigo })) {
@@ -48,6 +49,7 @@ export class UpdateDpsService {
         status_anterior,
         corrente_maxima,
         classe_dps,
+        quadro,
         tipo_equipamento,
         station_id,
       })

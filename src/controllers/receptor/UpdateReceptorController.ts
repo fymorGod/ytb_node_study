@@ -7,7 +7,7 @@ class UpdateReceptorController {
 
     const { id } = req.params;
 
-    const { codigo, marca, modelo, categoria, status, frequencia, symbol_rate, tipo_equipamento, parabolica, station_id } = req.body;
+    const { codigo, marca, modelo, categoria, status, frequencia, symbol_rate, channel, tipo_equipamento, parabolica, station_id } = req.body;
 
     const prismaReceptorRepository = new PrismaReceptorRepository()
 
@@ -22,6 +22,7 @@ class UpdateReceptorController {
       status,
       frequencia,
       symbol_rate,
+      channel,
       tipo_equipamento,
       parabolica,
       station_id,

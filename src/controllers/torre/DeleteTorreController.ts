@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaTorreRepository } from "../../repositories/prisma/prisma-torre-repository";
-import { DeleteTorreService } from "../../services/torre/DeleteAntenaService";
+import { DeleteTorreService } from "../../services/torre/DeleteTorreService";
 
 
 

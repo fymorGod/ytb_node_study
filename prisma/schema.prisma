@@ -251,16 +251,28 @@ model Disjuntor {
 model Quadro {
   id                String           @id @default(uuid())
   codigo            String           @unique
+<<<<<<< HEAD
   status            TypeStatus
   categoria         TypeCategoria
+=======
+  categoria         TypeCategoria
+  status            TypeStatus
+>>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
   Dps               Dps[]
   Disjuntor         Disjuntor[]
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
+<<<<<<< HEAD
   Station           Station?         @relation(fields: [stationId], references: [id])
   stationId         String?
   TipoEquipamento   TipoEquipamento? @relation(fields: [tipoEquipamentoId], references: [id])
   tipoEquipamentoId String?
+=======
+  TipoEquipamento   TipoEquipamento? @relation(fields: [tipoEquipamentoId], references: [id])
+  tipoEquipamentoId String?
+  Station           Station?         @relation(fields: [stationId], references: [id])
+  stationId         String?
+>>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
 }
 
 model Dps {
@@ -339,6 +351,7 @@ model Receptor {
   modelo            String
   categoria         TypeCategoria
   status            TypeStatus
+  channel           Float
   frequencia        Int
   symbol_rate       Int
   created_at        DateTime         @default(now())
@@ -438,8 +451,13 @@ model Transmissor {
   programmed        Float
   canal_fisico      Float
   canal_virtual     Float
+<<<<<<< HEAD
   acoplador_one     String
   acoplador_two     String
+=======
+  acoplador_one     String?
+  acoplador_two     String?
+>>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
   Receptor          Receptor?        @relation(fields: [receptorId], references: [id])
   receptorId        String?
   created_at        DateTime         @default(now())

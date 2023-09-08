@@ -20,7 +20,7 @@ export const isParabolicaIdValid = async ({ id }: any) => {
 }
 export class PrismaReceptorRepository implements ReceptorRepository {
 
-  async create({ codigo, marca, modelo, categoria, status, frequencia, symbol_rate, tipo_equipamento, parabolica, station_id }: ReceptorCreateData) {
+  async create({ codigo, marca, modelo, categoria, status, frequencia, symbol_rate, channel, tipo_equipamento, parabolica, station_id }: ReceptorCreateData) {
     const data: any = {
       codigo,
       marca,
@@ -29,6 +29,7 @@ export class PrismaReceptorRepository implements ReceptorRepository {
       status,
       frequencia,
       symbol_rate,
+      channel,
       TipoEquipamento: {
         connect: {
           name: tipo_equipamento
@@ -73,6 +74,7 @@ export class PrismaReceptorRepository implements ReceptorRepository {
         status: true,
         frequencia: true,
         symbol_rate: true,
+        channel: true,
         TipoEquipamento: {
           select: {
             name: true
@@ -107,6 +109,7 @@ export class PrismaReceptorRepository implements ReceptorRepository {
         status: true,
         frequencia: true,
         symbol_rate: true,
+        channel: true,
         TipoEquipamento: {
           select: {
             name: true
@@ -146,7 +149,7 @@ export class PrismaReceptorRepository implements ReceptorRepository {
     });
   }
 
-  async update({ id,  codigo, marca, modelo, categoria, status, frequencia, symbol_rate, tipo_equipamento, parabolica, station_id  }: ReceptorUpdate) {
+  async update({ id,  codigo, marca, modelo, categoria, status, frequencia, symbol_rate, channel, tipo_equipamento, parabolica, station_id  }: ReceptorUpdate) {
     await prisma.receptor.update({
       where: {
         id,
@@ -159,6 +162,7 @@ export class PrismaReceptorRepository implements ReceptorRepository {
         status,
         frequencia,
         symbol_rate,
+        channel,
         TipoEquipamento: {
           connect: {
             id: tipo_equipamento

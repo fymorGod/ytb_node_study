@@ -10,6 +10,7 @@ interface UpdateReceptorRequest {
   status?: receptorStatus;
   frequencia?: number;
   symbol_rate?: number;
+  channel?: number;
   tipo_equipamento?: string;
   parabolica?: string;
   station_id?: string;

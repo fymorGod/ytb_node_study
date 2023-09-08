@@ -19,8 +19,8 @@ export class PrismaNobreakRepository implements NobreakRepository {
       modelo,
       categoria,
       status,
-      tensaoEntrada: tensao_entrada,
-      tensaoSaida: tensao_saida,
+      tensao_entrada,
+      tensao_saida,
       TipoEquipamento: {
         connect: {
           name: tipo_equipamento

@@ -8,6 +8,7 @@ export interface ReceptorCreateData {
   modelo: string;
   categoria: receptorCategoria;
   status: receptorStatus;
+  channel: number;
   frequencia: number;
   symbol_rate: number;
   tipo_equipamento: string;
@@ -33,6 +34,7 @@ export interface ReceptorUpdate {
   status_anterior?: receptorStatus;
   frequencia?: number;
   symbol_rate?: number;
+  channel?: number;
   tipo_equipamento?: string;
   parabolica?: string;
   station_id?: string;
