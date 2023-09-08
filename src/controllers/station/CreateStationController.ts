@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { PrismaStationRepository } from "../../repositories/prisma/prisma-station-repository";
 import { CreateStationService } from "../../services/station/CreateStationService";
 
-
 class CreateStationControler {
   
   async handle(req: Request, res: Response) {
