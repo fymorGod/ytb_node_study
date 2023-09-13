@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import { prisma } from "../database/prisma"
 
 export const createTarefa = async (req: Request, res: Response) => {
-  const {description, verificado, foto_verificado} = req.body
+  const { description, verificado, foto_verificado } = req.body
 
   const tarefa = await prisma.tarefa.create({
     data: {

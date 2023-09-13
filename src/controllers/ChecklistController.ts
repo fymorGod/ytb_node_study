@@ -7,7 +7,7 @@ interface TarefaInput {
   foto_verificado: boolean;
 }
 export const createChecklist = async (req: Request, res: Response) => {
-  const {name, tarefas ,tipo_equipamento } = req.body
+  const { name, tarefas ,tipo_equipamento } = req.body
 
   const checklist = await prisma.checklist.create({
     data: {
