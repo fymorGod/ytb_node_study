@@ -10,17 +10,6 @@ export const isStationIdValid = async ({ id }: any) => {
   })
   return !!stationID;
 }
-<<<<<<< HEAD
-export const isDisjuntorIdValid = async ({ id }: any) => {
-  const disjuntorID = await prisma.disjuntor.findUnique({
-    where: {
-      id
-    }
-  })
-  return !!disjuntorID;
-}
-=======
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
 export const isDpsIdValid = async ({ id }: any) => {
   const dpsID = await prisma.dps.findUnique({
     where: {
@@ -30,15 +19,6 @@ export const isDpsIdValid = async ({ id }: any) => {
   return !!dpsID;
 }
 
-<<<<<<< HEAD
-export class PrismaQuadroRepository implements QuadroRepository {
-
-  async create({ codigo, status, categoria, dps, disjuntor, tipo_equipamento, station_id }: QuadroCreateData) {
-    const data: any = {
-      codigo,
-      status,
-      categoria,
-=======
 export const isDisjuntorIdValid = async ({ id }: any) => {
   const disjuntorID = await prisma.disjuntor.findUnique({
     where: {
@@ -55,24 +35,12 @@ export class PrismaQuadroRepository implements QuadroRepository {
       codigo,
       categoria,
       status,
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
       TipoEquipamento: {
         connect: {
           name: tipo_equipamento
         }
       },
     };
-<<<<<<< HEAD
-
-    if (disjuntor && (await isDisjuntorIdValid({ id: disjuntor}))) {
-      data.Disjuntor = {
-        connect: {
-          id: disjuntor
-        }
-      };
-    }
-=======
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
     if (dps && (await isDpsIdValid({ id: dps}))) {
       data.Dps = {
         connect: {
@@ -80,8 +48,6 @@ export class PrismaQuadroRepository implements QuadroRepository {
         }
       };
     }
-<<<<<<< HEAD
-=======
   
     if (disjuntor && (await isDisjuntorIdValid({ id: disjuntor}))) {
       data.Disjuntor = {
@@ -91,7 +57,6 @@ export class PrismaQuadroRepository implements QuadroRepository {
       };
     }
   
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
     if (station_id && (await isStationIdValid({ id: station_id}))) {
       data.Station = {
         connect: {
@@ -112,20 +77,12 @@ export class PrismaQuadroRepository implements QuadroRepository {
         codigo: true,
         categoria: true,
         status: true,
-<<<<<<< HEAD
-        Disjuntor: {
-=======
         Dps: {
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
           select: {
             id: true
           }
         },
-<<<<<<< HEAD
-        Dps: {
-=======
         Disjuntor: {
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
           select: {
             id: true
           }
@@ -140,10 +97,6 @@ export class PrismaQuadroRepository implements QuadroRepository {
             name: true
           }
         },
-<<<<<<< HEAD
-        
-=======
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
       }
     });
     return quadro;
@@ -158,20 +111,12 @@ export class PrismaQuadroRepository implements QuadroRepository {
         codigo: true,
         categoria: true,
         status: true,
-<<<<<<< HEAD
-        Disjntor: {
-=======
         Dps: {
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
           select: {
             id: true
           }
         },
-<<<<<<< HEAD
-        Dps: {
-=======
         Disjuntor: {
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
           select: {
             id: true
           }
@@ -209,11 +154,7 @@ export class PrismaQuadroRepository implements QuadroRepository {
     });
   }
 
-<<<<<<< HEAD
-  async update({ id, codigo, categoria, status, disjuntor, dps, station_id, tipo_equipamento}: QuadroUpdate) {
-=======
   async update({ id, codigo, categoria, status, dps, disjuntor, tipo_equipamento, station_id }: QuadroUpdate) {
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
     await prisma.quadro.update({
       where: {
         id,
@@ -222,7 +163,6 @@ export class PrismaQuadroRepository implements QuadroRepository {
         codigo,
         categoria,
         status,
-<<<<<<< HEAD
         Disjuntor: {
           connect: {
             id: disjuntor
@@ -231,16 +171,6 @@ export class PrismaQuadroRepository implements QuadroRepository {
         Dps: {
           connect: {
             id: dps
-=======
-        Dps: {
-          connect: {
-            id: dps
-          },
-        },
-        Disjuntor: {
-          connect: {
-            id: disjuntor
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
           }
         },
         TipoEquipamento: {
@@ -253,11 +183,7 @@ export class PrismaQuadroRepository implements QuadroRepository {
             id: station_id
           },
         },
-<<<<<<< HEAD
        
-=======
-        
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
       }
     });
   }

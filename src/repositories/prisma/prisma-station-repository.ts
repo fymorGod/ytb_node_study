@@ -68,21 +68,156 @@ export class PrismaStationRepository implements StationRepository {
         longitude: true,
         link_grafana: true,
         status: true,
-        antena: true,
-        arcondicionado: true,
-        cabo: true,
-        combinador: true,
-        disjuntor: true,
-        dps: true,
-        exaustor: true,
-        nobreak: true,
-        parabolica: true,
-        quadro: true,
-        receptor: true,
-        switchies: true,
-        telemetria: true,
-        torre: true,
-        transmissor: true
+        antena: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        arcondicionado: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        cabo:{
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        combinador: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        disjuntor: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        dps:{
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },,
+        exaustor: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        nobreak: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        parabolica: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        quadro: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        receptor: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        switchies: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        telemetria: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        torre: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+        transmissor: {
+          select: {
+            id: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
       },
     });
     return station;

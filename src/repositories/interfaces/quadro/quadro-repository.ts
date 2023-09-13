@@ -6,13 +6,8 @@ export interface QuadroCreateData {
   codigo: string;
   categoria: quadroCategoria;
   status: quadroStatus;
-<<<<<<< HEAD
-  dps: string;
-  disjuntor: string;
-=======
   dps?: string;
   disjuntor?: string;
->>>>>>> 1f9b1d97e399ff10bd2f8db6d931510091224c7f
   tipo_equipamento: string;
   station_id?: string;
 }
