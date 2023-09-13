@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaAntenaRepository } from "../../repositories/prisma/prisma-antenas-repository";
-import { GetAntenaService } from "../../services/antenas/GetAntenaService";
+import { GetAntenaService } from "../../services/antenas/GetTorreService";
 
 
 class GetAntenaController {

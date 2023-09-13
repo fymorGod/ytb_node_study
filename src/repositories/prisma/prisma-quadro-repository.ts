@@ -163,14 +163,14 @@ export class PrismaQuadroRepository implements QuadroRepository {
         codigo,
         categoria,
         status,
-        Dps: {
-          connect: {
-            id: dps
-          },
-        },
         Disjuntor: {
           connect: {
             id: disjuntor
+          }
+        },
+        Dps: {
+          connect: {
+            id: dps
           }
         },
         TipoEquipamento: {
@@ -183,7 +183,7 @@ export class PrismaQuadroRepository implements QuadroRepository {
             id: station_id
           },
         },
-        
+       
       }
     });
   }
