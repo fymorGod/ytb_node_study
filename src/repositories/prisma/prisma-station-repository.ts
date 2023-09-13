@@ -127,7 +127,7 @@ export class PrismaStationRepository implements StationRepository {
               }
             }
           }
-        },,
+        },
         exaustor: {
           select: {
             id: true,

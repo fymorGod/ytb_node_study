@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaAntenaRepository } from "../../repositories/prisma/prisma-antenas-repository";
-import { DeleteAntenaService } from "../../services/antenas/DeleteTorreService";
+import { DeleteAntenaService } from "../../services/antenas/DeleteAntenaService";
 
 class DeleteAntenaController {
 

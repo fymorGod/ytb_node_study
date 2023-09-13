@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaAntenaRepository } from "../../repositories/prisma/prisma-antenas-repository";
-import { FindAntenaService } from "../../services/antenas/FindTorreService";
+import { FindAntenaService } from "../../services/antenas/FindAntenaService";
 
 class FindAntenaController {
   async handle(req: Request, res: Response) {

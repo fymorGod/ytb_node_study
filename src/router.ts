@@ -2,8 +2,6 @@ import { Router } from "express";
 import { createUser } from "./controllers/UserController";
 import { createAccess, getAllAccesses } from "./controllers/AcessController";
 import { createTipoEquipamento, getAllTipoEquipamentos } from "./controllers/TipoEquipamentoController";
-import { createTarefa, getAllTarefas } from "./controllers/TarefaController";
-import { createChecklist, getAllChecklists } from "./controllers/ChecklistController";
 import { CreateAntenaControler } from "./controllers/antenas/CreateAntenaController";
 import { GetAntenaController } from "./controllers/antenas/GetAntenaController";
 import { FindAntenaController } from "./controllers/antenas/FindAntenaController";
@@ -86,6 +84,16 @@ import { FindTelemetriaController } from "./controllers/telemetria/FindTelemetri
 import { UpdateTelemetriaController } from "./controllers/telemetria/UpdateTelemetriaController";
 import { DeleteTelemetriaController } from "./controllers/telemetria/DeleteTelemetriaController";
 import { GetAllController } from "./controllers/All/GetAllControllers";
+import { GetTarefaController } from "./controllers/tarefa/GetTarefaController";
+import { CreateTarefaControler } from "./controllers/tarefa/CreateTarefaController";
+import { FindTarefaController } from "./controllers/tarefa/FindTarefaController";
+import { UpdateTarefaController } from "./controllers/tarefa/UpdateTarefaController";
+import { DeleteTarefaController } from "./controllers/tarefa/DeleteTarefaController";
+import { GetChecklistController } from "./controllers/checklist/GetAntenaController";
+import { CreateChecklistControler } from "./controllers/checklist/CreateAntenaController";
+import { FindChecklistController } from "./controllers/checklist/FindAntenaController";
+import { UpdateChecklistController } from "./controllers/checklist/UpdateAntenaController";
+import { DeleteChecklistController } from "./controllers/checklist/DeleteAntenaController";
 
 export const router = Router()
 
@@ -96,196 +104,218 @@ router.get("/accesses", getAllAccesses)
 
 //Rotas para Antena
 router
-  .route("/antenas")
+  .route("/v1/antenas")
   .get(new GetAntenaController().handle)
   .post(new CreateAntenaControler().handle)
 router
-  .route("/antenas/:id")
+  .route("/v1/antenas/:id")
   .get(new FindAntenaController().handle)
   .put(new UpdateAntenaController().handle)
   .delete(new DeleteAntenaController().handle)
 
 //Rotas para Arcondicionados
 router
-  .route("/arcondicionados")
+  .route("/v1/arcondicionados")
   .get(new GetArcondicionadoController().handle)
   .post(new CreateArcondicionadoController().handle)
 router
-  .route("/arcondicionados/:id")
+  .route("/v1/arcondicionados/:id")
   .get(new FindArcondicionadoController().handle)
   .put(new UpdateArcondicionadoController().handle)
   .delete(new DeleteArcondicionadoController().handle)
 
 //Rotas para Cabos
 router
-  .route("/cabos")
+  .route("/v1/cabos")
   .get(new GetCaboController().handle)
   .post(new CreateCaboController().handle)
 router
-  .route("/cabos/:id")
+  .route("/v1/cabos/:id")
   .get(new FindCaboController().handle)
   .put(new UpdateCaboController().handle)
   .delete(new DeleteCaboController().handle)
 
 //Rotas para Combinadores
 router
-  .route("/combinador")
+  .route("/v1/combinador")
   .get(new GetCombinadorController().handle)
   .post(new CreateCombinadorControler().handle)
 router
-  .route("/combinador/:id")
+  .route("/v1/combinador/:id")
   .get(new FindCombinadorController().handle)
   .put(new UpdateCombinadorController().handle)
   .delete(new DeleteCombinadorController().handle)
 
 //Rotas para Disjuntor
 router
-  .route("/disjuntor")
+  .route("/v1/disjuntor")
   .get(new GetDisjuntorController().handle)
   .post(new CreateDisjuntorControler().handle)
 router
-  .route("/disjuntor/:id")
+  .route("/v1/disjuntor/:id")
   .get(new FindDisjuntorController().handle)
   .put(new UpdateDisjuntorController().handle)
   .delete(new DeleteDisjuntorController().handle)
 
 //Rotas para Dps
 router
-.route("/dps")
-.get(new GetDpsController().handle)
-.post(new CreateDpsControler().handle)
+  .route("/v1/dps")
+  .get(new GetDpsController().handle)
+  .post(new CreateDpsControler().handle)
 router
-.route("/dps/:id")
-.get(new FindDpsController().handle)
-.put(new UpdateDpsController().handle)
-.delete(new DeleteDpsController().handle)
+  .route("/v1/dps/:id")
+  .get(new FindDpsController().handle)
+  .put(new UpdateDpsController().handle)
+  .delete(new DeleteDpsController().handle)
 
 //Rotas para Exaustor
 router
-.route("/exaustor")
-.get(new GetExaustorController().handle)
-.post(new CreateExaustorControler().handle)
+  .route("/v1/exaustor")
+  .get(new GetExaustorController().handle)
+  .post(new CreateExaustorControler().handle)
 router
-.route("/exaustor/:id")
-.get(new FindExaustorController().handle)
-.put(new UpdateExaustorController().handle)
-.delete(new DeleteExaustorController().handle)
+  .route("/v1/exaustor/:id")
+  .get(new FindExaustorController().handle)
+  .put(new UpdateExaustorController().handle)
+  .delete(new DeleteExaustorController().handle)
 
 //Rotas para Nobreak
 router
-.route("/nobreak")
-.get(new GetNobreakController().handle)
-.post(new CreateNobreakControler().handle)
+  .route("/v1/nobreak")
+  .get(new GetNobreakController().handle)
+  .post(new CreateNobreakControler().handle)
 router
-.route("/nobreak/:id")
-.get(new FindNobreakController().handle)
-.put(new UpdateNobreakController().handle)
-.delete(new DeleteNobreakController().handle)
+  .route("/v1/nobreak/:id")
+  .get(new FindNobreakController().handle)
+  .put(new UpdateNobreakController().handle)
+  .delete(new DeleteNobreakController().handle)
 
 //Rotas para Parabolica
 router
-.route("/parabolica")
-.get(new GetParabolicaController().handle)
-.post(new CreateParabolicaControler().handle)
+  .route("/v1/parabolica")
+  .get(new GetParabolicaController().handle)
+  .post(new CreateParabolicaControler().handle)
 router
-.route("/parabolica/:id")
-.get(new FindParabolicaController().handle)
-.put(new UpdateParabolicaController().handle)
-.delete(new DeleteParabolicaController().handle)
+  .route("/v1/parabolica/:id")
+  .get(new FindParabolicaController().handle)
+  .put(new UpdateParabolicaController().handle)
+  .delete(new DeleteParabolicaController().handle)
 
 //Rotas para Receptor
 router
-.route("/receptor")
-.get(new GetReceptorController().handle)
-.post(new CreateReceptorControler().handle)
+  .route("/v1/receptor")
+  .get(new GetReceptorController().handle)
+  .post(new CreateReceptorControler().handle)
 router
-.route("/receptor/:id")
-.get(new FindReceptorController().handle)
-.put(new UpdateReceptorController().handle)
-.delete(new DeleteReceptorController().handle)
+  .route("/v1/receptor/:id")
+  .get(new FindReceptorController().handle)
+  .put(new UpdateReceptorController().handle)
+  .delete(new DeleteReceptorController().handle)
 
 
 //Rotas para Switch
 router
-.route("/switch")
-.get(new GetSwitchController().handle)
-.post(new CreateSwitchControler().handle)
+  .route("/v1/switch")
+  .get(new GetSwitchController().handle)
+  .post(new CreateSwitchControler().handle)
 router
-.route("/switch/:id")
-.get(new FindSwitchController().handle)
-.put(new UpdateSwitchController().handle)
-.delete(new DeleteSwitchController().handle)
+  .route("/v1/switch/:id")
+  .get(new FindSwitchController().handle)
+  .put(new UpdateSwitchController().handle)
+  .delete(new DeleteSwitchController().handle)
 
 //Rotas para Torre
 router
-.route("/torre")
-.get(new GetTorreController().handle)
-.post(new CreateTorreControler().handle)
+  .route("/v1/torre")
+  .get(new GetTorreController().handle)
+  .post(new CreateTorreControler().handle)
 router
-.route("/torre/:id")
-.get(new FindTorreController().handle)
-.put(new UpdateTorreController().handle)
-.delete(new DeleteTorreController().handle)
+  .route("/v1/torre/:id")
+  .get(new FindTorreController().handle)
+  .put(new UpdateTorreController().handle)
+  .delete(new DeleteTorreController().handle)
 
 //Rotas para Transmissor
 router
-.route("/transmissor")
-.get(new GetTransmissorController().handle)
-.post(new CreateTransmissorControler().handle)
+  .route("/v1/transmissor")
+  .get(new GetTransmissorController().handle)
+  .post(new CreateTransmissorControler().handle)
 router
-.route("/transmissor/:id")
-.get(new FindTransmissorController().handle)
-.put(new UpdateTransmissorController().handle)
-.delete(new DeleteTransmissorController().handle)
+  .route("/v1/transmissor/:id")
+  .get(new FindTransmissorController().handle)
+  .put(new UpdateTransmissorController().handle)
+  .delete(new DeleteTransmissorController().handle)
 
 //Rotas para Quadro
 router
-.route("/quadro")
-.get(new GetQuadroController().handle)
-.post(new CreateQuadroControler().handle)
+  .route("/v1/quadro")
+  .get(new GetQuadroController().handle)
+  .post(new CreateQuadroControler().handle)
 router
-.route("/quadro/:id")
-.get(new FindQuadroController().handle)
-.put(new UpdateQuadroController().handle)
-.delete(new DeleteQuadroController().handle)
+  .route("/v1/quadro/:id")
+  .get(new FindQuadroController().handle)
+  .put(new UpdateQuadroController().handle)
+  .delete(new DeleteQuadroController().handle)
 
 //Rotas para Station
 router
-.route("/station")
-.get(new GetStationController().handle)
-.post(new CreateStationControler().handle)
+  .route("/v1/station")
+  .get(new GetStationController().handle)
+  .post(new CreateStationControler().handle)
 router
-.route("/station/:id")
-.get(new FindStationController().handle)
-.put(new UpdateStationController().handle)
-.delete(new DeleteStationController().handle)
+  .route("/v1/station/:id")
+  .get(new FindStationController().handle)
+  .put(new UpdateStationController().handle)
+  .delete(new DeleteStationController().handle)
 
 //Rotas para Telemetria
 router
-.route("/telemetria")
-.get(new GetTelemetriaController().handle)
-.post(new CreateTelemetriaControler().handle)
+  .route("/v1/telemetria")
+  .get(new GetTelemetriaController().handle)
+  .post(new CreateTelemetriaControler().handle)
 router
-.route("/telemetria/:id")
-.get(new FindTelemetriaController().handle)
-.put(new UpdateTelemetriaController().handle)
-.delete(new DeleteTelemetriaController().handle)
+  .route("/v1/telemetria/:id")
+  .get(new FindTelemetriaController().handle)
+  .put(new UpdateTelemetriaController().handle)
+  .delete(new DeleteTelemetriaController().handle)
 
-//Rotas para Telemetria
+//Rotas para Tarefas
 router
-.route("/all")
-.get(new GetAllController().handle)
+  .route("/v1/tarefas")
+  .get(new GetTarefaController().handle)
+  .post(new CreateTarefaControler().handle)
+router
+  .route("/v1/tarefas/:id")
+  .get(new FindTarefaController().handle)
+  .put(new UpdateTarefaController().handle)
+  .delete(new DeleteTarefaController().handle)
+
+//Rotas para Checklist
+router
+  .route("/v1/checklist")
+  .get(new GetChecklistController().handle)
+  .post(new CreateChecklistControler().handle)
+router
+  .route("/v1/checklist/:id")
+  .get(new FindChecklistController().handle)
+  .put(new UpdateChecklistController().handle)
+  .delete(new DeleteChecklistController().handle)
+
+//Rotas para All
+router
+  .route("/all")
+  .get(new GetAllController().handle)
 
 //Rotas para Authenticate
 router
   .route("/auth")
   .post(new AuthController().authenticate)
 
-router.post("/tarefa", createTarefa)
-router.get("/tarefas", getAllTarefas)
+// router.post("/tarefa", createTarefa)
+// router.get("/tarefas", getAllTarefas)
 
 router.post("/tipo-equipamento", createTipoEquipamento)
 router.get("/tipo-equipamentos", getAllTipoEquipamentos)
 
-router.post("/checklist", createChecklist)
-router.get("/checklists", getAllChecklists)
+// router.post("/checklist", createChecklist)
+// router.get("/checklists", getAllChecklists)
