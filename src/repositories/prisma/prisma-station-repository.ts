@@ -336,6 +336,19 @@ export class PrismaStationRepository implements StationRepository {
         antena: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            gain: true,
+            posicao_torre:true,
+            tipos_antena: true,
+            status: true,
+            transmissores: {
+              select: {
+                id: true
+              }
+            },
             TipoEquipamento: {
               select: {
                 name: true
@@ -346,6 +359,13 @@ export class PrismaStationRepository implements StationRepository {
         arcondicionado: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            potencia: true,
+            tensao: true,
+            status: true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -356,6 +376,13 @@ export class PrismaStationRepository implements StationRepository {
         cabo:{
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            tamanho: true,
+            tipos_cabo: true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -366,6 +393,11 @@ export class PrismaStationRepository implements StationRepository {
         combinador: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -376,6 +408,12 @@ export class PrismaStationRepository implements StationRepository {
         disjuntor: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            corrente_maxima: true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -386,6 +424,13 @@ export class PrismaStationRepository implements StationRepository {
         dps:{
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            classe_dps: true,
+            corrente_maxima: true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -396,6 +441,11 @@ export class PrismaStationRepository implements StationRepository {
         exaustor: {
           select: {
             id: true,
+            categoria: true,
+            codigo: true,
+            marca: true,
+            modelo: true,
+            status: true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -406,6 +456,13 @@ export class PrismaStationRepository implements StationRepository {
         nobreak: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            tensao_entrada: true,
+            tensao_saida: true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -416,6 +473,18 @@ export class PrismaStationRepository implements StationRepository {
         parabolica: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            diametro: true,
+            satelite: true,
+            receptor: {
+              select: {
+                id: true
+              }
+            },
             TipoEquipamento: {
               select: {
                 name: true
@@ -426,6 +495,16 @@ export class PrismaStationRepository implements StationRepository {
         quadro: {
           select: {
             id: true,
+            Dps: {
+              select: {
+                id: true,
+              }
+            },
+            Disjuntor: {
+              select: {
+                id: true
+              }
+            },
             TipoEquipamento: {
               select: {
                 name: true
@@ -436,6 +515,23 @@ export class PrismaStationRepository implements StationRepository {
         receptor: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            frequencia: true,
+            Parabolica: {
+              select: {
+                id: true
+              }
+            },
+            symbol_rate: true,
+            Transmissor: {
+              select: {
+                id: true
+              }
+            },
             TipoEquipamento: {
               select: {
                 name: true
@@ -446,6 +542,12 @@ export class PrismaStationRepository implements StationRepository {
         switchies: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            qtd_portas: true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -456,6 +558,11 @@ export class PrismaStationRepository implements StationRepository {
         telemetria: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -466,6 +573,14 @@ export class PrismaStationRepository implements StationRepository {
         torre: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            altura: true,
+            aterramento: true,
+            tipo_torre: true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -476,6 +591,21 @@ export class PrismaStationRepository implements StationRepository {
         transmissor: {
           select: {
             id: true,
+            categoria: true,
+            codigo:true,
+            marca: true,
+            modelo: true,
+            status:true,
+            acoplador_one: true,
+            acoplador_two: true,
+            canal_fisico: true,
+            canal_virtual: true,
+            programmed: true,
+            Antena: {
+              select: {
+                id: true
+              }
+            },
             TipoEquipamento: {
               select: {
                 name: true
