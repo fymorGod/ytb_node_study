@@ -20,7 +20,11 @@ export class CreateSwitchService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, qtd_portas, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.switchRepository.findByCodigo({ codigo })) {
+        return new Error("Switch já existente!")
+      }
+    }
     try {
       return await this.switchRepository.create({
          codigo,

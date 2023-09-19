@@ -27,11 +27,7 @@ export class UpdateDisjuntorService {
     if(!disjuntores) {
       return new Error("Disjuntor inexistente!")
     }
-    if(codigo) {
-      if(await this.disjuntorRepository.findByCodigo({ codigo })) {
-        return new Error("Disjuntor já existente!")
-      }
-    }
+
 
     const status_anterior = Object(disjuntores).status;
 

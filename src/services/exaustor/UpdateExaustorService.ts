@@ -25,11 +25,6 @@ export class UpdateExaustorService {
     if(!exaustor) {
       return new Error("Exaustor inexistente!")
     }
-    if(codigo) {
-      if(await this.exaustorRepository.findByCodigo({ codigo })) {
-        return new Error("Exaustor já existente!")
-      }
-    }
 
     const status_anterior = Object(exaustor).status;
 

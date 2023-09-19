@@ -27,6 +27,7 @@ export class UpdateArcondicionadoService {
       return new Error("Arcondicionado inexistente!")
     }
 
+
     const status_anterior = Object(arcondicionado).status;
 
     try {

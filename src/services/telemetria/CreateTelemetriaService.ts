@@ -19,7 +19,11 @@ export class CreateTelemetriaService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.telemetriaRepository.findByCodigo({ codigo })) {
+        return new Error("Telemetria já existente!")
+      }
+    }
     try {
       return await this.telemetriaRepository.create({
          codigo,

@@ -20,7 +20,11 @@ export class CreateQuadroService {
     
     //Dados do service
     const { codigo, categoria, status, dps, disjuntor, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.quadroRepository.findByCodigo({ codigo })) {
+        return new Error("Quadro já existente!")
+      }
+    }
     try {
       return await this.quadroRepository.create({
         codigo,

@@ -10,7 +10,7 @@ export interface ChecklistCreateData {
 }
 
 export interface ChecklistFind {
-  id: string;
+  name: string;
 }
 
 export interface ChecklistDelete {

@@ -19,6 +19,11 @@ export class CreateArcondicionadoService {
 
   async execute(request: CreateArcondicionadoRequest) {
     const { codigo, marca, modelo, categoria, status, potencia, tensao, tipo_equipamento, station_id } = request;
+    if(codigo){
+      if(await this.arcondicionadoRepository.findByCodigo({ codigo })) {
+        return new Error("Arcondicionado com este codigo já existe!")
+      }
+    }
 
     try {
       return await this.arcondicionadoRepository.create({

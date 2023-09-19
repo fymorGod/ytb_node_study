@@ -30,11 +30,7 @@ export class UpdateAntenaService {
     if(!antena) {
       return new Error("Antena inexistente!")
     }
-    if(codigo) {
-      if(await this.antenaRepository.findByCodigo({ codigo })) {
-        return new Error("Antena já existente!")
-      }
-    }
+
 
     const status_anterior = Object(antena).status;
 

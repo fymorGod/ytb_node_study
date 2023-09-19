@@ -30,11 +30,7 @@ export class UpdateReceptorService {
     if(!receptor) {
       return new Error("Receptor inexistente!")
     }
-    if(codigo) {
-      if(await this.receptorRepository.findByCodigo({ codigo })) {
-        return new Error("Receptor já existente!")
-      }
-    }
+
 
     const status_anterior = Object(receptor).status;
 

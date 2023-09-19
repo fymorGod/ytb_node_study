@@ -21,11 +21,6 @@ export class UpdateTarefaService {
     if(!tarefa) {
       return new Error("Tarefa inexistente!")
     }
-    if(id) {
-      if(await this.tarefaRepository.find({ id })) {
-        return new Error("Tarefa já existente!")
-      }
-    }
 
     try {
       return await this.tarefaRepository.update({

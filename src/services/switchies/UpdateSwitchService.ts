@@ -27,11 +27,7 @@ export class UpdateSwitchService {
     if(!switchies) {
       return new Error("Switch inexistente!")
     }
-    if(codigo) {
-      if(await this.switchRepository.findByCodigo({ codigo })) {
-        return new Error("Switch já existente!")
-      }
-    }
+
 
     const status_anterior = Object(switchies).status;
 

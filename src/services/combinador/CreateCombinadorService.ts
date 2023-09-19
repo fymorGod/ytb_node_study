@@ -19,6 +19,11 @@ export class CreateCombinadorService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, tipo_equipamento, station_id }= request;
+    if(codigo) {
+      if(await this.combinadorRepository.findByCodigo({ codigo })) {
+        return new Error("Combinador já existente!")
+      }
+    }
 
     try {
       return await this.combinadorRepository.create({

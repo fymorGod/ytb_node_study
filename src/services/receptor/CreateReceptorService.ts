@@ -23,7 +23,11 @@ export class CreateReceptorService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, frequencia, symbol_rate, channel, tipo_equipamento, parabolica, station_id }= request;
-
+    if(codigo) {
+      if(await this.receptorRepository.findByCodigo({ codigo })) {
+        return new Error("Receptor já existente!")
+      }
+    }
     try {
       return await this.receptorRepository.create({
          codigo,

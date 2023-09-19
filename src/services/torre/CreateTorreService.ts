@@ -23,7 +23,11 @@ export class CreateTorreService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, tipo_torre, aterramento , altura, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.torreRepository.findByCodigo({ codigo })) {
+        return new Error("Torre já existente!")
+      }
+    }
     try {
       return await this.torreRepository.create({
          codigo,

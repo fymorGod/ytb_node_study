@@ -28,6 +28,8 @@ export class UpdateCaboService {
       return new Error("Cabo inexistente!")
     }
 
+
+
     const status_anterior = Object(cabo).status; 
 
     try {

@@ -25,11 +25,7 @@ export class UpdateTelemetriaService {
     if(!telemetria) {
       return new Error("Telemetria inexistente!")
     }
-    if(codigo) {
-      if(await this.telemetriaRepository.findByCodigo({ codigo })) {
-        return new Error("Telemetria já existente!")
-      }
-    }
+
 
     const status_anterior = Object(telemetria).status;
 

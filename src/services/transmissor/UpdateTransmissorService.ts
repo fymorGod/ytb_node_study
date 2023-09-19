@@ -33,11 +33,7 @@ export class UpdateTransmissorService {
     if(!transmissor) {
       return new Error("Transmissor inexistente!")
     }
-    if(codigo) {
-      if(await this.transmissorRepository.findByCodigo({ codigo })) {
-        return new Error("Transmissor já existente!")
-      }
-    }
+
 
     const status_anterior = Object(transmissor).status;
 

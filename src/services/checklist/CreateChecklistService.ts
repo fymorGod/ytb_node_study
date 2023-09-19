@@ -16,7 +16,11 @@ export class CreateChecklistService {
     
     //Dados do service
     const { name, tarefas ,tipo_equipamento }= request;
-
+    if(name) {
+      if(await this.checklistRepository.find({ name })) {
+        return new Error("Checklist já existente!")
+      }
+    }
     try {
       return await this.checklistRepository.create({
         name,

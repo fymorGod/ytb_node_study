@@ -30,11 +30,7 @@ export class UpdateDpsService {
     if(!dps) {
       return new Error("Dps inexistente!")
     }
-    if(codigo) {
-      if(await this.dpsRepository.findByCodigo({ codigo })) {
-        return new Error("Dps já existente!")
-      }
-    }
+
 
     const status_anterior = Object(dps).status;
 

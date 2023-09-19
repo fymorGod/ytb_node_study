@@ -27,7 +27,11 @@ export class CreateTransmissorService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, programmed, canal_fisico, canal_virtual, acoplador_one, acoplador_two, receptor, antena, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.transmissorRepository.findByCodigo({ codigo })) {
+        return new Error("Transmissor já existente!")
+      }
+    }
     try {
       return await this.transmissorRepository.create({
         codigo,

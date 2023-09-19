@@ -46,10 +46,10 @@ export class PrismaChecklistRepository implements ChecklistRepository {
     return checklist;
   }
 
-  async find({ id }: ChecklistFind) {
+  async find({ name }: ChecklistFind) {
     const checklist = await prisma.checklist.findUnique({
       where: {
-        id,
+        name,
       },
       select: {
         name: true,

@@ -22,7 +22,11 @@ export class CreateParabolicaService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, diametro, satelite, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.parabolicaRepository.findByCodigo({ codigo })) {
+        return new Error("Parabolica já existente!")
+      }
+    }
     try {
       return await this.parabolicaRepository.create({
          codigo,

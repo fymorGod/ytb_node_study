@@ -21,7 +21,11 @@ export class CreateCaboService {
 
   async execute(request: CreateCaboRequest) {
     const { codigo, marca, modelo, categoria, status, tipos_cabo, tamanho, tipo_equipamento, station_id } = request;
-
+    if(codigo) {
+      if(await this.caboRepository.findByCodigo({ codigo })) {
+        return new Error("Código já existente!")
+      }
+    }
     try {
       return await this.caboRepository.create({
         codigo,

@@ -20,6 +20,11 @@ export class CreateExaustorService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, tipo_equipamento, station_id}= request;
+    if(codigo) {
+      if(await this.exaustorRepository.findByCodigo({ codigo })) {
+        return new Error("Exaustor já existente!")
+      }
+    }
 
     try {
       return await this.exaustorRepository.create({

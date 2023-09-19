@@ -22,7 +22,11 @@ export class CreateDisjuntorService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, corrente_maxima, quadro, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.disjuntorRepository.findByCodigo({ codigo })) {
+        return new Error("Disjuntor já existente!")
+      }
+    }
     try {
       return await this.disjuntorRepository.create({
          codigo,

@@ -31,11 +31,7 @@ export class UpdateParabolicaService {
     if(!parabolica) {
       return new Error("Parabolica inexistente!")
     }
-    if(codigo) {
-      if(await this.parabolicaRepository.findByCodigo({ codigo })) {
-        return new Error("Parabolica já existente!")
-      }
-    }
+
 
     const status_anterior = Object(parabolica).status;
 

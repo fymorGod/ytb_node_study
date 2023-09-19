@@ -25,7 +25,13 @@ export class CreateAntenaService {
     
     //Dados do service
     const { codigo, marca, modelo, categoria, status, gain, tipos_antena, posicao_torre, vr, tipo_equipamento, station_id }= request;
-
+    
+    if(codigo) {
+      if(await this.antenaRepository.findByCodigo({ codigo })) {
+        return new Error("Antena já existente!")
+      }
+    }
+    
     try {
       return await this.antenaRepository.create({
          codigo,

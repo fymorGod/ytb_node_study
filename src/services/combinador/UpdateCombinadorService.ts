@@ -25,11 +25,6 @@ export class UpdateCombinadorService {
     if(!combinador) {
       return new Error("Combinador inexistente!")
     }
-    if(codigo) {
-      if(await this.combinadorRepository.findByCodigo({ codigo })) {
-        return new Error("Combinador já existente!")
-      }
-    }
 
     const status_anterior = Object(combinador).status;
 

@@ -26,11 +26,7 @@ export class UpdateQuadroService {
     if(!quadro) {
       return new Error("Quadro inexistente!")
     }
-    if(codigo) {
-      if(await this.quadroRepository.findByCodigo({ codigo })) {
-        return new Error("Quadro já existente!")
-      }
-    }
+
 
     const status_anterior = Object(quadro).status;
 

@@ -22,7 +22,11 @@ export class CreateDpsService {
     
     //Dados do service
     const {  codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, quadro, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.dpsRepository.findByCodigo({ codigo })) {
+        return new Error("Dps já existente!")
+      }
+    }
     try {
       return await this.dpsRepository.create({
         codigo,

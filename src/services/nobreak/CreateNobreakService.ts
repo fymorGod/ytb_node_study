@@ -22,7 +22,11 @@ export class CreateNobreakService {
     
     //Dados do service
     const {codigo, marca, modelo, categoria, status, tensao_entrada, tensao_saida, tipo_equipamento, station_id }= request;
-
+    if(codigo) {
+      if(await this.nobreakRepository.findByCodigo({ codigo })) {
+        return new Error("Antena já existente!")
+      }
+    }
     try {
       return await this.nobreakRepository.create({
          codigo,

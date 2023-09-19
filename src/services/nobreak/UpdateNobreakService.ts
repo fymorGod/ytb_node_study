@@ -29,11 +29,7 @@ export class UpdateNobreakService {
     if(!nobreak) {
       return new Error("Nobreak inexistente!")
     }
-    if(codigo) {
-      if(await this.nobreakRepository.findByCodigo({ codigo })) {
-        return new Error("Antena já existente!")
-      }
-    }
+
 
     const status_anterior = Object(nobreak).status;
 
