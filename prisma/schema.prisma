@@ -366,14 +366,15 @@ model TipoEquipamento {
 }
 
 model Checklist {
-  id                String              @id @default(uuid())
-  name              String              @unique
+  id                String           @id @default(uuid())
+  name              String           @unique
   tarefa            Tarefa[]
-  template          ChecklistTemplate[]
-  created_at        DateTime            @default(now())
-  updated_at        DateTime            @updatedAt
-  TipoEquipamento   TipoEquipamento?    @relation(fields: [tipoEquipamentoId], references: [id])
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+  TipoEquipamento   TipoEquipamento? @relation(fields: [tipoEquipamentoId], references: [id])
   tipoEquipamentoId String?
+  Template          Template?        @relation(fields: [templateId], references: [id])
+  templateId        String?
 }
 
 model Tarefa {
@@ -388,20 +389,20 @@ model Tarefa {
 }
 
 model Template {
-  id         String              @id @default(uuid())
+  id         String      @id @default(uuid())
   name       String
-  checklist  ChecklistTemplate[]
-  created_at DateTime            @default(now())
-  updated_at DateTime            @updatedAt
+  Checklist Checklist[]
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
 }
 
-model ChecklistTemplate {
-  id          String     @id @default(uuid())
-  Checklist   Checklist? @relation(fields: [checklistId], references: [id])
-  checklistId String?
-  Template    Template?  @relation(fields: [templateId], references: [id])
-  templateId  String?
-}
+// model ChecklistTemplate {
+//   id          String     @id @default(uuid())
+//   Checklist   Checklist? @relation(fields: [checklistId], references: [id])
+//   checklistId String?
+//   Template    Template?  @relation(fields: [templateId], references: [id])
+//   templateId  String?
+// }
 
 model Arcondicionado {
   id                       String                     @id @default(uuid())

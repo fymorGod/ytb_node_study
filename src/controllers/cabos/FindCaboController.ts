@@ -10,7 +10,7 @@ class FindCaboController {
 
     const findCaboService = new FindCaboService(prismaCaboRepository)
 
-    const cabo = await prismaCaboRepository.find({
+    const cabo = await findCaboService.execute({
       id,
     });
 

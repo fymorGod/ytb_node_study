@@ -28,12 +28,6 @@ export class UpdateCaboService {
       return new Error("Cabo inexistente!")
     }
 
-    if(codigo) {
-      if(await this.caboRepository.findByCodigo({ codigo })) {
-        return new Error("Código já existente!")
-      }
-    }
-
     const status_anterior = Object(cabo).status; 
 
     try {

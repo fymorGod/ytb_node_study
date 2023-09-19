@@ -27,12 +27,6 @@ export class UpdateArcondicionadoService {
       return new Error("Arcondicionado inexistente!")
     }
 
-    if(codigo){
-      if(await this.arcondicionadoRepository.findByCodigo({ codigo })) {
-        return new Error("Arcondicionado com este codigo já existe!")
-      }
-    }
-
     const status_anterior = Object(arcondicionado).status;
 
     try {

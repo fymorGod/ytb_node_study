@@ -89,11 +89,11 @@ import { CreateTarefaControler } from "./controllers/tarefa/CreateTarefaControll
 import { FindTarefaController } from "./controllers/tarefa/FindTarefaController";
 import { UpdateTarefaController } from "./controllers/tarefa/UpdateTarefaController";
 import { DeleteTarefaController } from "./controllers/tarefa/DeleteTarefaController";
-import { GetChecklistController } from "./controllers/checklist/GetAntenaController";
-import { CreateChecklistControler } from "./controllers/checklist/CreateAntenaController";
-import { FindChecklistController } from "./controllers/checklist/FindAntenaController";
-import { UpdateChecklistController } from "./controllers/checklist/UpdateAntenaController";
-import { DeleteChecklistController } from "./controllers/checklist/DeleteAntenaController";
+import { GetChecklistController } from "./controllers/checklist/GetChecklistController";
+import { CreateChecklistControler } from "./controllers/checklist/CreateChecklistController";
+import { FindChecklistController } from "./controllers/checklist/FindChecklistController";
+import { UpdateChecklistController } from "./controllers/checklist/UpdateChecklistController";
+import { DeleteChecklistController } from "./controllers/checklist/DeleteChecklistController";
 
 export const router = Router()
 

@@ -21,11 +21,6 @@ export class UpdateChecklistService {
     if(!checklist) {
       return new Error("Checklist inexistente!")
     }
-    if(id) {
-      if(await this.checklistRepository.find({ id })) {
-        return new Error("Checklist já existente!")
-      }
-    }
 
     try {
       return await this.checklistRepository.update({
