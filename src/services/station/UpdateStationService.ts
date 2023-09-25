@@ -39,11 +39,6 @@ export class UpdateStationService {
     if(!station) {
       return new Error("Station inexistente!")
     }
-    if(name) {
-      if(await this.stationRepository.findByName({ name })) {
-        return new Error("Station já existente!")
-      }
-    }
 
     try {
       return await this.stationRepository.update({

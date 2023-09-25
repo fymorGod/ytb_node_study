@@ -30,11 +30,7 @@ export class UpdateTorreService {
       return new Error("Torre inexistente!")
     }
 
-    if(codigo) {
-      if(await this.torreRepository.findByCodigo({ codigo })) {
-        return new Error("Torre já existente!")
-      }
-    }
+
 
     const status_anterior = Object(torre).status;
 
