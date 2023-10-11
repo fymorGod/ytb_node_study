@@ -6,6 +6,7 @@ export interface StationCreateData {
   address: string
   link_grafana: string
   status: stationStatus
+  manutencaoId?: string
 }
 
 export interface StationFind {
@@ -25,6 +26,7 @@ export interface StationUpdate {
   link_grafana?: string;
   status?: stationStatus
   status_anterior?: stationStatus
+  manutencaoId?: string
 }
 
 export interface StationFindByName {

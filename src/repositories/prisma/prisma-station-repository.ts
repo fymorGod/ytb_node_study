@@ -1,17 +1,25 @@
 import { prisma } from "../../database/prisma";
 import { StationCreateData, StationDelete, StationFind, StationFindByName, StationRepository, StationUpdate } from "../interfaces/station/station-repository";
 
-export const isAntenaIdValid = async ({ id }: any) => {
-  const antenaID = await prisma.antena.findUnique({
+// export const isAntenaIdValid = async ({ id }: any) => {
+//   const antenaID = await prisma.antena.findUnique({
+//     where: {
+//       id
+//     }
+//   })
+//   return !!antenaID;
+// }
+export const isManutencaoIdValid = async ({ id }: any) => {
+  const manutencaoID = await prisma.manutencao.findUnique({
     where: {
       id
     }
   })
-  return !!antenaID;
+  return !!manutencaoID;
 }
 export class PrismaStationRepository implements StationRepository {
 
-  async create({ name, address, latitude, link_grafana, longitude, status }: StationCreateData) {
+  async create({ name, address, latitude, link_grafana, longitude, status, manutencaoId }: StationCreateData) {
     const data: any = {
       name,
       address,
@@ -20,7 +28,13 @@ export class PrismaStationRepository implements StationRepository {
       longitude,
       status,
     };
-
+    if (manutencaoId && (await isManutencaoIdValid({ id: manutencaoId}))) {
+      data.manutencao = {
+        connect: {
+          id: manutencaoId
+        }
+      };
+    }
     return await prisma.station.create({
       data,
     });

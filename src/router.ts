@@ -94,6 +94,11 @@ import { CreateChecklistControler } from "./controllers/checklist/CreateChecklis
 import { FindChecklistController } from "./controllers/checklist/FindChecklistController";
 import { UpdateChecklistController } from "./controllers/checklist/UpdateChecklistController";
 import { DeleteChecklistController } from "./controllers/checklist/DeleteChecklistController";
+import { GetManutencaoController } from "./controllers/manutencao/GetManutencaoController";
+import { CreateManutencaoControler } from "./controllers/manutencao/CreateManutencaoController";
+import { FindManutencaoController } from "./controllers/manutencao/FindManutencaoController";
+import { UpdateManutencaoController } from "./controllers/manutencao/UpdateManutencaoController";
+import { DeleteManutencaoController } from "./controllers/manutencao/DeleteManutencaoController";
 
 export const router = Router()
 
@@ -300,6 +305,17 @@ router
   .get(new FindChecklistController().handle)
   .put(new UpdateChecklistController().handle)
   .delete(new DeleteChecklistController().handle)
+
+//Rotas para Manutenção
+router
+  .route("/v1/manutencao")
+  .get(new GetManutencaoController().handle)
+  .post(new CreateManutencaoControler().handle)
+router
+  .route("/v1/manutencao/:id")
+  .get(new FindManutencaoController().handle)
+  .put(new UpdateManutencaoController().handle)
+  .delete(new DeleteManutencaoController().handle)
 
 //Rotas para All
 router

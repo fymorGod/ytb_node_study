@@ -303,14 +303,19 @@ model Documento_Transmissor {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  name       String
-  email      String   @unique
-  password   String
-  Access     Access?  @relation(fields: [accessId], references: [id])
+  id              String @id @default(uuid())
+  name            String
+  email           String @unique
+  password        String
+  contato         String
+  empresa         String
+  contato_empresa String
+
+  manutencao Manutencao?
+  Access     Access?     @relation(fields: [accessId], references: [id])
   accessId   String?
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
 }
 
 model Access {
@@ -319,6 +324,31 @@ model Access {
   user       User[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+}
+
+enum TipoManutencao {
+  PREVENTIVA
+  CORRETIVA
+}
+
+enum StatusManutencao {
+  AGENDADA
+  EM_EXECUCAO
+  EM_AGUARDO
+  FINALIZADA
+}
+
+model Manutencao {
+  id         String           @id @default(uuid())
+  dataCreate DateTime
+  tipo       TipoManutencao
+  checklist  Checklist[]
+  observacao String
+  status     StatusManutencao
+  User       User             @relation(fields: [userId], references: [id])
+  Station    Station          @relation(fields: [stationId], references: [id])
+  userId     String           @unique
+  stationId  String           @unique
 }
 
 model Antena {
@@ -367,7 +397,7 @@ model TipoEquipamento {
 
 model Checklist {
   id                String           @id @default(uuid())
-  name              String           @unique
+  name              String
   tarefa            Tarefa[]
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
@@ -375,6 +405,8 @@ model Checklist {
   tipoEquipamentoId String?
   Template          Template?        @relation(fields: [templateId], references: [id])
   templateId        String?
+  Manutencao        Manutencao?      @relation(fields: [manutencaoId], references: [id])
+  manutencaoId      String?
 }
 
 model Tarefa {
@@ -391,7 +423,7 @@ model Tarefa {
 model Template {
   id         String      @id @default(uuid())
   name       String
-  Checklist Checklist[]
+  Checklist  Checklist[]
   created_at DateTime    @default(now())
   updated_at DateTime    @updatedAt
 }
@@ -592,6 +624,7 @@ model Station {
   address           String
   link_grafana      String
   status            TypeStatus
+  manutencao        Manutencao?
   Documento_Station Documento_Station[]
   antena            Antena[]
   arcondicionado    Arcondicionado[]

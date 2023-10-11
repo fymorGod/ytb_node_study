@@ -15,7 +15,10 @@ export class AuthController{
         id: true,
         name: true,
         email: true,
-        password: true
+        password: true,
+        contato: true,
+        contato_empresa: true,
+        empresa: true
       }
     })
   

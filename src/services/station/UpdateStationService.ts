@@ -23,6 +23,7 @@ interface UpdateStationRequest {
   telemetria?: string;
   torre?: string;
   transmissor?: string;
+  manutencaoId?: string;
 }
 
 export class UpdateStationService {
@@ -32,7 +33,7 @@ export class UpdateStationService {
   ) {}
 
   async execute(request: UpdateStationRequest) {
-    const {id, name, address, latitude, link_grafana, longitude, status } = request;
+    const {id, name, address, latitude, link_grafana, longitude, status, manutencaoId } = request;
 
     const station = await this.stationRepository.find({id});
 
@@ -48,7 +49,8 @@ export class UpdateStationService {
         latitude,
         link_grafana,
         longitude,
-        status
+        status,
+        manutencaoId
       })
     } catch (error) {
       return error

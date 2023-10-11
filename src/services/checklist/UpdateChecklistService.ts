@@ -16,7 +16,7 @@ export class UpdateChecklistService {
   async execute(request: UpdateChecklistRequest) {
     const {id, name, tarefas, tipo_equipamento } = request;
 
-    const checklist = await this.checklistRepository.find({name});
+    const checklist = await this.checklistRepository.find({id});
 
     if(!checklist) {
       return new Error("Checklist inexistente!")

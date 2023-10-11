@@ -1,4 +1,5 @@
 export interface TarefaProps {
+  id?: string;
   description: string,
   verificado: boolean,
   foto_verificado: boolean
@@ -10,7 +11,7 @@ export interface ChecklistCreateData {
 }
 
 export interface ChecklistFind {
-  name: string;
+  id: string;
 }
 
 export interface ChecklistDelete {

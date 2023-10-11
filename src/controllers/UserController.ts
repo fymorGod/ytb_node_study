@@ -3,7 +3,7 @@ import { prisma } from "../database/prisma";
 import { hash } from "bcryptjs";
 
 export const createUser = async (req: Request, res: Response) => {
-  const { name, email, password, accessName } = req.body;
+  const { name, email, password, accessName, contato, empresa, contato_empresa, manutencao } = req.body;
 
   const isUserUniqueEmail = await prisma.user.findUnique({
     where: {
@@ -28,7 +28,12 @@ export const createUser = async (req: Request, res: Response) => {
   const hashPassowrd = await hash(password, 8)
 
   const user = await prisma.user.create({
-    data: { name, email, password: hashPassowrd, Access: {
+    data: { name, email, password: hashPassowrd, 
+      contato,
+      empresa,
+      contato_empresa,
+      manutencao,
+      Access: {
       connect: {
         name: accessName
       }
@@ -37,6 +42,9 @@ export const createUser = async (req: Request, res: Response) => {
       id: true,
       name: true,
       email: true,
+      contato: true,
+      contato_empresa: true,
+      empresa: true,
       Access: {
         select: {
           name: true

@@ -21,6 +21,7 @@ interface CreateStationRequest {
   address: string
   link_grafana: string;
   status: stationStatus;
+  manutencaoId?: string;
 }
 
 export class CreateStationService {
@@ -45,7 +46,7 @@ export class CreateStationService {
   async execute(request: CreateStationRequest) {
     
     //Dados do service
-    const { name, address, latitude, link_grafana, longitude, status }= request;
+    const { name, address, latitude, link_grafana, longitude, status, manutencaoId }= request;
     
     // const condensadora = await this.antenaRepository.find({ id:antena });
 
@@ -56,7 +57,8 @@ export class CreateStationService {
         latitude,
         link_grafana,
         longitude,
-        status
+        status,
+        manutencaoId
       })
     } catch (error) {
       return error
