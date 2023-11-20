@@ -8,7 +8,6 @@ export interface Checklist {
   tarefa: TarefaProps[]
   tipo_equipamento: string
   template?: string
-  manutencao: string 
 }
 
 
@@ -18,7 +17,7 @@ export interface ManutencaoCreateData {
   userId: string;
   stationId: string;
   checklist: Checklist[] 
-  observacao: string
+  observacao?: string
   status: statusManutencao
 }
 

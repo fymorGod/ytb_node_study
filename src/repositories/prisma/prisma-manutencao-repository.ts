@@ -8,7 +8,6 @@ interface ChecklistProps {
   tarefa: TarefaProps[]
   tipo_equipamento: string
   template?: string
-  manutencao: string 
 }
 
 export const isUserIdValid = async ({ id }: any) => {
@@ -45,8 +44,7 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
               )
             },
             tipo_equipamento: check.tipo_equipamento,
-            template: check.template,
-            manutencao: check.manutencao
+            template: check.template
           }))
       },
       observacao,
@@ -60,7 +58,7 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
         }
       };
     }
-    if(userId && (await isUserIdValid({ id: userId}))) {
+    if(userId && (await isUserIdValid({ id: userId }))) {
       data.User = {
         connect: {
           id: userId
@@ -166,11 +164,6 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
                 Template: {
                   connect: {
                     id: check.template
-                  }
-                },
-                Manutencao: {
-                  connect: {
-                    id: check.manutencao
                   }
                 }
               }

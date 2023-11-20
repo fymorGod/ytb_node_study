@@ -68,9 +68,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         arcondicionado: {
@@ -85,9 +92,16 @@ export class PrismaStationRepository implements StationRepository {
             status: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         cabo:{
@@ -102,9 +116,16 @@ export class PrismaStationRepository implements StationRepository {
             tipos_cabo: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         combinador: {
@@ -117,9 +138,16 @@ export class PrismaStationRepository implements StationRepository {
             status:true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         disjuntor: {
@@ -133,9 +161,16 @@ export class PrismaStationRepository implements StationRepository {
             corrente_maxima: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         dps:{
@@ -150,9 +185,16 @@ export class PrismaStationRepository implements StationRepository {
             corrente_maxima: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         exaustor: {
@@ -165,9 +207,16 @@ export class PrismaStationRepository implements StationRepository {
             status: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         nobreak: {
@@ -182,9 +231,16 @@ export class PrismaStationRepository implements StationRepository {
             tensao_saida: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         parabolica: {
@@ -204,9 +260,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         quadro: {
@@ -224,9 +287,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         receptor: {
@@ -251,9 +321,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         switchies: {
@@ -267,9 +344,16 @@ export class PrismaStationRepository implements StationRepository {
             qtd_portas: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         telemetria: {
@@ -282,9 +366,16 @@ export class PrismaStationRepository implements StationRepository {
             status:true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         torre: {
@@ -300,9 +391,16 @@ export class PrismaStationRepository implements StationRepository {
             tipo_torre: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         transmissor: {
@@ -325,9 +423,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
       }
@@ -365,9 +470,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         arcondicionado: {
@@ -382,9 +494,16 @@ export class PrismaStationRepository implements StationRepository {
             status: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         cabo:{
@@ -399,9 +518,16 @@ export class PrismaStationRepository implements StationRepository {
             tipos_cabo: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         combinador: {
@@ -414,9 +540,16 @@ export class PrismaStationRepository implements StationRepository {
             status:true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         disjuntor: {
@@ -430,9 +563,16 @@ export class PrismaStationRepository implements StationRepository {
             corrente_maxima: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         dps:{
@@ -447,9 +587,16 @@ export class PrismaStationRepository implements StationRepository {
             corrente_maxima: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         exaustor: {
@@ -462,9 +609,16 @@ export class PrismaStationRepository implements StationRepository {
             status: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         nobreak: {
@@ -479,9 +633,16 @@ export class PrismaStationRepository implements StationRepository {
             tensao_saida: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         parabolica: {
@@ -501,9 +662,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         quadro: {
@@ -521,9 +689,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         receptor: {
@@ -548,9 +723,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         switchies: {
@@ -564,9 +746,16 @@ export class PrismaStationRepository implements StationRepository {
             qtd_portas: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         telemetria: {
@@ -579,9 +768,16 @@ export class PrismaStationRepository implements StationRepository {
             status:true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         torre: {
@@ -597,9 +793,16 @@ export class PrismaStationRepository implements StationRepository {
             tipo_torre: true,
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
         transmissor: {
@@ -622,9 +825,16 @@ export class PrismaStationRepository implements StationRepository {
             },
             TipoEquipamento: {
               select: {
-                name: true
+                name: true,
+                checklist: {
+                  select: {
+                    id: true,
+                    name:true,
+                    tarefa: true
+                  }
+                }
               }
-            }
+            },
           }
         },
       },

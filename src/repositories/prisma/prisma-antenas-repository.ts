@@ -58,7 +58,14 @@ export class PrismaAntenaRepository implements AntenaRepository {
         vr: true,
         TipoEquipamento: {
           select: {
-            name: true
+            name: true,
+            checklist: {
+              select: {
+                id: true,
+                name:true,
+                tarefa: true
+              }
+            }
           }
         },
         Station: {
@@ -89,7 +96,14 @@ export class PrismaAntenaRepository implements AntenaRepository {
         vr: true,
         TipoEquipamento: {
           select: {
-            name: true
+            name: true,
+            checklist: {
+              select: {
+                id: true,
+                name:true,
+                tarefa: true
+              }
+            }
           }
         },
         Station: {
@@ -114,11 +128,18 @@ export class PrismaAntenaRepository implements AntenaRepository {
   }
 
   async delete({ id }: AntenaDelete) {
-    await prisma.antena.delete({
-      where: {
-        id,
-      },
-    });
+    try {
+      // Remova a antena com base no ID
+      await prisma.antena.delete({
+          where: {
+              id,
+          },
+      });
+  } catch (error) {
+      console.error(`An error occurred while deleting the antena: ${error}`);
+  } finally {
+      await prisma.$disconnect(); // Feche a conexão com o Prisma
+  }
   }
 
   async update({ id, codigo, marca, modelo, categoria, gain, posicao_torre, station_id, tipo_equipamento, tipos_antena, status, vr, transmissores }: AntenaUpdate) {

@@ -36,12 +36,19 @@ export class PrismaChecklistRepository implements ChecklistRepository {
       select: {
         id:true,
         name: true,
-        tarefa: true,
         TipoEquipamento: {
           select: {
             name: true
           }
         },
+        tarefa: {
+          select: {
+              id: true,
+              description: true,
+              verificado: true,
+              foto_verificado: true
+          }
+      }
       }
     });
     return checklist;
@@ -54,7 +61,14 @@ export class PrismaChecklistRepository implements ChecklistRepository {
       },
       select: {
         name: true,
-        tarefa: true,
+        tarefa: {
+          select: {
+              id: true,
+              description: true,
+              verificado: true,
+              foto_verificado: true
+          }
+      },
         TipoEquipamento: {
           select: {
             name: true
@@ -101,77 +115,86 @@ export class PrismaChecklistRepository implements ChecklistRepository {
   }
 
   async update({ id, name, tarefas, tipo_equipamento  }: ChecklistUpdate) {
-
     try {
-      await prisma.checklist.update({
-        where: {
-          id,
-        },
-        data: {
-          name,
-          TipoEquipamento: { 
-            connect: {
-              name: tipo_equipamento,
-            },
-          },
-        },
+      // Verifique se o checklist com o ID fornecido existe no banco de dados
+      const checklist = await prisma.checklist.findUnique({
+          where: { id },
+          include: { tarefa: true },
       });
-  
-      if (tarefas && tarefas.length > 0) {
-        // Atualize as tarefas corretamente
-        await Promise.all(
-          tarefas.map(async (task:TarefaProps) => {
-            await prisma.tarefa.update({
-              where: {
-                id: task.id,
-              },
-              data: {
-                description: task.description,
-                verificado: task.verificado,
-                foto_verificado: task.foto_verificado,
-              },
-            });
-          })
-        );
-      }
-  
-      console.log('Checklist e tarefas atualizadas com sucesso');
-    } catch (error) {
-      console.error('Ocorreu um erro ao atualizar o checklist e as tarefas:', error);
-    } finally {
-      await prisma.$disconnect(); // Feche a conexão com o Prisma
-    }
 
-    // if (tarefas && tarefas.length > 0) {
-    //   // Atualize as tarefas corretamente
-    //   await Promise.all(
-    //     tarefas.map(async (task: TarefaProps) => {
-    //       await prisma.tarefa.update({
-    //         where: {
-    //           id: task.id
-    //         },
-    //         data: {
-    //           description: task.description,
-    //           verificado: task.verificado,
-    //           foto_verificado: task.foto_verificado,
-    //         },
-    //       });
-    //     })
-    //   );
-    // }
-    // await prisma.checklist.update({
-    //   where: {
-    //     id,
-    //   },
-    //   data: {
-    //     name,
-    //     TipoEquipamento: {
-    //       connect: {
-    //         name: tipo_equipamento
-    //       },
-    //     }
-    //   }
-    // });
+      if (!checklist) {
+          throw new Error('Checklist not found');
+      }
+
+      // Atualize os atributos do checklist
+      const updatedChecklist = await prisma.checklist.update({
+          where: { id },
+          data: { name },
+      });
+
+      // Atualize o tipo de equipamento separadamente
+      if (tipo_equipamento) {
+          await prisma.checklist.update({
+              where: { id: updatedChecklist.id },
+              data: {
+                  TipoEquipamento: {
+                      connect: { name: tipo_equipamento },
+                  },
+              },
+          });
+      }
+
+      // Crie uma lista para acompanhar as tarefas atualizadas
+      const updatedTasks = [];
+
+      // Itere sobre os dados das tarefas na solicitação
+      for (const taskData of tarefas || []) {
+          const taskId = taskData.id;
+          const description = taskData.description;
+          const verificado = taskData.verificado;
+          const foto_verificado = taskData.foto_verificado;
+
+          // Se um ID de tarefa for fornecido, atualize a tarefa existente
+          if (taskId) {
+              const task = checklist.tarefa.find((t) => t.id === taskId);
+              if (task) {
+                  await prisma.tarefa.update({
+                      where: { id: taskId },
+                      data: {
+                          description,
+                          verificado,
+                          foto_verificado,
+                      },
+                  });
+              }
+          } else {
+              // Se nenhum ID de tarefa for fornecido, crie uma nova tarefa com referência ao checklist
+              const newTask = await prisma.tarefa.create({
+                  data: {
+                      description,
+                      verificado,
+                      foto_verificado,
+                      Checklist: { connect: { id: updatedChecklist.id } },
+                  },
+              });
+              updatedTasks.push(newTask);
+          }
+      }
+
+      // Remova as tarefas que não estão mais na lista de tarefas atualizadas
+      for (const task of checklist.tarefa) {
+          if (!updatedTasks.some((t) => t.id === task.id)) {
+              await prisma.tarefa.delete({
+                  where: { id: task.id },
+              });
+          }
+      }
+
+      return;
+  } catch (error:any) {
+      // Lançar a exceção em caso de erro
+      throw new Error(`An error occurred while updating the checklist and tasks: ${error.message}`);
+  }
   }
 
 }
