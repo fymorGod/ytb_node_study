@@ -99,6 +99,11 @@ import { CreateManutencaoControler } from "./controllers/manutencao/CreateManute
 import { FindManutencaoController } from "./controllers/manutencao/FindManutencaoController";
 import { UpdateManutencaoController } from "./controllers/manutencao/UpdateManutencaoController";
 import { DeleteManutencaoController } from "./controllers/manutencao/DeleteManutencaoController";
+import { CreateDocumentController } from "./controllers/documents/CreateDocumentController";
+import { GetDocumentController } from "./controllers/documents/GetDocumentController";
+import multer from "multer";
+import { multerConfig } from "./config/multer";
+import { DeleteDocumentController } from "./controllers/documents/DeleteDocumentController";
 
 export const router = Router()
 
@@ -117,6 +122,16 @@ router
   .get(new FindAntenaController().handle)
   .put(new UpdateAntenaController().handle)
   .delete(new DeleteAntenaController().handle)
+
+// Documentos (Multer) ------------------------------------------
+router
+  .route("/v1/documentos")
+  .post(multer(multerConfig).fields([{name: "file"}, {name: "foto"}]), new CreateDocumentController().handle)
+  .get(new GetDocumentController().handle)
+
+router
+  .route("/v1/documentos/:id")
+  .delete(new DeleteDocumentController().handle)
 
 //Rotas para Arcondicionados
 router
@@ -297,11 +312,11 @@ router
 
 //Rotas para Checklist
 router
-  .route("/v1/checklist")
+  .route("/v1/checklists")
   .get(new GetChecklistController().handle)
   .post(new CreateChecklistControler().handle)
 router
-  .route("/v1/checklist/:id")
+  .route("/v1/checklists/:id")
   .get(new FindChecklistController().handle)
   .put(new UpdateChecklistController().handle)
   .delete(new DeleteChecklistController().handle)

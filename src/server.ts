@@ -12,6 +12,6 @@ app.use(router)
 
 // app.use("/documents", express.static(path.join(__dirname, "..", "uploads")));station
 
-app.listen(3333, () => {
+app.listen(3333,() => {
   console.log("Server is Running")
 })

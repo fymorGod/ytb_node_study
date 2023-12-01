@@ -23,7 +23,6 @@ export const multerConfig = {
         cb(null, filename);
       });
     },
-
   }),
   //tamanho máximo do arquivo
   limits: {

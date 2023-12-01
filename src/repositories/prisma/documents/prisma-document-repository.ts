@@ -2,6 +2,7 @@ import { prisma } from "../../../database/prisma";
 import { DocumentRepository, DocumentCreateData, DocumentFind, DocumentDelete } from '../../interfaces/documentos/documentos-repository'
 
 export class PrismaDocumentRepository implements DocumentRepository {
+
   async create({ path, filename, originalName, fileFormat}: DocumentCreateData) {
     return await prisma.documento.create({
       data: {
