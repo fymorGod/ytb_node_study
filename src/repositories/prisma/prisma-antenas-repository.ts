@@ -108,7 +108,47 @@ export class PrismaAntenaRepository implements AntenaRepository {
         },
         Station: {
           select: {
-            name: true
+            name: true,
+            address: true,
+            id: true,
+            latitude: true,
+            link_grafana: true,
+            longitude: true,
+            manutencao: {
+              select: {
+                checklist:true,
+                dataCreate: true,
+                observacao: true,
+                stationId: true,
+                status: true,
+                tipo: true,
+                User: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    empresa: true,
+                    contato_empresa: true,
+                    Access: {
+                      select: {
+                        name: true
+                      }
+                    }
+                  }
+                },
+                Station: {
+                  select: {
+                    name: true,
+                    address: true,
+                  }
+                }
+              }
+            }
+          }
+        },
+        Documento_Antenas: {
+          select: {
+            documento: true
           }
         },
         transmissores: true,

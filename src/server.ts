@@ -9,7 +9,7 @@ const IP = "192.168.4.125"
 app.use(cors())
 app.use(express.json())
 app.use(router)
-
+app.use("/files", express.static(path.resolve(__dirname, '..','uploads')))
 // app.use("/documents", express.static(path.join(__dirname, "..", "uploads")));station
 
 app.listen(3333,() => {

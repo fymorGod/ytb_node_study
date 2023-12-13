@@ -7,24 +7,35 @@ interface CreateDocumentRequest {
   fileFormat: string;
 }
 
+interface CreateDocumentResponse {
+  success: boolean;
+  document?: any;
+  error?: string;
+}
 export class CreateDocumentService {
   constructor (
     private documentRepository: DocumentRepository
   ){}
 
-  async execute(request: CreateDocumentRequest) {
+  async execute(request: CreateDocumentRequest): Promise<CreateDocumentResponse> {
     
     const { path, filename, originalName, fileFormat } = request;
 
     if(!path || !filename || !originalName || !fileFormat) {
-      return new Error("Os campos são obrigatórios")
+      return { success: false, error: "Os campos são obrigatórios" };
     }
 
-    return await this.documentRepository.create({
-      path,
-      filename,
-      originalName,
-      fileFormat
-    })
+    try {
+      const document = await this.documentRepository.create({
+        path,
+        filename,
+        originalName,
+        fileFormat
+      });
+      return { success: true, document}
+    }  
+    catch (error) {
+      return { success: false, error: "Erro ao criar o documento"}
+    }
   }
 }

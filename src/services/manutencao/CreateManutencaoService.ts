@@ -7,7 +7,7 @@ interface CreateManutencaoRequest {
   userId: string;
   stationId: string;
   checklist: Checklist[] 
-  observacao: string
+  observacao?: string
   status: statusManutencao
 }
 

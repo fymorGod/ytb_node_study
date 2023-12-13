@@ -315,11 +315,11 @@ model User {
   empresa         String
   contato_empresa String
 
-  manutencao Manutencao?
-  Access     Access?     @relation(fields: [accessId], references: [id])
+  manutencao Manutencao[]
+  Access     Access?      @relation(fields: [accessId], references: [id])
   accessId   String?
-  created_at DateTime    @default(now())
-  updated_at DateTime    @updatedAt
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
 }
 
 model Access {
@@ -347,12 +347,14 @@ model Manutencao {
   dataCreate String
   tipo       TipoManutencao
   checklist  Checklist[]
-  observacao String
+  observacao String?
   status     StatusManutencao
-  User       User             @relation(fields: [userId], references: [id])
-  Station    Station          @relation(fields: [stationId], references: [id])
-  userId     String           @unique
-  stationId  String           @unique
+
+  Station Station @relation(fields: [stationId], references: [id])
+
+  stationId String
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    String?
 }
 
 model Antena {
@@ -629,7 +631,7 @@ model Station {
   address           String
   link_grafana      String
   status            TypeStatus
-  manutencao        Manutencao?
+  manutencao        Manutencao[]
   Documento_Station Documento_Station[]
   antena            Antena[]
   arcondicionado    Arcondicionado[]

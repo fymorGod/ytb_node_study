@@ -50,6 +50,16 @@ export class PrismaStationRepository implements StationRepository {
         longitude: true,
         link_grafana: true,
         status: true,
+        manutencao: {
+          select: {
+            dataCreate:true,
+            checklist: true,
+            observacao: true,
+            status: true,
+            tipo: true,
+            userId: true
+          }
+        },
         antena: {
           select: {
             id: true,
@@ -452,6 +462,27 @@ export class PrismaStationRepository implements StationRepository {
         longitude: true,
         link_grafana: true,
         status: true,
+        manutencao: {
+          select: {
+            dataCreate:true,
+            checklist: true,
+            observacao: true,
+            status: true,
+            tipo: true,
+            Station: {
+              select: {
+                name: true,
+                address: true
+              }
+            },
+            User: {
+              select: {
+                name: true
+              }
+            },
+            userId: true
+          }
+        },
         antena: {
           select: {
             id: true,

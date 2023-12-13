@@ -116,11 +116,11 @@ router.get("/accesses", getAllAccesses)
 router
   .route("/v1/antenas")
   .get(new GetAntenaController().handle)
-  .post(new CreateAntenaControler().handle)
+  .post(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), new CreateAntenaControler().handle)
 router
   .route("/v1/antenas/:id")
   .get(new FindAntenaController().handle)
-  .put(new UpdateAntenaController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, {name: "foto"}]),new UpdateAntenaController().handle)
   .delete(new DeleteAntenaController().handle)
 
 // Documentos (Multer) ------------------------------------------
