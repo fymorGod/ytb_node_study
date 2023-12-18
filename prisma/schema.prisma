@@ -43,43 +43,6 @@ enum TypeTowers {
   ESTAIADA
 }
 
-// model Documents {
-//   id               String         @id @default(uuid())
-//   path             String
-
-//   antenaId         String
-//   arcondicionadoId String
-//   nobreakId        String
-//   switchiesId      String
-//   telemetriaId     String
-//   tarefaId         String
-//   disjuntorId      String
-//   stationId        String
-//   caboId           String
-//   combinadorId     String
-//   dpsId            String
-//   exaustorId       String
-//   receptorId       String
-//   parabolicaId     String
-//   torreId          String
-//   transmissorId    String
-//   antena           Antena         @relation(fields: [antenaId], references: [id])
-//   arcondicionado   Arcondicionado @relation(fields: [arcondicionadoId], references: [id])
-//   nobreak          Nobreak        @relation(fields: [nobreakId], references: [id])
-//   switchies        Switchies      @relation(fields: [switchiesId], references: [id])
-//   telemetria       Telemetria     @relation(fields: [telemetriaId], references: [id])
-//   tarefa           Tarefa         @relation(fields: [tarefaId], references: [id])
-//   disjuntor        Disjuntor      @relation(fields: [disjuntorId], references: [id])
-//   station          Station        @relation(fields: [stationId], references: [id])
-//   cabo             Cabo           @relation(fields: [caboId], references: [id])
-//   combinador       Combinador     @relation(fields: [combinadorId], references: [id])
-//   dps              Dps            @relation(fields: [dpsId], references: [id])
-//   exaustor         Exaustor       @relation(fields: [exaustorId], references: [id])
-//   receptor         Receptor       @relation(fields: [receptorId], references: [id])
-//   parabolica       Parabolica     @relation(fields: [parabolicaId], references: [id])
-//   torre            Torre          @relation(fields: [torreId], references: [id])
-//   transmissor      Transmissor    @relation(fields: [transmissorId], references: [id])
-// }
 model Documento {
   id String @id @default(uuid())
 

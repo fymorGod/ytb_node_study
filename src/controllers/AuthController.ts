@@ -40,7 +40,10 @@ export class AuthController{
     return res.send({
       id: user.id,
       name: user.name,
-      email: user.email, 
+      email: user.email,
+      empresa: user.empresa,
+      contato: user.contato,
+      contato_empresa: user.contato_empresa, 
       token
     });
   }

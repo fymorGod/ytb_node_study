@@ -31,7 +31,6 @@ export class UpdateAntenaService {
       return new Error("Antena inexistente!")
     }
 
-
     const status_anterior = Object(antena).status;
 
     try {

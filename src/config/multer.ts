@@ -1,12 +1,8 @@
 import { Options, diskStorage } from "multer";
-import multer from "multer";
 import { resolve } from "path";
 import { randomBytes } from "crypto";
 
 export const multerConfig = {
-  // Local de armazenamento dos arquivos
-  // Configs do arquivo a ser armazenado
-  // storage: multer.memoryStorage(),
   storage: diskStorage({
       destination: (req, file, cb) => {
         const uploadPath = resolve(__dirname, "../../uploads");
@@ -15,11 +11,9 @@ export const multerConfig = {
       // Encriptando o arquivo para o usuario não o sobrescrever
       filename: (req, file, cb) => {
           randomBytes(16, (err, hash) => {
-              // Se der algum erro na hora de encriptar, retorna o erro e o nome do arquivo
               if (err) {
                   cb(err, file.filename);
               }
-              // const filename = `${file.originalname}`
               const filename = `${hash.toString('hex')}-${file.originalname}`
               cb(null, filename);
           });

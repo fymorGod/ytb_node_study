@@ -43,9 +43,15 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
                 })
               )
             },
-            tipo_equipamento: check.tipo_equipamento,
+            TipoEquipamento: {
+              // Assuming you have either id or name
+              connect: {
+                name: check.tipo_equipamento
+              },
+            },
             template: check.template
-          }))
+          }
+          ))
       },
       observacao,
       status, 
@@ -80,7 +86,23 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
           },
         },
         tipo: true,
-        checklist: true,
+        checklist: {
+          select: {
+            name: true,
+            tarefa: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            },
+            Template: {
+              select: {
+                id: true,
+                name: true,                
+              }
+            }
+          }
+        },
         dataCreate: true,
         observacao: true,
         status: true,
@@ -893,7 +915,11 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
           select: {
             id: true,
             name: true,
-            TipoEquipamento: true,
+            TipoEquipamento: {
+              select: {
+                name: true
+              }
+            },
             tarefa: {
               select: {
                 description: true,

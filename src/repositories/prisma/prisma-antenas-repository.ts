@@ -29,15 +29,15 @@ export class PrismaAntenaRepository implements AntenaRepository {
       tipos_antena,
       vr,
     };
-  
-    if (station_id && (await isStationIdValid({ id: station_id}))) {
+
+    if (station_id && (await isStationIdValid({ id: station_id }))) {
       data.Station = {
         connect: {
           id: station_id
         }
       };
     }
-  
+
     return await prisma.antena.create({
       data,
     });
@@ -46,7 +46,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
   async get() {
     const antenas = await prisma.antena.findMany({
       select: {
-        id:true,
+        id: true,
         codigo: true,
         marca: true,
         modelo: true,
@@ -56,13 +56,18 @@ export class PrismaAntenaRepository implements AntenaRepository {
         tipos_antena: true,
         posicao_torre: true,
         vr: true,
+        Documento_Antenas: {
+          select: {
+            documento:  true
+          }
+        },
         TipoEquipamento: {
           select: {
             name: true,
             checklist: {
               select: {
                 id: true,
-                name:true,
+                name: true,
                 tarefa: true
               }
             }
@@ -76,6 +81,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
         transmissores: true
       }
     });
+    
     return antenas;
   }
 
@@ -100,7 +106,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
             checklist: {
               select: {
                 id: true,
-                name:true,
+                name: true,
                 tarefa: true
               }
             }
@@ -116,7 +122,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
             longitude: true,
             manutencao: {
               select: {
-                checklist:true,
+                checklist: true,
                 dataCreate: true,
                 observacao: true,
                 stationId: true,
@@ -157,7 +163,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
     return antena;
   }
 
-  async findByCodigo ({ codigo }: AntenaFindByCodigo) {
+  async findByCodigo({ codigo }: AntenaFindByCodigo) {
     const antena = await prisma.antena.findFirst({
       where: {
         codigo
@@ -171,23 +177,18 @@ export class PrismaAntenaRepository implements AntenaRepository {
     try {
       // Remova a antena com base no ID
       await prisma.antena.delete({
-          where: {
-              id,
-          },
+        where: {
+          id,
+        },
       });
-  } catch (error) {
+    } catch (error) {
       console.error(`An error occurred while deleting the antena: ${error}`);
-  } finally {
+    } finally {
       await prisma.$disconnect(); // Feche a conexão com o Prisma
+    }
   }
-  }
-
-  async update({ id, codigo, marca, modelo, categoria, gain, posicao_torre, station_id, tipo_equipamento, tipos_antena, status, vr, transmissores }: AntenaUpdate) {
-    await prisma.antena.update({
-      where: {
-        id,
-      },
-      data: {
+async update({ id, codigo, marca, modelo, categoria, gain, posicao_torre, station_id, tipo_equipamento, tipos_antena, status, vr, transmissores }: AntenaUpdate) {
+    const data: any = {
         codigo,
         marca,
         modelo,
@@ -195,25 +196,32 @@ export class PrismaAntenaRepository implements AntenaRepository {
         status,
         gain,
         posicao_torre,
-        TipoEquipamento: {
-          connect: {
-            id: tipo_equipamento
-          },
-        },
         tipos_antena,
         vr,
-        Station: {
-          connect: {
-            id: station_id
-          },
+        transmissores: {},
+        TipoEquipamento: {},
+        Station: {},
+    };
+
+    if (tipo_equipamento) {
+        data.TipoEquipamento.connect = { id: tipo_equipamento };
+    }
+
+    if (station_id) {
+        data.Station.connect = { id: station_id };
+    }
+
+    if (transmissores) {
+        data.transmissores.connect = { id: transmissores };
+    }
+
+    await prisma.antena.update({
+        where: {
+            id,
         },
-        transmissores: {
-          connect: {
-            id: id
-          }
-        },
-      }
+        data,
     });
-  }
+}
+
 
 }
