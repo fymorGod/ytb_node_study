@@ -231,10 +231,12 @@ CREATE TABLE "Manutencao" (
     "id" TEXT NOT NULL,
     "dataCreate" TEXT NOT NULL,
     "tipo" "TipoManutencao" NOT NULL,
-    "observacao" TEXT NOT NULL,
+    "observacao" TEXT,
     "status" "StatusManutencao" NOT NULL,
-    "userId" TEXT NOT NULL,
     "stationId" TEXT NOT NULL,
+    "userId" TEXT,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Manutencao_pkey" PRIMARY KEY ("id")
 );
@@ -577,12 +579,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "Access_name_key" ON "Access"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Manutencao_userId_key" ON "Manutencao"("userId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Manutencao_stationId_key" ON "Manutencao"("stationId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Antena_codigo_key" ON "Antena"("codigo");
 
 -- CreateIndex
@@ -637,7 +633,7 @@ CREATE UNIQUE INDEX "Transmissor_codigo_key" ON "Transmissor"("codigo");
 ALTER TABLE "documentos_antenas" ADD CONSTRAINT "documentos_antenas_id_doc_fkey" FOREIGN KEY ("id_doc") REFERENCES "documentos"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "documentos_antenas" ADD CONSTRAINT "documentos_antenas_antenaId_fkey" FOREIGN KEY ("antenaId") REFERENCES "Antena"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "documentos_antenas" ADD CONSTRAINT "documentos_antenas_antenaId_fkey" FOREIGN KEY ("antenaId") REFERENCES "Antena"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "documentos_arcondicionados" ADD CONSTRAINT "documentos_arcondicionados_documentoId_fkey" FOREIGN KEY ("documentoId") REFERENCES "documentos"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -727,10 +723,10 @@ ALTER TABLE "documentos_transmissor" ADD CONSTRAINT "documentos_transmissor_tran
 ALTER TABLE "User" ADD CONSTRAINT "User_accessId_fkey" FOREIGN KEY ("accessId") REFERENCES "Access"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Manutencao" ADD CONSTRAINT "Manutencao_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Manutencao" ADD CONSTRAINT "Manutencao_stationId_fkey" FOREIGN KEY ("stationId") REFERENCES "Station"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Manutencao" ADD CONSTRAINT "Manutencao_stationId_fkey" FOREIGN KEY ("stationId") REFERENCES "Station"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Manutencao" ADD CONSTRAINT "Manutencao_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Antena" ADD CONSTRAINT "Antena_tipoEquipamentoId_fkey" FOREIGN KEY ("tipoEquipamentoId") REFERENCES "TipoEquipamento"("id") ON DELETE SET NULL ON UPDATE CASCADE;

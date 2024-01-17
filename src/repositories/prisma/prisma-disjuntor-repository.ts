@@ -22,7 +22,7 @@ export const isQuadroIdValid = async ({ id }: any) => {
 
 export class PrismaDisjuntorRepository implements DisjuntorRepository {
   
-  async create({ codigo, marca, modelo, categoria, status, corrente_maxima, quadro, tipo_equipamento, station_id }: DisjuntorCreateData) {
+  async create({ codigo, marca, modelo, categoria, status, corrente_maxima, tipo_equipamento, station_id }: DisjuntorCreateData) {
     const data: any = {
       codigo,
       marca,
@@ -36,13 +36,6 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
         }
       },
     };
-    if (quadro && (await isQuadroIdValid({ id: quadro}))) {
-      data.Quadro = {
-        connect: {
-          id: quadro
-        }
-      };
-    }
     if (station_id && (await isStationIdValid({ id: station_id}))) {
       data.Station = {
         connect: {
@@ -110,9 +103,44 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
         },
         Station: {
           select: {
-            name: true
+            name: true,
+            address: true,
+            id: true,
+            latitude: true,
+            link_grafana: true,
+            longitude: true,
+            manutencao: {
+              select: {
+                checklist:true,
+                dataCreate: true,
+                observacao: true,
+                stationId: true,
+                status: true,
+                tipo: true,
+                User: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    empresa: true,
+                    contato_empresa: true,
+                    Access: {
+                      select: {
+                        name: true
+                      }
+                    }
+                  }
+                },
+                Station: {
+                  select: {
+                    name: true,
+                    address: true,
+                  }
+                }
+              }
+            }
           }
-        },       
+        },      
       },
     });
     return disjuntores;
@@ -136,7 +164,7 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
     });
   }
 
-  async update({ id, codigo, marca, modelo, categoria, corrente_maxima, quadro, station_id, tipo_equipamento, status }: DisjuntorUpdate) {
+  async update({ id, codigo, marca, modelo, categoria, corrente_maxima, station_id, tipo_equipamento, status }: DisjuntorUpdate) {
     await prisma.disjuntor.update({
       where: {
         id,
@@ -148,14 +176,9 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
         categoria,
         status,
         corrente_maxima,
-        Quadro: {
-          connect: {
-            codigo: quadro
-          }
-        },
         TipoEquipamento: {
           connect: {
-            id: tipo_equipamento
+            name: tipo_equipamento
           },
         },
         Station: {

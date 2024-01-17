@@ -5,6 +5,7 @@ import { ManutencaoCreateData, ManutencaoDelete, ManutencaoFind, ManutencaoRepos
 interface ChecklistProps {
   id?: string;
   name: string
+  id_ativo?: string;
   tarefa: TarefaProps[]
   tipo_equipamento: string
   template?: string
@@ -32,9 +33,10 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
   async create({userId, stationId, dataCreate, checklist, observacao, status, tipo}: ManutencaoCreateData) {
     const data: any = {
       dataCreate,
-      checklist: {
+      checklistManutencao: {
         create: checklist?.map((check: ChecklistProps) => ({
             name: check.name,
+            id_ativo: check.id_ativo,
             tarefa: {
               create: check.tarefa?.map((task: TarefaProps) => ({
                 description: task.description,
@@ -44,7 +46,6 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
               )
             },
             TipoEquipamento: {
-              // Assuming you have either id or name
               connect: {
                 name: check.tipo_equipamento
               },
@@ -86,10 +87,11 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
           },
         },
         tipo: true,
-        checklist: {
+        checklistManutencao: {
           select: {
             name: true,
             tarefa: true,
+            id_ativo:true,
             TipoEquipamento: {
               select: {
                 name: true
@@ -911,10 +913,11 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
             }
           },
         },
-        checklist: {
+        checklistManutencao: {
           select: {
             id: true,
             name: true,
+            id_ativo: true,
             TipoEquipamento: {
               select: {
                 name: true

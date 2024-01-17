@@ -1,7 +1,7 @@
 import { DocumentAntenaRepository } from "../../repositories/interfaces/documentos/documentos_antena-repository";
 
 interface CreateDocument_AntenaRequest {
-  id_doc: string;
+  documentoId: string;
   antenaId: string;
 }
 
@@ -12,11 +12,11 @@ export class CreateDocument_AntenaService {
 
   async execute(request: CreateDocument_AntenaRequest) {
     
-    const { id_doc, antenaId } = request;
+    const { documentoId, antenaId } = request;
 
     try {
       await this.documentAntenaRepository.create({
-        id_doc,
+        documentoId,
         antenaId
       })
     } catch (err) {

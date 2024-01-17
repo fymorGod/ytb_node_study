@@ -39,7 +39,6 @@ export interface AntenaUpdate {
   vr?: string;
   tipo_equipamento?: string;
   station_id?: string;
-  transmissores?: string;
 }
 export interface AntenaFindByCodigo {
   codigo: string;

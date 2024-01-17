@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser } from "./controllers/UserController";
+import { createUser, getAllUsers, updateUser } from "./controllers/UserController";
 import { createAccess, getAllAccesses } from "./controllers/AcessController";
 import { createTipoEquipamento, getAllTipoEquipamentos } from "./controllers/TipoEquipamentoController";
 import { CreateAntenaControler } from "./controllers/antenas/CreateAntenaController";
@@ -107,7 +107,9 @@ import { DeleteDocumentController } from "./controllers/documents/DeleteDocument
 
 export const router = Router()
 
-router.post("/user", createUser)
+router.post("/v1/user", createUser)
+router.get("/v1/users", getAllUsers)
+router.put("/v1/user/:id", updateUser)
 
 router.post("/access", createAccess)
 router.get("/accesses", getAllAccesses)

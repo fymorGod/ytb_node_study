@@ -65,11 +65,13 @@ class CreateAntenaControler {
             return res.status(400).json(docCriado.message);
           }
 
-          const id_doc = Object(docCriado).id;
+          const documentoId = Object(docCriado).id;
+          console.log(documentoId)
           const antenaId = Object(antena).id;
+          console.log(antenaId)
 
           // Criando o documento da condensadora
-          const doc_antenaCreated = await createDocumentAntenaService.execute({ id_doc, antenaId });
+          const doc_antenaCreated = await createDocumentAntenaService.execute({ documentoId, antenaId });
 
           if (doc_antenaCreated instanceof Error) {
             return res.status(400).json(doc_antenaCreated);
@@ -88,10 +90,11 @@ class CreateAntenaControler {
 
           const docCriado = await createDocumentService.execute({ path, filename, originalName, fileFormat });
 
-          const id_doc = Object(docCriado).id;
+          const documentoId = Object(docCriado).id;
           const antenaId = Object(antena).id;
-
-          const doc_antenaCreated = await createDocumentAntenaService.execute({ id_doc, antenaId });
+          console.log(documentoId)
+          console.log(antenaId)
+          const doc_antenaCreated = await createDocumentAntenaService.execute({ documentoId, antenaId });
 
           if (doc_antenaCreated instanceof Error) {
             return res.status(400).json(doc_antenaCreated);

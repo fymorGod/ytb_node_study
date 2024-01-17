@@ -14,7 +14,6 @@ interface UpdateParabolicaRequest {
   satelite?: string;
   tipo_equipamento?: string;
   station_id?: string;
-  receptor_id?: string;
 }
 
 export class UpdateParabolicaService {
@@ -24,7 +23,7 @@ export class UpdateParabolicaService {
   ) {}
 
   async execute(request: UpdateParabolicaRequest) {
-    const {id,codigo,marca,modelo, categoria,status, diametro, satelite,tipo_equipamento,station_id, receptor_id} = request;
+    const {id,codigo,marca,modelo, categoria,status, diametro, satelite,tipo_equipamento,station_id} = request;
 
     const parabolica = await this.parabolicaRepository.find({id});
 
@@ -48,7 +47,6 @@ export class UpdateParabolicaService {
         satelite,
         tipo_equipamento,
         station_id,
-        receptor_id
       })
     } catch (error) {
       return error

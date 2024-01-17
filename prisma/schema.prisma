@@ -76,13 +76,14 @@ model Documento {
 model Documento_Antenas {
   id String @id @default(uuid())
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  
+  Antena      Antena?    @relation(fields: [antenaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  antenaId    String?
 
-  id_doc    String
-  documento Documento @relation(fields: [id_doc], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  Antena    Antena?   @relation(fields: [antenaId], references: [id])
-  antenaId  String?
+  Documento   Documento? @relation(fields: [documentoId], references: [id])
+  documentoId String?
 
   @@map("documentos_antenas")
 }
@@ -306,62 +307,84 @@ enum StatusManutencao {
 }
 
 model Manutencao {
-  id         String           @id @default(uuid())
-  dataCreate String
-  tipo       TipoManutencao
-  checklist  Checklist[]
-  observacao String?
-  status     StatusManutencao
+  id                  String                @id @default(uuid())
+  dataCreate          String
+  tipo                TipoManutencao
+  checklistManutencao ChecklistManutencao[]
+  observacao          String?
+  status              StatusManutencao
 
-  Station Station @relation(fields: [stationId], references: [id])
+  Station    Station  @relation(fields: [stationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  stationId  String
+  User       User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId     String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
 
-  stationId String
-  User      User?   @relation(fields: [userId], references: [id])
-  userId    String?
+model ChecklistManutencao {
+  id                String           @id @default(uuid())
+  name              String
+  tarefa            Tarefa[]
+  id_ativo          String?
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+  TipoEquipamento   TipoEquipamento? @relation(fields: [tipoEquipamentoId], references: [id])
+  tipoEquipamentoId String?
+  Template          Template?        @relation(fields: [templateId], references: [id])
+  templateId        String?
+  Manutencao        Manutencao?      @relation(fields: [manutencaoId], references: [id])
+  manutencaoId      String?
+  Antena            Antena?          @relation(fields: [antenaId], references: [id])
+  antenaId          String?
 }
 
 model Antena {
-  id                String              @id @default(uuid())
-  codigo            String              @unique
-  marca             String
-  modelo            String
-  categoria         TypeCategoria
-  status            TypeStatus
-  gain              String
-  tipos_antena      TypeAntena
-  posicao_torre     Float
-  vr                String
-  Documento_Antenas Documento_Antenas[]
-  transmissores     Transmissor[]
-  TipoEquipamento   TipoEquipamento?    @relation(fields: [tipoEquipamentoId], references: [id])
-  tipoEquipamentoId String?
-  created_at        DateTime            @default(now())
-  updated_at        DateTime            @updatedAt
-  Station           Station?            @relation(fields: [stationId], references: [id])
-  stationId         String?
+  id                  String                @id @default(uuid())
+  codigo              String                @unique
+  marca               String
+  modelo              String
+  categoria           TypeCategoria
+  status              TypeStatus
+  gain                String
+  tipos_antena        TypeAntena
+  posicao_torre       Float?
+  vr                  String
+  Documento_Antenas   Documento_Antenas[]
+  transmissores       Transmissor[]
+  TipoEquipamento     TipoEquipamento?      @relation(fields: [tipoEquipamentoId], references: [id])
+  tipoEquipamentoId   String?
+  created_at          DateTime              @default(now())
+  updated_at          DateTime              @updatedAt
+  Station             Station?              @relation(fields: [stationId], references: [id])
+  stationId           String?
+  ChecklistManutencao ChecklistManutencao[]
+
+  @@map("antenas")
 }
 
 model TipoEquipamento {
-  id             String           @id @default(uuid())
-  name           String           @unique
-  antena         Antena[]
-  arcondicionado Arcondicionado[]
-  cabo           Cabo[]
-  combinador     Combinador[]
-  disjuntor      Disjuntor[]
-  dps            Dps[]
-  exaustor       Exaustor[]
-  nobreak        Nobreak[]
-  parabolica     Parabolica[]
-  receptor       Receptor[]
-  switchies      Switchies[]
-  telemetria     Telemetria[]
-  torre          Torre[]
-  transmissor    Transmissor[]
-  checklist      Checklist[]
-  quadro         Quadro[]
-  created_at     DateTime         @default(now())
-  updated_at     DateTime         @updatedAt
+  id                  String                @id @default(uuid())
+  name                String                @unique
+  antena              Antena[]
+  arcondicionado      Arcondicionado[]
+  cabo                Cabo[]
+  combinador          Combinador[]
+  disjuntor           Disjuntor[]
+  dps                 Dps[]
+  exaustor            Exaustor[]
+  nobreak             Nobreak[]
+  parabolica          Parabolica[]
+  receptor            Receptor[]
+  switchies           Switchies[]
+  telemetria          Telemetria[]
+  torre               Torre[]
+  transmissor         Transmissor[]
+  checklist           Checklist[]
+  quadro              Quadro[]
+  created_at          DateTime              @default(now())
+  updated_at          DateTime              @updatedAt
+  ChecklistManutencao ChecklistManutencao[]
 }
 
 model Checklist {
@@ -374,27 +397,28 @@ model Checklist {
   tipoEquipamentoId String?
   Template          Template?        @relation(fields: [templateId], references: [id])
   templateId        String?
-  Manutencao        Manutencao?      @relation(fields: [manutencaoId], references: [id])
-  manutencaoId      String?
 }
 
 model Tarefa {
-  id              String     @id @default(uuid())
-  description     String
-  verificado      Boolean
-  foto_verificado Boolean
-  created_at      DateTime   @default(now())
-  updated_at      DateTime   @updatedAt
-  Checklist       Checklist? @relation(fields: [checklistId], references: [id])
-  checklistId     String?
+  id                    String               @id @default(uuid())
+  description           String
+  verificado            Boolean
+  foto_verificado       Boolean
+  created_at            DateTime             @default(now())
+  updated_at            DateTime             @updatedAt
+  Checklist             Checklist?           @relation(fields: [checklistId], references: [id])
+  checklistId           String?
+  ChecklistManutencao   ChecklistManutencao? @relation(fields: [checklistManutencaoId], references: [id])
+  checklistManutencaoId String?
 }
 
 model Template {
-  id         String      @id @default(uuid())
-  name       String
-  Checklist  Checklist[]
-  created_at DateTime    @default(now())
-  updated_at DateTime    @updatedAt
+  id                  String                @id @default(uuid())
+  name                String
+  Checklist           Checklist[]
+  created_at          DateTime              @default(now())
+  updated_at          DateTime              @updatedAt
+  ChecklistManutencao ChecklistManutencao[]
 }
 
 // model ChecklistTemplate {
@@ -592,7 +616,7 @@ model Station {
   latitude          String
   longitude         String
   address           String
-  link_grafana      String
+  link_grafana      String?
   status            TypeStatus
   manutencao        Manutencao[]
   Documento_Station Documento_Station[]

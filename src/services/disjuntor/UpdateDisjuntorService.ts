@@ -8,7 +8,6 @@ interface UpdateDisjuntorRequest {
   categoria?: disjuntorCategoria;
   status?: disjuntorStatus;
   corrente_maxima?: number;
-  quadro?: string;
   tipo_equipamento?: string;
   station_id?: string;
 }
@@ -20,7 +19,7 @@ export class UpdateDisjuntorService {
   ) {}
 
   async execute(request: UpdateDisjuntorRequest) {
-    const {id,codigo,marca,modelo, categoria,status, corrente_maxima, quadro, tipo_equipamento,station_id} = request;
+    const {id,codigo,marca,modelo, categoria,status, corrente_maxima, tipo_equipamento,station_id} = request;
 
     const disjuntores = await this.disjuntorRepository.find({id});
 
@@ -41,7 +40,6 @@ export class UpdateDisjuntorService {
         status,
         status_anterior,
         corrente_maxima,
-        quadro,
         tipo_equipamento,
         station_id,
       })

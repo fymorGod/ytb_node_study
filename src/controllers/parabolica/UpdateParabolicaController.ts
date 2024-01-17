@@ -8,7 +8,7 @@ class UpdateParabolicaController {
 
     const { id } = req.params;
 
-    const { codigo, marca, modelo, categoria, status, diametro, satelite, tipo_equipamento, station_id, receptor_id } = req.body;
+    const { codigo, marca, modelo, categoria, status, diametro, satelite, tipo_equipamento, station_id } = req.body;
 
     const prismaParabolicaRepository = new PrismaParabolicaRepository()
 
@@ -24,8 +24,7 @@ class UpdateParabolicaController {
       diametro,
       satelite,
       station_id,
-      tipo_equipamento,
-      receptor_id
+      tipo_equipamento
     });
 
     if(parabolica instanceof Error) {

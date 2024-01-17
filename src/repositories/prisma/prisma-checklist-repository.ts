@@ -32,26 +32,27 @@ export class PrismaChecklistRepository implements ChecklistRepository {
   }
 
   async get() {
-    const checklist = await prisma.checklist.findMany({
+    const checklists = await prisma.checklist.findMany({
       select: {
-        id:true,
+        id: true,
         name: true,
         TipoEquipamento: {
           select: {
-            name: true
-          }
+            name: true,
+          },
         },
         tarefa: {
           select: {
-              id: true,
-              description: true,
-              verificado: true,
-              foto_verificado: true
-          }
-      }
-      }
+            id: true,
+            description: true,
+            verificado: true,
+            foto_verificado: true,
+          },
+        },
+      },
     });
-    return checklist;
+    // const checklistsSemManutencao = checklists.filter((checklist) => !checklist.manutencaoId);
+    return checklists;
   }
 
   async find({ id }: ChecklistFind) {

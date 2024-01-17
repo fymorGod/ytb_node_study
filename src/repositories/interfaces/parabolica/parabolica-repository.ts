@@ -34,7 +34,6 @@ export interface ParabolicaUpdate {
   satelite?: string;
   tipo_equipamento?: string;
   station_id?: string;
-  receptor_id?: string;
 }
 export interface ParabolicaFindByCodigo {
   codigo: string;

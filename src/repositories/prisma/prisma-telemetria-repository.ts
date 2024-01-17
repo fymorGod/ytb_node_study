@@ -79,7 +79,42 @@ export class PrismaTelemetriaRepository implements TelemetriaRepository {
         },
         Station: {
           select: {
-            name: true
+            name: true,
+            address: true,
+            id: true,
+            latitude: true,
+            link_grafana: true,
+            longitude: true,
+            manutencao: {
+              select: {
+                checklist:true,
+                dataCreate: true,
+                observacao: true,
+                stationId: true,
+                status: true,
+                tipo: true,
+                User: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    empresa: true,
+                    contato_empresa: true,
+                    Access: {
+                      select: {
+                        name: true
+                      }
+                    }
+                  }
+                },
+                Station: {
+                  select: {
+                    name: true,
+                    address: true,
+                  }
+                }
+              }
+            }
           }
         },
       
@@ -119,7 +154,7 @@ export class PrismaTelemetriaRepository implements TelemetriaRepository {
         status,
         TipoEquipamento: {
           connect: {
-            id: tipo_equipamento
+            name: tipo_equipamento
           },
         },
         Station: {

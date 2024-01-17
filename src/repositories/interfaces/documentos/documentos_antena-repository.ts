@@ -1,5 +1,5 @@
 export interface DocumentAntenaCreateData {
-  id_doc: string;
+  documentoId: string;
   antenaId: string;
 }
 

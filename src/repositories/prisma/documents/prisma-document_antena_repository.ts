@@ -2,10 +2,10 @@ import { prisma } from "../../../database/prisma";
 import { DocumentAntenaCreateData, DocumentAntenaDelete, DocumentAntenaFind, DocumentAntenaRepository } from "../../interfaces/documentos/documentos_antena-repository";
 
 export class PrismaDocumentAntenaRepository implements DocumentAntenaRepository {
-  async create({ id_doc, antenaId }: DocumentAntenaCreateData) {
+  async create({ documentoId, antenaId }: DocumentAntenaCreateData) {
     await prisma.documento_Antenas.create({
       data: {
-        id_doc,
+        documentoId,
         antenaId
       }
       });

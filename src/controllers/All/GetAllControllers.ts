@@ -111,51 +111,7 @@ class GetAllController {
     allActives.push({"torre" : torre})
     allActives.push({"transmissor" : transmissor})
 
-    if(antenas instanceof Error) {
-      return res.status(400).send(antenas.message)
-    }
-    if(arcondicionado instanceof Error) {
-      return res.status(400).json({ error: arcondicionado.message });
-    }
-    if( cabos instanceof Error) {
-      return res.status(400).json({ error: cabos.message })
-    }
-    if(combinador instanceof Error) {
-      return res.status(400).send(combinador.message)
-    }
-    if(disjuntores instanceof Error) {
-      return res.status(400).send(disjuntores.message)
-    }
-    if(dps instanceof Error) {
-      return res.status(400).send(dps.message)
-    }
-    if(exaustor instanceof Error) {
-      return res.status(400).send(exaustor.message)
-    }
-    if(nobreak instanceof Error) {
-      return res.status(400).send(nobreak.message)
-    }
-    if(parabolicas instanceof Error) {
-      return res.status(400).send(parabolicas.message)
-    }
-    if(quadro instanceof Error) {
-      return res.status(400).send(quadro.message)
-    }
-    if(receptor instanceof Error) {
-      return res.status(400).send(receptor.message)
-    }
-    if(switchs instanceof Error) {
-      return res.status(400).send(switchs.message)
-    }
-    if(telemetria instanceof Error) {
-      return res.status(400).send(telemetria.message)
-    }
-    if(torre instanceof Error) {
-      return res.status(400).send(torre.message)
-    }
-    if(transmissor instanceof Error) {
-      return res.status(400).send(transmissor.message)
-    }
+
 
     return res.status(200).send(allActives);
   }

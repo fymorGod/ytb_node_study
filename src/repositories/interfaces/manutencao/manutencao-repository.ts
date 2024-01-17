@@ -6,6 +6,7 @@ export type statusManutencao = "AGENDADA" | "EM_EXECUCAO" | "EM_AGUARDO" | "FINA
 export interface Checklist {
   name: string
   tarefa: TarefaProps[]
+  id_ativo?: string;
   tipo_equipamento: string
   template?: string
 }
@@ -34,6 +35,7 @@ export interface ManutencaoUpdate {
   dataCreate?: string;
   userId?: string;
   stationId?: string;
+  id_ativo?:string;
   tipo?: tipoManutencao;
   checklist?: Checklist[] 
   observacao?: string

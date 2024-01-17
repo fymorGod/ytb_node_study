@@ -16,8 +16,11 @@ class UpdateAntenaController {
 
     const prismaAntenaRepository = new PrismaAntenaRepository()
     const prismaDocumentRepository = new PrismaDocumentRepository();
+    const createDocumentService = new CreateDocumentService(prismaDocumentRepository);
+
     const prismaDocumentsAntenaRepository = new PrismaDocumentAntenaRepository();
-    
+    const createDocumentAntenaService = new CreateDocument_AntenaService(prismaDocumentsAntenaRepository);
+
     const updateAntenaService = new UpdateAntenaService(prismaAntenaRepository);
 
     const antena = await updateAntenaService.execute({
@@ -40,8 +43,7 @@ class UpdateAntenaController {
     }
 
     if (req.files && Object.keys(req.files).length > 0) {
-      const createDocumentService = new CreateDocumentService(prismaDocumentRepository);
-      const createDocumentAntenaService = new CreateDocument_AntenaService(prismaDocumentsAntenaRepository);
+      
       // Verificando se o documento inserido foi PNG
       if (Object.keys(req.files).includes("foto")) {
 
@@ -59,11 +61,12 @@ class UpdateAntenaController {
           return res.status(400).json(docCriado.message);
         }
 
-        const id_doc = Object(docCriado).id;
+        const documentoId = Object(docCriado).id;
         const antenaId = Object(antena).id;
 
-        // Criando o documento da condensadora
-        const doc_antenaCreated = await createDocumentAntenaService.execute({ id_doc, antenaId });
+        // Criando o documento da antena
+        const doc_antenaCreated = await createDocumentAntenaService.execute({ documentoId, antenaId });
+        
         if (doc_antenaCreated instanceof Error) {
           return res.status(400).json(doc_antenaCreated);
         }
@@ -81,14 +84,14 @@ class UpdateAntenaController {
 
         const docCriado = await createDocumentService.execute({ path, filename, originalName, fileFormat });
 
-        const id_doc = Object(docCriado).id;
+        const documentoId = Object(docCriado).id;
         const antenaId = Object(antena).id;
 
         if (docCriado instanceof Error) {
           return res.status(400).json(docCriado.message);
         }
 
-        const doc_antenaCreated = await createDocumentAntenaService.execute({ id_doc, antenaId });
+        const doc_antenaCreated = await createDocumentAntenaService.execute({ documentoId, antenaId });
 
         if (doc_antenaCreated instanceof Error) {
           return res.status(400).json(doc_antenaCreated);

@@ -7,7 +7,6 @@ export interface DisjuntorCreateData {
   modelo: string;
   categoria: disjuntorCategoria;
   status: disjuntorStatus;
-  quadro?: string;
   corrente_maxima: number;
   tipo_equipamento: string;
   station_id?: string;
@@ -29,7 +28,6 @@ export interface DisjuntorUpdate {
   categoria?: disjuntorCategoria;
   status?: disjuntorStatus;
   status_anterior?: disjuntorStatus;
-  quadro?: string;
   corrente_maxima?: number;
   tipo_equipamento?: string;
   station_id?: string;

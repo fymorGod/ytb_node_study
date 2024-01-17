@@ -7,7 +7,7 @@ class UpdateQuadroController {
 
     const { id } = req.params;
 
-    const { codigo, categoria, status, dps, disjuntor, tipo_equipamento, station_id } = req.body;
+    const { codigo, categoria, status, dps, disjuntor, tipo_equipamento, station_id } = req.body || {};
 
     const prismaQuadroRepository = new PrismaQuadroRepository()
 

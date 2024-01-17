@@ -21,7 +21,7 @@ export const isQuadroIdValid = async ({ id }: any) => {
 
 export class PrismaDpsRepository implements DpsRepository {
 
-  async create({ codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, quadro, tipo_equipamento, station_id }: DpsCreateData) {
+  async create({ codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps,  tipo_equipamento, station_id }: DpsCreateData) {
     const data: any = {
       codigo,
       marca,
@@ -36,13 +36,7 @@ export class PrismaDpsRepository implements DpsRepository {
         }
       },
     };
-    if (quadro && (await isQuadroIdValid({ id: quadro}))) {
-      data.Quadro = {
-        connect: {
-          id: quadro
-        }
-      };
-    }
+
     if (station_id && (await isStationIdValid({ id: station_id}))) {
       data.Station = {
         connect: {
@@ -110,7 +104,42 @@ export class PrismaDpsRepository implements DpsRepository {
         },
         Station: {
           select: {
-            name: true
+            name: true,
+            address: true,
+            id: true,
+            latitude: true,
+            link_grafana: true,
+            longitude: true,
+            manutencao: {
+              select: {
+                checklist:true,
+                dataCreate: true,
+                observacao: true,
+                stationId: true,
+                status: true,
+                tipo: true,
+                User: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    empresa: true,
+                    contato_empresa: true,
+                    Access: {
+                      select: {
+                        name: true
+                      }
+                    }
+                  }
+                },
+                Station: {
+                  select: {
+                    name: true,
+                    address: true,
+                  }
+                }
+              }
+            }
           }
         },
       },
@@ -136,7 +165,7 @@ export class PrismaDpsRepository implements DpsRepository {
     });
   }
 
-  async update({ id,codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, quadro, tipo_equipamento, station_id }: DpsUpdate) {
+  async update({ id,codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, tipo_equipamento, station_id }: DpsUpdate) {
     await prisma.dps.update({
       where: {
         id,
@@ -149,14 +178,9 @@ export class PrismaDpsRepository implements DpsRepository {
         status,
         corrente_maxima,
         classe_dps,
-        Quadro: {
-          connect: {
-            codigo: quadro
-          }
-        },
         TipoEquipamento: {
           connect: {
-            id: tipo_equipamento
+            name: tipo_equipamento
           },
         },
         Station: {

@@ -91,7 +91,42 @@ export class PrismaParabolicaRepository implements ParabolicaRepository {
         },
         Station: {
           select: {
-            name: true
+            name: true,
+            address: true,
+            id: true,
+            latitude: true,
+            link_grafana: true,
+            longitude: true,
+            manutencao: {
+              select: {
+                checklist:true,
+                dataCreate: true,
+                observacao: true,
+                stationId: true,
+                status: true,
+                tipo: true,
+                User: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    empresa: true,
+                    contato_empresa: true,
+                    Access: {
+                      select: {
+                        name: true
+                      }
+                    }
+                  }
+                },
+                Station: {
+                  select: {
+                    name: true,
+                    address: true,
+                  }
+                }
+              }
+            }
           }
         },
         receptor: true,
@@ -118,7 +153,7 @@ export class PrismaParabolicaRepository implements ParabolicaRepository {
     });
   }
 
-  async update({ id, codigo, marca, modelo, categoria, status, diametro, satelite, tipo_equipamento, station_id, receptor_id }: ParabolicaUpdate) {
+  async update({ id, codigo, marca, modelo, categoria, status, diametro, satelite, tipo_equipamento, station_id }: ParabolicaUpdate) {
     await prisma.parabolica.update({
       where: {
         id,
@@ -133,18 +168,12 @@ export class PrismaParabolicaRepository implements ParabolicaRepository {
         satelite,
         TipoEquipamento: {
           connect: {
-            id: tipo_equipamento
+            name: tipo_equipamento
           },
         },
-    
         Station: {
           connect: {
             id: station_id
-          },
-        },
-        receptor: {
-          connect: {
-            id: receptor_id
           },
         }
       }

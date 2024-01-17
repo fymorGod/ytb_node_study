@@ -19,7 +19,7 @@ interface CreateStationRequest {
   latitude: string
   longitude: string
   address: string
-  link_grafana: string;
+  link_grafana?: string;
   status: stationStatus;
   manutencaoId?: string;
 }

@@ -53,7 +53,7 @@ export class PrismaStationRepository implements StationRepository {
         manutencao: {
           select: {
             dataCreate:true,
-            checklist: true,
+            checklistManutencao: true,
             observacao: true,
             status: true,
             tipo: true,
@@ -465,7 +465,7 @@ export class PrismaStationRepository implements StationRepository {
         manutencao: {
           select: {
             dataCreate:true,
-            checklist: true,
+            checklistManutencao: true,
             observacao: true,
             status: true,
             tipo: true,
@@ -708,6 +708,9 @@ export class PrismaStationRepository implements StationRepository {
         quadro: {
           select: {
             id: true,
+            codigo: true,
+            categoria: true,
+            status: true,
             Dps: {
               select: {
                 id: true,
