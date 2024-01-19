@@ -33,7 +33,7 @@ class CreateAntenaControler {
       tipo_equipamento,
       station_id
     })
-
+    console.log(Object(antena))
     if (antena instanceof Error) {
       return res.status(400).send({
         message: antena.message
@@ -53,8 +53,8 @@ class CreateAntenaControler {
 
           const indice = Object.keys(req.files).indexOf("foto")
 
-          const path = "http://192.168.6.20:3001/files/" + Object.values(req.files)[indice][0].filename;
-          const filename = "http://192.168.6.20:3001/files/" + Object.values(req.files)[indice][0].filename;
+          const path = "http://localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
+          const filename = "http://localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
           const originalName = Object.values(req.files)[indice][0].originalname;
           const fileFormat = Object.values(req.files)[indice][0].mimetype;
 
@@ -65,7 +65,7 @@ class CreateAntenaControler {
             return res.status(400).json(docCriado.message);
           }
 
-          const documentoId = Object(docCriado).id;
+          const documentoId = docCriado?.document?.id;
           console.log(documentoId)
           const antenaId = Object(antena).id;
           console.log(antenaId)
@@ -83,14 +83,14 @@ class CreateAntenaControler {
 
           const indice = Object.keys(req.files).indexOf("file")
 
-          const path = "http://192.168.6.20:3001/files" + Object.values(req.files)[indice][0].filename;
-          const filename = "http://192.168.6.20:3001/files" + Object.values(req.files)[indice][0].filename;
+          const path = "http://localhost:3001/files" + Object.values(req.files)[indice][0].filename;
+          const filename = "http://localhost:3001/files" + Object.values(req.files)[indice][0].filename;
           const originalName = Object.values(req.files)[indice][0].originalname;
           const fileFormat = Object.values(req.files)[indice][0].mimetype;
 
           const docCriado = await createDocumentService.execute({ path, filename, originalName, fileFormat });
 
-          const documentoId = Object(docCriado).id;
+          const documentoId = docCriado?.document?.id;
           const antenaId = Object(antena).id;
           console.log(documentoId)
           console.log(antenaId)

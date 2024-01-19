@@ -30,9 +30,8 @@ export const isStationIdValid = async ({ id }: any) => {
 }
 
 export class PrismaManutencaoRepository implements ManutencaoRepository {
-  async create({userId, stationId, dataCreate, checklist, observacao, status, tipo}: ManutencaoCreateData) {
+  async create({userId, stationId, checklist, observacao, status, tipo}: ManutencaoCreateData) {
     const data: any = {
-      dataCreate,
       checklistManutencao: {
         create: checklist?.map((check: ChecklistProps) => ({
             name: check.name,
@@ -105,7 +104,8 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
             }
           }
         },
-        dataCreate: true,
+        created_at: true,
+        updated_at: true,
         observacao: true,
         status: true,
         Station: {
@@ -515,11 +515,18 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
       select: {
         User: {
           select: {
+            id:true,
             name: true,
-          },
+            contato: true,
+            contato_empresa: true,
+            empresa: true
+          }
         },
+        created_at: true,
+        updated_at: true,
         Station: {
           select: {
+            id:true,
             name: true,
             address: true,
             latitude: true,
@@ -925,6 +932,7 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
             },
             tarefa: {
               select: {
+                id:true, 
                 description: true,
                 foto_verificado: true,
                 verificado: true
@@ -932,9 +940,9 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
             }
           }
         },
-        dataCreate: true,
         observacao: true,
-        status: true     
+        status: true,     
+        tipo: true
       }
     });
     return manutencao;
@@ -946,7 +954,7 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
       },
     });
   }
-  async update({ id, userId, stationId, dataCreate, checklist, observacao, status, tipo }: ManutencaoUpdate) {
+  async update({ id, userId, stationId, checklist, observacao, status, tipo }: ManutencaoUpdate) {
     try {
       await prisma.manutencao.update({
         where: {
@@ -963,7 +971,6 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
               id: stationId
             }
           },
-          dataCreate,
           observacao,
           status, 
           tipo
@@ -973,7 +980,7 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
       if(checklist && checklist.length > 0) {
         await Promise.all(
           checklist.map(async (check: ChecklistProps) => {
-            await prisma.checklist.update({
+            await prisma.checklistManutencao.update({
               where: {
                 id: check.id
               },
@@ -982,11 +989,6 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
                 TipoEquipamento: {
                   connect: {
                     name: check.tipo_equipamento
-                  }
-                },
-                Template: {
-                  connect: {
-                    id: check.template
                   }
                 }
               }

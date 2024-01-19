@@ -2,7 +2,6 @@ import { Checklist, ManutencaoRepository, statusManutencao, tipoManutencao } fro
 
 
 interface CreateManutencaoRequest {
-  dataCreate: string;
   tipo: tipoManutencao;
   userId: string;
   stationId: string;
@@ -19,12 +18,11 @@ export class CreateManutencaoService {
   async execute(request: CreateManutencaoRequest) {
     
     //Dados do service
-    const { dataCreate, tipo, checklist, observacao, stationId, status, userId }= request;
+    const {  tipo, checklist, observacao, stationId, status, userId }= request;
     
     try {
       return await this.manutencaoRepository.create({
         checklist,
-        dataCreate,
         observacao,
         stationId,
         status,

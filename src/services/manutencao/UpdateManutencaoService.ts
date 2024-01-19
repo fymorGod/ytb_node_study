@@ -2,7 +2,6 @@ import { Checklist, ManutencaoRepository, statusManutencao, tipoManutencao } fro
 
 interface UpdateManutencaoRequest {
   id: string;
-  dataCreate: string;
   tipo: tipoManutencao;
   userId: string;
   stationId: string;
@@ -17,7 +16,7 @@ export class UpdateManutencaoService {
   ) {}
 
   async execute(request: UpdateManutencaoRequest) {
-    const {id, dataCreate, tipo, checklist, observacao, stationId, status, userId } = request;
+    const {id, tipo, checklist, observacao, stationId, status, userId } = request;
 
     const manutencao = await this.manutencaoRepository.find({id});
 
@@ -30,7 +29,6 @@ export class UpdateManutencaoService {
       return await this.manutencaoRepository.update({
         id,
         checklist,
-        dataCreate,
         observacao,
         stationId,
         status,

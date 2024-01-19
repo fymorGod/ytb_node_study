@@ -76,13 +76,13 @@ model Documento {
 model Documento_Antenas {
   id String @id @default(uuid())
 
-  created_at  DateTime   @default(now())
-  updated_at  DateTime   @updatedAt
-  
-  Antena      Antena?    @relation(fields: [antenaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  antenaId    String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  Documento   Documento? @relation(fields: [documentoId], references: [id])
+  Antena   Antena? @relation(fields: [antenaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  antenaId String?
+
+  documento   Documento? @relation(fields: [documentoId], references: [id])
   documentoId String?
 
   @@map("documentos_antenas")
@@ -308,7 +308,6 @@ enum StatusManutencao {
 
 model Manutencao {
   id                  String                @id @default(uuid())
-  dataCreate          String
   tipo                TipoManutencao
   checklistManutencao ChecklistManutencao[]
   observacao          String?

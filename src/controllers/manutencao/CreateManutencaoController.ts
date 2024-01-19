@@ -5,7 +5,7 @@ import { CreateManutencaoService } from "../../services/manutencao/CreateManuten
 class CreateManutencaoControler {
   
   async handle(req: Request, res: Response) {
-    const { dataCreate, tipo, checklist, observacao, stationId, status, userId } = req.body;
+    const { tipo, checklist, observacao, stationId, status, userId } = req.body;
 
     const prismaManutencaoRepository = new PrismaManutencaoRepository();
 
@@ -15,8 +15,7 @@ class CreateManutencaoControler {
     //executando o service
     const manutencao = await createManutencaoService.execute({
       checklist,
-      dataCreate,
-      observacao,
+            observacao,
       stationId,
       status,
       tipo,

@@ -7,7 +7,7 @@ class UpdateManutencaoController {
 
     const { id } = req.params;
 
-    const {  dataCreate, tipo, checklist, observacao, stationId, status, userId } = req.body;
+    const { tipo, checklist, observacao, stationId, status, userId } = req.body;
 
     const prismaManutencaoRepository = new PrismaManutencaoRepository()
 
@@ -16,7 +16,6 @@ class UpdateManutencaoController {
     const manutencao = await updateManutencaoService.execute({
       id,
       checklist,
-      dataCreate,
       observacao,
       stationId,
       status,

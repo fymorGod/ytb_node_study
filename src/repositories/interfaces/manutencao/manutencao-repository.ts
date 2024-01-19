@@ -13,7 +13,6 @@ export interface Checklist {
 
 
 export interface ManutencaoCreateData { 
-  dataCreate: string;
   tipo: tipoManutencao;
   userId: string;
   stationId: string;
@@ -32,7 +31,6 @@ export interface ManutencaoDelete {
 
 export interface ManutencaoUpdate {
   id: string;
-  dataCreate?: string;
   userId?: string;
   stationId?: string;
   id_ativo?:string;

@@ -73,7 +73,12 @@ export class PrismaAntenaRepository implements AntenaRepository {
             name: true
           }
         },
-        transmissores: true
+        transmissores: true,
+        Documento_Antenas: {
+          select: {
+            documento: true
+          }
+        }
       }
     });
     return antenas;
@@ -117,7 +122,6 @@ export class PrismaAntenaRepository implements AntenaRepository {
             manutencao: {
               select: {
                 checklistManutencao:true,
-                dataCreate: true,
                 observacao: true,
                 stationId: true,
                 status: true,
@@ -148,7 +152,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
         },
         Documento_Antenas: {
           select: {
-            Documento: true
+            documento: true
           }
         },
         transmissores: true,
@@ -183,7 +187,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
   }
 
   async update({ id, codigo, marca, modelo, categoria, gain, posicao_torre, station_id, tipo_equipamento, tipos_antena, status, vr }: AntenaUpdate) {
-    await prisma.antena.update({
+    return await prisma.antena.update({
       where: {
         id,
       },

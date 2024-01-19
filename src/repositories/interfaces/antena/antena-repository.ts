@@ -48,6 +48,6 @@ export interface AntenaRepository {
   get: () => Promise<Object>;
   find: (data: AntenaFind) => Promise<Object | null>;
   findByCodigo: (data: AntenaFindByCodigo) => Promise<Object | null>
-  update: (data: AntenaUpdate) => Promise<void>;
+  update: (data: AntenaUpdate) => Promise<Object | null>;
   delete: (data: AntenaDelete) => Promise<void>;
 }

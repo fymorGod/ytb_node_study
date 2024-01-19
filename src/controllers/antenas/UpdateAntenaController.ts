@@ -37,9 +37,11 @@ class UpdateAntenaController {
       tipos_antena,
       vr
     });
-
+    console.log(Object(antena))
     if (antena instanceof Error) {
-      return res.status(400).json({ error: antena.message });
+      return res.status(400).send({
+        message: antena.message
+      })
     }
 
     if (req.files && Object.keys(req.files).length > 0) {
@@ -61,9 +63,9 @@ class UpdateAntenaController {
           return res.status(400).json(docCriado.message);
         }
 
-        const documentoId = Object(docCriado).id;
+        const documentoId = docCriado?.document?.id;
         const antenaId = Object(antena).id;
-
+        console.log(antena)
         // Criando o documento da antena
         const doc_antenaCreated = await createDocumentAntenaService.execute({ documentoId, antenaId });
         
@@ -84,9 +86,10 @@ class UpdateAntenaController {
 
         const docCriado = await createDocumentService.execute({ path, filename, originalName, fileFormat });
 
-        const documentoId = Object(docCriado).id;
+        const documentoId = docCriado?.document?.id;
+        console.log(documentoId)
         const antenaId = Object(antena).id;
-
+        console.log(antena)
         if (docCriado instanceof Error) {
           return res.status(400).json(docCriado.message);
         }
@@ -98,8 +101,10 @@ class UpdateAntenaController {
         }
       }
     }
-    return res.status(200).json({
+    return res.status(200).send(
+      {
       message: "Antena atualizada com sucesso!",
+      antena
       }
     );
   }

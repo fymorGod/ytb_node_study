@@ -52,7 +52,6 @@ export class PrismaStationRepository implements StationRepository {
         status: true,
         manutencao: {
           select: {
-            dataCreate:true,
             checklistManutencao: true,
             observacao: true,
             status: true,
@@ -464,7 +463,6 @@ export class PrismaStationRepository implements StationRepository {
         status: true,
         manutencao: {
           select: {
-            dataCreate:true,
             checklistManutencao: true,
             observacao: true,
             status: true,
