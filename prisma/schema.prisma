@@ -38,6 +38,11 @@ enum TypeDps {
   D_3
 }
 
+enum TypeTorreTipo {
+  TOPO
+  LATERAL
+}
+
 enum TypeTowers {
   AUTOPORTANTE
   ESTAIADA
@@ -49,11 +54,11 @@ model Documento {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  path         String
-  filename     String
-  originalName String
-  fileFormat   String
-
+  path                     String
+  filename                 String
+  originalName             String
+  fileFormat               String
+  Documento_Tarefas        Documento_Tarefa[]
   Documento_Antenas        Documento_Antenas[]
   Documento_Arcondicionado Documento_Arcondicionado[]
   Documento_Cabo           Documento_Cabo[]
@@ -302,7 +307,7 @@ enum TipoManutencao {
 enum StatusManutencao {
   AGENDADA
   EM_EXECUCAO
-  EM_AGUARDO
+  EM_ESPERA
   FINALIZADA
 }
 
@@ -313,8 +318,8 @@ model Manutencao {
   observacao          String?
   status              StatusManutencao
 
-  Station    Station  @relation(fields: [stationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  stationId  String
+  Station    Station? @relation(fields: [stationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  stationId  String?
   User       User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId     String?
   created_at DateTime @default(now())
@@ -345,10 +350,10 @@ model Antena {
   modelo              String
   categoria           TypeCategoria
   status              TypeStatus
-  gain                String
+  gain                String?
   tipos_antena        TypeAntena
-  posicao_torre       Float?
-  vr                  String
+  posicao_torre       TypeTorreTipo?
+  vr                  Float?
   Documento_Antenas   Documento_Antenas[]
   transmissores       Transmissor[]
   TipoEquipamento     TipoEquipamento?      @relation(fields: [tipoEquipamentoId], references: [id])
@@ -398,6 +403,21 @@ model Checklist {
   templateId        String?
 }
 
+model Documento_Tarefa {
+  id String @id @default(uuid())
+
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documentoId String?
+
+  arcondicionadoId String?
+  Tarefa           Tarefa? @relation(fields: [tarefaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tarefaId         String?
+
+  @@map("documentos_tarefas")
+}
+
 model Tarefa {
   id                    String               @id @default(uuid())
   description           String
@@ -409,6 +429,9 @@ model Tarefa {
   checklistId           String?
   ChecklistManutencao   ChecklistManutencao? @relation(fields: [checklistManutencaoId], references: [id])
   checklistManutencaoId String?
+  Documento_Tarefa      Documento_Tarefa[]
+
+  @@map("tarefas")
 }
 
 model Template {

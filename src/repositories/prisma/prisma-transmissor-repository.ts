@@ -138,12 +138,14 @@ export class PrismaTransmissorRepository implements TransmissorRepository {
       acoplador_two: true,
       Receptor: {
         select: {
-          id: true
+          id: true,
+          codigo: true
         }
       },
       Antena: {
         select: {
-          id: true
+          id: true,
+          codigo: true
         }
       },
       TipoEquipamento: {
@@ -161,8 +163,8 @@ export class PrismaTransmissorRepository implements TransmissorRepository {
           longitude: true,
           manutencao: {
             select: {
-              checklist:true,
-              dataCreate: true,
+              id: true,
+              checklistManutencao:true,
               observacao: true,
               stationId: true,
               status: true,

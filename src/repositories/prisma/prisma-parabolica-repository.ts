@@ -99,8 +99,8 @@ export class PrismaParabolicaRepository implements ParabolicaRepository {
             longitude: true,
             manutencao: {
               select: {
-                checklist:true,
-                dataCreate: true,
+                id: true,
+                checklistManutencao:true,
                 observacao: true,
                 stationId: true,
                 status: true,

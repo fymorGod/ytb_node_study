@@ -93,8 +93,8 @@ export class PrismaSwitchRepository implements SwitchRepository {
             longitude: true,
             manutencao: {
               select: {
-                checklist:true,
-                dataCreate: true,
+                id: true,
+                checklistManutencao:true,
                 observacao: true,
                 stationId: true,
                 status: true,

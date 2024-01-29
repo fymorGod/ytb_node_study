@@ -111,6 +111,7 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
             longitude: true,
             manutencao: {
               select: {
+                id: true,
                 checklistManutencao:true,
                 observacao: true,
                 stationId: true,

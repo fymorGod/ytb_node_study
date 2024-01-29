@@ -95,8 +95,8 @@ export class PrismaNobreakRepository implements NobreakRepository {
             longitude: true,
             manutencao: {
               select: {
-                checklist:true,
-                dataCreate: true,
+                id: true,
+                checklistManutencao:true,  
                 observacao: true,
                 stationId: true,
                 status: true,

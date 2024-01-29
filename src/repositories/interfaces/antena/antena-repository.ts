@@ -1,7 +1,7 @@
 export type antenaCategoria = "REFRIGERACAO" | "ELETRICA" | "TELEMETRIA" | "IRRADIACAO";
 export type antenaStatus = "FUNCIONANDO" | "STAND_BY" | "DEFEITO" | "MANUTENCAO";
 export type antenaTipo = "OMNIDIRECIONAL" | "DIRETIVA";
-
+export type TypeTorreTipo = "TOPO" | "LATERAL"
 
 export interface AntenaCreateData {
   codigo: string;
@@ -11,8 +11,8 @@ export interface AntenaCreateData {
   status: antenaStatus;
   gain: string;
   tipos_antena: antenaTipo;
-  posicao_torre: number;
-  vr: string;
+  posicao_torre: TypeTorreTipo;
+  vr: number;
   tipo_equipamento: string;
   station_id?: string;
 }
@@ -35,8 +35,8 @@ export interface AntenaUpdate {
   status_anterior?: antenaStatus;
   gain?: string;
   tipos_antena?: antenaTipo;
-  posicao_torre?: number;
-  vr?: string;
+  posicao_torre?: TypeTorreTipo;
+  vr?: number;
   tipo_equipamento?: string;
   station_id?: string;
 }

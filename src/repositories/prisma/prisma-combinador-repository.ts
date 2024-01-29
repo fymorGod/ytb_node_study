@@ -88,6 +88,7 @@ export class PrismaCombinadorRepository implements CombinadorRepository {
             longitude: true,
             manutencao: {
               select: {
+                id: true,
                 checklistManutencao:true,
                 observacao: true,
                 stationId: true,

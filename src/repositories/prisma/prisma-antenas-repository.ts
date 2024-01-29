@@ -121,6 +121,7 @@ export class PrismaAntenaRepository implements AntenaRepository {
             longitude: true,
             manutencao: {
               select: {
+                id: true,
                 checklistManutencao:true,
                 observacao: true,
                 stationId: true,

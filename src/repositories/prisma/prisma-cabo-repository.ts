@@ -40,6 +40,7 @@ export class PrismaCaboRepository implements CaboRepository {
   async get() {
     const cabos = await prisma.cabo.findMany({
       select: {
+        id: true,
         codigo: true,
         marca: true,
         modelo: true,
@@ -91,8 +92,8 @@ export class PrismaCaboRepository implements CaboRepository {
             longitude: true,
             manutencao: {
               select: {
-                checklist:true,
-                dataCreate: true,
+                id: true,
+                checklistManutencao:true,
                 observacao: true,
                 stationId: true,
                 status: true,

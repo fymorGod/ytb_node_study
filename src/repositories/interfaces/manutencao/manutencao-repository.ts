@@ -1,7 +1,7 @@
 import { TarefaProps } from "../checklist/checklist-repository";
 
 export type tipoManutencao =  "PREVENTIVA" | "CORRETIVA";
-export type statusManutencao = "AGENDADA" | "EM_EXECUCAO" | "EM_AGUARDO" | "FINALIZADA"
+export type statusManutencao = "AGENDADA" | "EM_EXECUCAO" | "EM_ESPERA" | "FINALIZADA"
 
 export interface Checklist {
   name: string

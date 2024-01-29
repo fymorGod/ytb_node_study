@@ -97,8 +97,8 @@ export class PrismaTorreRepository implements TorreRepository {
             longitude: true,
             manutencao: {
               select: {
-                checklist:true,
-                dataCreate: true,
+                id: true,
+                checklistManutencao:true,
                 observacao: true,
                 stationId: true,
                 status: true,

@@ -112,8 +112,8 @@ export class PrismaDpsRepository implements DpsRepository {
             longitude: true,
             manutencao: {
               select: {
-                checklist:true,
-                dataCreate: true,
+                id: true,
+                checklistManutencao:true,
                 observacao: true,
                 stationId: true,
                 status: true,
