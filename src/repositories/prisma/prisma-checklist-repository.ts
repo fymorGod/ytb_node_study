@@ -52,6 +52,12 @@ export class PrismaChecklistRepository implements ChecklistRepository {
             description: true,
             verificado: true,
             foto_verificado: true,
+
+            Documento_Tarefa: {
+              select: {
+                documento: true
+              }
+            }
           },
         },
       },
@@ -72,7 +78,12 @@ export class PrismaChecklistRepository implements ChecklistRepository {
               id: true,
               description: true,
               verificado: true,
-              foto_verificado: true
+              foto_verificado: true,
+              Documento_Tarefa: {
+                select: {
+                  documento: true
+                }
+              }
           }
       },
       Documento_Checklist: {
