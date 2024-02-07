@@ -1,4 +1,4 @@
-import { AntenaRepository, antenaCategoria, antenaStatus, antenaTipo } from "../../repositories/interfaces/antena/antena-repository";
+import { AntenaRepository, TypeTorreTipo, antenaCategoria, antenaStatus, antenaTipo } from "../../repositories/interfaces/antena/antena-repository";
 
 
 interface UpdateAntenaRequest {
@@ -10,8 +10,8 @@ interface UpdateAntenaRequest {
   status?: antenaStatus;
   gain?: string;
   tipos_antena?: antenaTipo;
-  posicao_torre?: number;
-  vr?: string;
+  posicao_torre?: TypeTorreTipo;
+  vr?: number;
   tipo_equipamento?: string;
   station_id?: string;
 }

@@ -35,7 +35,12 @@ export class PrismaTarefaRepository implements TarefaRepository {
       select: {
         description: true,
         verificado: true,
-        foto_verificado: true
+        foto_verificado: true,
+        Documento_Tarefa: {
+          select: {
+            documento: true
+          }
+        }
       },
     });
     return tarefa;
@@ -50,7 +55,7 @@ export class PrismaTarefaRepository implements TarefaRepository {
   }
 
   async update({ id, description, verificado, foto_verificado }: TarefaUpdate) {
-    await prisma.tarefa.update({
+    const updatedTarefa = await prisma.tarefa.update({
       where: {
         id,
       },
@@ -58,8 +63,15 @@ export class PrismaTarefaRepository implements TarefaRepository {
         description,
         verificado,
         foto_verificado
+      },
+      select: {
+        id: true,
+        description: true,
+        verificado: true,
+        foto_verificado: true,
       }
     });
+    return updatedTarefa;
   }
 
 }

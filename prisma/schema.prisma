@@ -54,11 +54,12 @@ model Documento {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  path                     String
-  filename                 String
-  originalName             String
-  fileFormat               String
-  Documento_Tarefas        Documento_Tarefa[]
+  path              String
+  filename          String
+  originalName      String
+  fileFormat        String
+  Documento_Tarefas Documento_Tarefa[]
+
   Documento_Antenas        Documento_Antenas[]
   Documento_Arcondicionado Documento_Arcondicionado[]
   Documento_Cabo           Documento_Cabo[]
@@ -74,6 +75,7 @@ model Documento {
   Documento_Telemetria     Documento_Telemetria[]
   Documento_Torre          Documento_Torre[]
   Documento_Transmissor    Documento_Transmissor[]
+  Documento_Checklist      Documento_Checklist[]
 
   @@map("documentos")
 }
@@ -98,7 +100,7 @@ model Documento_Arcondicionado {
 
   created_at       DateTime        @default(now())
   updated_at       DateTime        @updatedAt
-  Documento        Documento?      @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento        Documento?      @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId      String?
   Arcondicionado   Arcondicionado? @relation(fields: [arcondicionadoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   arcondicionadoId String?
@@ -111,7 +113,7 @@ model Documento_Cabo {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Cabo        Cabo?      @relation(fields: [caboId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   caboId      String?
@@ -124,7 +126,7 @@ model Documento_Combinador {
 
   created_at   DateTime    @default(now())
   updated_at   DateTime    @updatedAt
-  Documento    Documento?  @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento    Documento?  @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId  String?
   Combinador   Combinador? @relation(fields: [combinadorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   combinadorId String?
@@ -137,7 +139,7 @@ model Documento_Disjuntor {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Disjuntor   Disjuntor? @relation(fields: [disjuntorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   disjuntorId String?
@@ -150,7 +152,7 @@ model Documento_Dps {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Dps         Dps?       @relation(fields: [dpsId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   dpsId       String?
@@ -163,7 +165,7 @@ model Documento_Exaustor {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Exaustor    Exaustor?  @relation(fields: [exaustorId], references: [id])
   exaustorId  String?
@@ -176,7 +178,7 @@ model Documento_Nobreak {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Nobreak     Nobreak?   @relation(fields: [nobreakId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   nobreakId   String?
@@ -189,7 +191,7 @@ model Documento_Parabolica {
 
   created_at   DateTime    @default(now())
   updated_at   DateTime    @updatedAt
-  Documento    Documento?  @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento    Documento?  @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId  String?
   Parabolica   Parabolica? @relation(fields: [parabolicaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   parabolicaId String?
@@ -202,7 +204,7 @@ model Documento_Receptor {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Receptor    Receptor?  @relation(fields: [receptorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   receptorId  String?
@@ -215,7 +217,7 @@ model Documento_Station {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Station     Station?   @relation(fields: [stationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   stationId   String?
@@ -228,7 +230,7 @@ model Documento_Switch {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Switchies   Switchies? @relation(fields: [switchiesId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   switchiesId String?
@@ -241,7 +243,7 @@ model Documento_Telemetria {
 
   created_at   DateTime    @default(now())
   updated_at   DateTime    @updatedAt
-  Documento    Documento?  @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento    Documento?  @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId  String?
   Telemetria   Telemetria? @relation(fields: [telemetriaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   telemetriaId String?
@@ -254,7 +256,7 @@ model Documento_Torre {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
   Torre       Torre?     @relation(fields: [torreId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   torreId     String?
@@ -267,7 +269,7 @@ model Documento_Transmissor {
 
   created_at    DateTime     @default(now())
   updated_at    DateTime     @updatedAt
-  Documento     Documento?   @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento     Documento?   @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId   String?
   Transmissor   Transmissor? @relation(fields: [transmissorId], references: [id])
   transmissorId String?
@@ -391,16 +393,30 @@ model TipoEquipamento {
   ChecklistManutencao ChecklistManutencao[]
 }
 
+model Documento_Checklist {
+  id String @id @default(uuid())
+
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documentoId String?
+  Checklist   Checklist? @relation(fields: [checklistId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  checklistId String?
+
+  @@map("documentos_checklists")
+}
+
 model Checklist {
-  id                String           @id @default(uuid())
-  name              String
-  tarefa            Tarefa[]
-  created_at        DateTime         @default(now())
-  updated_at        DateTime         @updatedAt
-  TipoEquipamento   TipoEquipamento? @relation(fields: [tipoEquipamentoId], references: [id])
-  tipoEquipamentoId String?
-  Template          Template?        @relation(fields: [templateId], references: [id])
-  templateId        String?
+  id                  String                @id @default(uuid())
+  name                String
+  tarefa              Tarefa[]
+  created_at          DateTime              @default(now())
+  updated_at          DateTime              @updatedAt
+  TipoEquipamento     TipoEquipamento?      @relation(fields: [tipoEquipamentoId], references: [id])
+  tipoEquipamentoId   String?
+  Template            Template?             @relation(fields: [templateId], references: [id])
+  templateId          String?
+  Documento_Checklist Documento_Checklist[]
 }
 
 model Documento_Tarefa {
@@ -408,12 +424,11 @@ model Documento_Tarefa {
 
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
-  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
 
-  arcondicionadoId String?
-  Tarefa           Tarefa? @relation(fields: [tarefaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  tarefaId         String?
+  Tarefa   Tarefa? @relation(fields: [tarefaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tarefaId String?
 
   @@map("documentos_tarefas")
 }

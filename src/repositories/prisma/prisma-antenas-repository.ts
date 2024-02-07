@@ -188,32 +188,39 @@ export class PrismaAntenaRepository implements AntenaRepository {
   }
 
   async update({ id, codigo, marca, modelo, categoria, gain, posicao_torre, station_id, tipo_equipamento, tipos_antena, status, vr }: AntenaUpdate) {
-    return await prisma.antena.update({
-      where: {
-        id,
-      },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        gain,
-        posicao_torre,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        tipos_antena,
-        vr,
-        Station: {
-          connect: {
-            id: station_id
-          },
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      gain,
+      posicao_torre,
+      tipos_antena,
+      vr
+    };
+
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
         }
       }
-    });
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.antena.update({
+      where: {
+        id
+      },
+      data: dataToUpdate
+    })
   }
 
 }

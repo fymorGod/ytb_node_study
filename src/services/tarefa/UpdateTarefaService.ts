@@ -17,7 +17,7 @@ export class UpdateTarefaService {
     const { id, description, verificado, foto_verificado} = request;
 
     const tarefa = await this.tarefaRepository.find({id});
-
+    console.log(tarefa)
     if(!tarefa) {
       return new Error("Tarefa inexistente!")
     }

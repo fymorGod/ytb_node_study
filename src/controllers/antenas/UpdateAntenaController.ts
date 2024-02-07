@@ -65,7 +65,7 @@ class UpdateAntenaController {
 
         const documentoId = docCriado?.document?.id;
         const antenaId = Object(antena).id;
-        console.log(antena)
+        console.log(antenaId)
         // Criando o documento da antena
         const doc_antenaCreated = await createDocumentAntenaService.execute({ documentoId, antenaId });
         

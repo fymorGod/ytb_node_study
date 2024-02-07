@@ -305,22 +305,22 @@ router
 router
   .route("/v1/tarefas")
   .get(new GetTarefaController().handle)
-  .post(new CreateTarefaControler().handle)
+  .post(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new CreateTarefaControler().handle)
 router
   .route("/v1/tarefas/:id")
   .get(new FindTarefaController().handle)
-  .put(new UpdateTarefaController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateTarefaController().handle)
   .delete(new DeleteTarefaController().handle)
 
 //Rotas para Checklist
 router
   .route("/v1/checklists")
   .get(new GetChecklistController().handle)
-  .post(new CreateChecklistControler().handle)
+  .post(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), new CreateChecklistControler().handle)
 router
   .route("/v1/checklists/:id")
   .get(new FindChecklistController().handle)
-  .put(new UpdateChecklistController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), new UpdateChecklistController().handle)
   .delete(new DeleteChecklistController().handle)
 
 //Rotas para Manutenção
