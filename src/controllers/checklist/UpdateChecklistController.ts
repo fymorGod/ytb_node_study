@@ -39,8 +39,8 @@ class UpdateChecklistController {
 
          const indice = Object.keys(req.files).indexOf("foto")
 
-         const path = "http://localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
-         const filename = "http://localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
+         const path = "http://192.168.6.2:3001/files/" + Object.values(req.files)[indice][0].filename;
+         const filename = "http://192.168.6.2:3001/files/" + Object.values(req.files)[indice][0].filename;
          const originalName = Object.values(req.files)[indice][0].originalname;
          const fileFormat = Object.values(req.files)[indice][0].mimetype;
 
@@ -69,8 +69,8 @@ class UpdateChecklistController {
 
          const indice = Object.keys(req.files).indexOf("file")
 
-         const path = "http://localhost:3001/files" + Object.values(req.files)[indice][0].filename;
-         const filename = "http://localhost:3001/files" + Object.values(req.files)[indice][0].filename;
+         const path = "http://192.168.6.2:3001/files" + Object.values(req.files)[indice][0].filename;
+         const filename = "http://192.168.6.2:3001/files" + Object.values(req.files)[indice][0].filename;
          const originalName = Object.values(req.files)[indice][0].originalname;
          const fileFormat = Object.values(req.files)[indice][0].mimetype;
 

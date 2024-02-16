@@ -15,7 +15,7 @@ class CreateManutencaoControler {
     //executando o service
     const manutencao = await createManutencaoService.execute({
       checklist,
-            observacao,
+      observacao,
       stationId,
       status,
       tipo,

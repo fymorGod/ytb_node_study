@@ -89,7 +89,19 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
         checklistManutencao: {
           select: {
             name: true,
-            tarefa: true,
+            tarefa: {
+              select: {
+                id:true, 
+                description: true,
+                foto_verificado: true,
+                verificado: true,
+                Documento_Tarefa: {
+                  select: {
+                    documento: true
+                  }
+                }
+              }
+            },
             id_ativo:true,
             TipoEquipamento: {
               select: {
@@ -935,7 +947,12 @@ export class PrismaManutencaoRepository implements ManutencaoRepository {
                 id:true, 
                 description: true,
                 foto_verificado: true,
-                verificado: true
+                verificado: true,
+                Documento_Tarefa: {
+                  select: {
+                    documento: true
+                  }
+                }
               }
             }
           }

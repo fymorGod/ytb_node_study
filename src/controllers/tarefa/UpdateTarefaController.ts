@@ -5,6 +5,7 @@ import { PrismaDocumentRepository } from "../../repositories/prisma/documents/pr
 import { PrismaDocumentTarefaRepository } from "../../repositories/prisma/documents/prisma-document_tarefa_repository";
 import { CreateDocumentService } from "../../services/documents/CreateDocumentoService";
 import { CreateDocument_TarefaService } from "../../services/documents/CreateDocumentTarefa";
+import { FindTarefaService } from "../../services/tarefa/FindTarefaService";
 
 class UpdateTarefaController {
   async handle(req: Request, res: Response) {
@@ -21,7 +22,7 @@ class UpdateTarefaController {
     const createDocumentTarefaService = new CreateDocument_TarefaService(prismaDocumentsTarefaRepository);
 
     const updateTarefaService = new UpdateTarefaService(prismaTarefaRepository);
-
+    const findTarefaService = new FindTarefaService(prismaTarefaRepository);
     const tarefa = await updateTarefaService.execute({
       id,
       description,
@@ -29,7 +30,8 @@ class UpdateTarefaController {
       foto_verificado
     });
     console.log(Object(tarefa))
-
+    const tarefaDocs = await findTarefaService.execute({ id })
+    console.log(Object(tarefaDocs))
     if (tarefa instanceof Error) {
       return res.status(400).send({ error: tarefa.message });
     }
@@ -46,8 +48,8 @@ class UpdateTarefaController {
 
           const indice = Object.keys(req.files).indexOf("foto")
 
-          const path = "http://localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
-          const filename = "http://localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
+          const path = "http://192.168.6.2:3001/files/" + Object.values(req.files)[indice][0].filename;
+          const filename = "http://192.168.6.2:3001/files/" + Object.values(req.files)[indice][0].filename;
           const originalName = Object.values(req.files)[indice][0].originalname;
           const fileFormat = Object.values(req.files)[indice][0].mimetype;
 
@@ -74,8 +76,8 @@ class UpdateTarefaController {
 
           const indice = Object.keys(req.files).indexOf("file")
 
-          const path = "http://localhost:3001/files" + Object.values(req.files)[indice][0].filename;
-          const filename = "http://localhost:3001/files" + Object.values(req.files)[indice][0].filename;
+          const path = "http://192.168.6.2:3001/files" + Object.values(req.files)[indice][0].filename;
+          const filename = "http://192.168.6.2:3001/files" + Object.values(req.files)[indice][0].filename;
           const originalName = Object.values(req.files)[indice][0].originalname;
           const fileFormat = Object.values(req.files)[indice][0].mimetype;
 

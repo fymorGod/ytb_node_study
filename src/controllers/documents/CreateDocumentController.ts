@@ -14,8 +14,8 @@ class CreateDocumentController {
 
         const indice = Object.keys(req.files).indexOf("foto")
 
-        const path = "localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
-        const filename = "localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
+        const path = " 192.168.6.2:3001/files/" + Object.values(req.files)[indice][0].filename;
+        const filename = "192.168.6.2:3001/files/" + Object.values(req.files)[indice][0].filename;
         const originalName = Object.values(req.files)[indice][0].originalname;
         const fileFormat = Object.values(req.files)[indice][0].mimetype;
 
@@ -34,8 +34,8 @@ class CreateDocumentController {
 
         const indice = Object.keys(req.files).indexOf("file")
 
-        const path = "localhost:3001/files" + Object.values(req.files)[indice][0].filename;
-        const filename = "localhost:3001/files" + Object.values(req.files)[indice][0].filename;
+        const path = "192.168.6.2:3001/files" + Object.values(req.files)[indice][0].filename;
+        const filename = "192.168.6.2:3001/files" + Object.values(req.files)[indice][0].filename;
         const originalName = Object.values(req.files)[indice][0].originalname;
         const fileFormat = Object.values(req.files)[indice][0].mimetype;
 
