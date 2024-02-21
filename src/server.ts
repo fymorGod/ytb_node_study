@@ -6,7 +6,7 @@ import path from "path"
 const app = express()
 // const PORT = 3333
 // const IP = "192.168.4.125" 
-
+app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 app.use(express.json())
 app.use(router)

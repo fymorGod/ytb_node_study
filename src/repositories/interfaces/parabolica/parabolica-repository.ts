@@ -43,6 +43,6 @@ export interface ParabolicaRepository {
   get: () => Promise<Object>;
   find: (data: ParabolicaFind) => Promise<Object | null>;
   findByCodigo: (data: ParabolicaFindByCodigo) => Promise<Object | null>
-  update: (data: ParabolicaUpdate) => Promise<void>;
+  update: (data: ParabolicaUpdate) => Promise<Object | null>;
   delete: (data: ParabolicaDelete) => Promise<void>;
 }

@@ -218,11 +218,8 @@ export class PrismaTransmissorRepository implements TransmissorRepository {
 }
 
   async update({ id ,codigo, marca, modelo, categoria, status, programmed, canal_fisico, canal_virtual, acoplador_one, acoplador_two, receptor, antena, tipo_equipamento, station_id }: TransmissorUpdate) {
-  await prisma.transmissor.update({
-    where: {
-      id,
-    },
-    data: {
+   
+    const dataToUpdate:any = {
       codigo,
       marca,
       modelo,
@@ -233,27 +230,42 @@ export class PrismaTransmissorRepository implements TransmissorRepository {
       canal_virtual,
       acoplador_one,
       acoplador_two,
-      Receptor: {
-        connect: {
-          id: receptor
-        }
-      },
-      Antena: {
-        connect: {
-          id: antena
-        }
-      },
-      TipoEquipamento: {
-        connect: {
-          name: tipo_equipamento
-        },
-      },
-      Station: {
+    }
+
+    if (station_id) {
+      dataToUpdate.Station = {
         connect: {
           id: station_id
-        },
-      },     
+        }
+      }
     }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    if (receptor) {
+      dataToUpdate.Receptor = {
+        connect: {
+          name: receptor
+        }
+      }
+    }
+    if (antena) {
+      dataToUpdate.Antena = {
+        connect: {
+          name: antena
+        }
+      }
+    }
+    return await prisma.transmissor.update({
+      where: {
+        id,
+      },
+    data: dataToUpdate
   });
 }
 

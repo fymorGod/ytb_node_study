@@ -40,6 +40,6 @@ export interface SwitchRepository {
   get: () => Promise<Object>;
   find: (data: SwitchFind) => Promise<Object | null>;
   findByCodigo: (data: SwitchFindByCodigo) => Promise<Object | null>
-  update: (data: SwitchUpdate) => Promise<void>;
+  update: (data: SwitchUpdate) => Promise<Object | null>;
   delete: (data: SwitchDelete) => Promise<void>;
 }

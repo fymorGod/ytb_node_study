@@ -46,5 +46,5 @@ export interface CaboRepository {
   find: (data: CaboFind) => Promise<Object | null>
   findByCodigo: (data: CaboFindByCodigo) => Promise<Object | null>
   delete: (data: CaboDelete) => Promise<void>
-  update: (data: CaboUpdate) => Promise<void>
+  update: (data: CaboUpdate) => Promise<Object | null>
 }

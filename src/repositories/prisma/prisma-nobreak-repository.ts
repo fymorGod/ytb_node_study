@@ -149,30 +149,35 @@ export class PrismaNobreakRepository implements NobreakRepository {
   }
 
   async update({ id, codigo, marca, modelo, categoria, status, tensao_entrada, tensao_saida, tipo_equipamento, station_id }: NobreakUpdate) {
-    await prisma.nobreak.update({
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      tensao_entrada,
+      tensao_saida,
+    }
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.nobreak.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        tensao_entrada,
-        tensao_saida,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-        
-      }
+      data: dataToUpdate
     });
   }
 

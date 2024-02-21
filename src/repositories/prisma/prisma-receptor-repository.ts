@@ -185,36 +185,44 @@ export class PrismaReceptorRepository implements ReceptorRepository {
   }
 
   async update({ id,  codigo, marca, modelo, categoria, status, frequencia, symbol_rate, channel, tipo_equipamento, parabolica, station_id  }: ReceptorUpdate) {
-    await prisma.receptor.update({
+    
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      frequencia,
+      symbol_rate,
+      channel,
+    };
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    if (parabolica) {
+      dataToUpdate.Parabolica = {
+          connect: {
+            id: parabolica
+        },
+      }
+    }
+    return await prisma.receptor.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        frequencia,
-        symbol_rate,
-        channel,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Parabolica: {
-          connect: {
-            id: parabolica
-          }
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-        
-      }
+      data:dataToUpdate
     });
   }
 

@@ -147,28 +147,34 @@ export class PrismaSwitchRepository implements SwitchRepository {
   }
 
   async update({ id, codigo, marca, modelo, categoria, qtd_portas, status,station_id, tipo_equipamento }: SwitchUpdate) {
-    await prisma.switchies.update({
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      qtd_portas,
+    }
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.switchies.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        qtd_portas,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-      }
+      data: dataToUpdate
     });
   }
 

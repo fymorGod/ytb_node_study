@@ -151,30 +151,36 @@ export class PrismaTorreRepository implements TorreRepository {
   }
 
   async update({ id,  codigo, marca, modelo, categoria, status, tipo_torre, aterramento , altura, tipo_equipamento, station_id }: TorreUpdate) {
-    await prisma.torre.update({
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      tipo_torre,
+      aterramento,
+      altura,
+    }
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.torre.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        tipo_torre,
-        aterramento,
-        altura,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },      
-      }
+      data: dataToUpdate
     });
   }
 

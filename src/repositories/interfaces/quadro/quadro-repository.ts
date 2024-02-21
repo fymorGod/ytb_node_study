@@ -39,6 +39,6 @@ export interface QuadroRepository {
   get: () => Promise<Object>;
   find: (data: QuadroFind) => Promise<Object | null>;
   findByCodigo: (data: QuadroFindByCodigo) => Promise<Object | null>
-  update: (data: QuadroUpdate) => Promise<void>;
+  update: (data: QuadroUpdate) => Promise<Object | null>;
   delete: (data: QuadroDelete) => Promise<void>;
 }

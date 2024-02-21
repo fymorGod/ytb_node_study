@@ -50,6 +50,11 @@ export class PrismaStationRepository implements StationRepository {
         longitude: true,
         link_grafana: true,
         status: true,
+        Documento_Station: {
+          select: {
+            documento: true
+          }
+        },
         manutencao: {
           select: {
             id:true,
@@ -462,6 +467,11 @@ export class PrismaStationRepository implements StationRepository {
         longitude: true,
         link_grafana: true,
         status: true,
+        Documento_Station: {
+          select: {
+            documento: true
+          }
+        },
         manutencao: {
           select: {
             id:true,

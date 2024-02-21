@@ -154,29 +154,36 @@ export class PrismaParabolicaRepository implements ParabolicaRepository {
   }
 
   async update({ id, codigo, marca, modelo, categoria, status, diametro, satelite, tipo_equipamento, station_id }: ParabolicaUpdate) {
-    await prisma.parabolica.update({
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      diametro,
+      satelite,
+    }
+
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.parabolica.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        diametro,
-        satelite,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        }
-      }
+      data: dataToUpdate
     });
   }
 }

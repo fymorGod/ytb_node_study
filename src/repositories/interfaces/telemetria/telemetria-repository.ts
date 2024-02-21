@@ -40,6 +40,6 @@ export interface TelemetriaRepository {
   get: () => Promise<Object>;
   find: (data: TelemetriaFind) => Promise<Object | null>;
   findByCodigo: (data: TelemetriaFindByCodigo) => Promise<Object | null>
-  update: (data: TelemetriaUpdate) => Promise<void>;
+  update: (data: TelemetriaUpdate) => Promise<Object | null>;
   delete: (data: TelemetriaDelete) => Promise<void>;
 }

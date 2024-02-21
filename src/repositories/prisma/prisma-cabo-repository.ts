@@ -145,29 +145,35 @@ export class PrismaCaboRepository implements CaboRepository {
   }
 
   async update({id, codigo, marca, modelo, categoria, status,tamanho, tipos_cabo, tipo_equipamento, station_id}: CaboUpdate) {
-    await prisma.cabo.update({
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      tipos_cabo,
+      tamanho,
+    }
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.cabo.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        tipos_cabo,
-        tamanho,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-      }
+      data: dataToUpdate
     });
   }
   

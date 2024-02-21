@@ -76,8 +76,23 @@ model Documento {
   Documento_Torre          Documento_Torre[]
   Documento_Transmissor    Documento_Transmissor[]
   Documento_Checklist      Documento_Checklist[]
+  Documento_Usuario        Documento_Usuario[]
 
   @@map("documentos")
+}
+
+model Documento_Usuario {
+  id String @id @default(uuid())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documentoId String?
+  User        User?      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId      String?
+
+  @@map("documentos_usuario")
 }
 
 model Documento_Antenas {
@@ -89,7 +104,7 @@ model Documento_Antenas {
   Antena   Antena? @relation(fields: [antenaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   antenaId String?
 
-  documento   Documento? @relation(fields: [documentoId], references: [id])
+  documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentoId String?
 
   @@map("documentos_antenas")
@@ -278,19 +293,19 @@ model Documento_Transmissor {
 }
 
 model User {
-  id              String @id @default(uuid())
-  name            String
-  email           String @unique
-  password        String
-  contato         String
-  empresa         String
-  contato_empresa String
-
-  manutencao Manutencao[]
-  Access     Access?      @relation(fields: [accessId], references: [id])
-  accessId   String?
-  created_at DateTime     @default(now())
-  updated_at DateTime     @updatedAt
+  id                String              @id @default(uuid())
+  name              String
+  email             String              @unique
+  password          String
+  contato           String
+  empresa           String
+  contato_empresa   String
+  Documento_Usuario Documento_Usuario[]
+  manutencao        Manutencao[]
+  Access            Access?             @relation(fields: [accessId], references: [id])
+  accessId          String?
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
 }
 
 model Access {

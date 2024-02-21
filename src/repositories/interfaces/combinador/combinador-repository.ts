@@ -40,6 +40,6 @@ export interface CombinadorRepository {
   get: () => Promise<Object>;
   find: (data: CombinadorFind) => Promise<Object | null>;
   findByCodigo: (data: CombinadorFindByCodigo) => Promise<Object | null>
-  update: (data: CombinadorUpdate) => Promise<void>;
+  update: (data: CombinadorUpdate) => Promise<Object | null>;
   delete: (data: CombinadorDelete) => Promise<void>;
 }

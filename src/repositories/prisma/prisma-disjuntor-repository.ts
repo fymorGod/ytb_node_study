@@ -165,28 +165,35 @@ export class PrismaDisjuntorRepository implements DisjuntorRepository {
   }
 
   async update({ id, codigo, marca, modelo, categoria, corrente_maxima, station_id, tipo_equipamento, status }: DisjuntorUpdate) {
-    await prisma.disjuntor.update({
+
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      corrente_maxima,
+    }
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.disjuntor.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        corrente_maxima,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-      }
+      data:  dataToUpdate
     });
   }
 

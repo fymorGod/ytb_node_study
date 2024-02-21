@@ -46,6 +46,6 @@ export interface TorreRepository {
   get: () => Promise<Object>;
   find: (data: TorreFind) => Promise<Object | null>;
   findByCodigo: (data: TorreFindByCodigo) => Promise<Object | null>
-  update: (data: TorreUpdate) => Promise<void>;
+  update: (data: TorreUpdate) => Promise<Object | null>;
   delete: (data: TorreDelete) => Promise<void>;
 }

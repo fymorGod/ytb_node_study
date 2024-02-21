@@ -142,27 +142,33 @@ export class PrismaTelemetriaRepository implements TelemetriaRepository {
   }
 
   async update({ id, codigo, marca, modelo, categoria, station_id, tipo_equipamento, status }: TelemetriaUpdate) {
-    await prisma.telemetria.update({
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+    }
+    if (station_id) {
+          dataToUpdate.Station = {
+            connect: {
+              id: station_id
+            }
+          }
+        }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.telemetria.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-      }
+      data: dataToUpdate
     });
   }
 }

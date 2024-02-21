@@ -47,6 +47,6 @@ export interface ReceptorRepository {
   get: () => Promise<Object>;
   find: (data: ReceptorFind) => Promise<Object | null>;
   findByCodigo: (data: ReceptorFindByCodigo) => Promise<Object | null>
-  update: (data: ReceptorUpdate) => Promise<void>;
+  update: (data: ReceptorUpdate) => Promise<Object | null>;
   delete: (data: ReceptorDelete) => Promise<void>;
 }

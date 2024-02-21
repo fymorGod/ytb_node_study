@@ -45,9 +45,9 @@ if (req.files != null || req.files != undefined) {
 
       const indice = Object.keys(req.files).indexOf("foto")
 
-      const path = "http://localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
-      const filename = "http://localhost:3001/files/" + Object.values(req.files)[indice][0].filename;
-      const originalName = Object.values(req.files)[indice][0].originalname;
+      const path = "http://192.168.6.2:3333/files/" + Object.values(req.files)[indice][0].filename;
+      const filename = "http://192.168.6.2:3333/files/" + Object.values(req.files)[indice][0].filename;
+      const originalName = Object.values(req.files)[indice][0].originalname.replace(/\s/g, '_');
       const fileFormat = Object.values(req.files)[indice][0].mimetype;
 
       const docCriado = await createDocumentService.execute({ path, filename, originalName, fileFormat });
@@ -75,9 +75,9 @@ if (req.files != null || req.files != undefined) {
 
       const indice = Object.keys(req.files).indexOf("file")
 
-      const path = "http://localhost:3001/files" + Object.values(req.files)[indice][0].filename;
-      const filename = "http://localhost:3001/files" + Object.values(req.files)[indice][0].filename;
-      const originalName = Object.values(req.files)[indice][0].originalname;
+      const path = "http://192.168.6.2:3333/files/" + Object.values(req.files)[indice][0].filename;
+      const filename = "http://192.168.6.2:3333/files/" + Object.values(req.files)[indice][0].filename;
+      const originalName = Object.values(req.files)[indice][0].originalname.replace(/\s/g, '_');
       const fileFormat = Object.values(req.files)[indice][0].mimetype;
 
       const docCriado = await createDocumentService.execute({ path, filename, originalName, fileFormat });

@@ -1,7 +1,5 @@
 import { AntenaRepository, antenaCategoria, antenaStatus, antenaTipo, TypeTorreTipo } from "../../repositories/interfaces/antena/antena-repository";
 
-
-
 interface CreateAntenaRequest {
   codigo: string;
   marca: string;

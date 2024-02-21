@@ -41,6 +41,6 @@ export interface DisjuntorRepository {
   get: () => Promise<Object>;
   find: (data: DisjuntorFind) => Promise<Object | null>;
   findByCodigo: (data: DisjuntorFindByCodigo) => Promise<Object | null>
-  update: (data: DisjuntorUpdate) => Promise<void>;
+  update: (data: DisjuntorUpdate) => Promise<Object | null>;
   delete: (data: DisjuntorDelete) => Promise<void>;
 }

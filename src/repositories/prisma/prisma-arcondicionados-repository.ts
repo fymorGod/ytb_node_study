@@ -153,29 +153,35 @@ export class PrismaArcondicionadoRepository implements ArcondicionadoRepository 
   }
 
   async update({ id, codigo, marca, modelo, categoria, status, potencia, tensao, tipo_equipamento, station_id }: ArcondicionadoUpdate) {
-    await prisma.arcondicionado.update({
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      potencia,
+      tensao,
+    };
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.arcondicionado.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        potencia,
-        tensao,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-      }
+      data: dataToUpdate
     });
   }
   

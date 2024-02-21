@@ -53,6 +53,6 @@ export interface TransmissorRepository {
   get: () => Promise<Object>;
   find: (data: TransmissorFind) => Promise<Object | null>;
   findByCodigo: (data: TransmissorFindByCodigo) => Promise<Object | null>
-  update: (data: TransmissorUpdate) => Promise<void>;
+  update: (data: TransmissorUpdate) => Promise<Object | null>;
   delete: (data: TransmissorDelete) => Promise<void>;
 }

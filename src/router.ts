@@ -106,14 +106,19 @@ import { multerConfig } from "./config/multer";
 import { DeleteDocumentController } from "./controllers/documents/DeleteDocumentController";
 
 export const router = Router()
-
-router.post("/v1/user", createUser)
+router.post("/v1/user", multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), createUser)
 router.get("/v1/users", getAllUsers)
-router.put("/v1/user/:id", updateUser)
+router.put("/v1/user/:id", multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), updateUser)
 
 router.post("/access", createAccess)
 router.get("/accesses", getAllAccesses)
-
+// router
+//   .route("/v1/user")
+//   .get(getAllUsers)
+//   .post(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), createUser)
+// router
+//   .route("/v1/user/:id")
+//   .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), updateUser)
 //Rotas para Antena
 router
   .route("/v1/antenas")
@@ -172,11 +177,11 @@ router
 router
   .route("/v1/disjuntor")
   .get(new GetDisjuntorController().handle)
-  .post(new CreateDisjuntorControler().handle)
+  .post(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), new CreateDisjuntorControler().handle)
 router
   .route("/v1/disjuntor/:id")
   .get(new FindDisjuntorController().handle)
-  .put(new UpdateDisjuntorController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]), new UpdateDisjuntorController().handle)
   .delete(new DeleteDisjuntorController().handle)
 
 //Rotas para Dps

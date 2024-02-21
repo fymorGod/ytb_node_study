@@ -39,6 +39,6 @@ export interface ExaustorRepository {
   get: () => Promise<Object>;
   find: (data: ExaustorFind) => Promise<Object | null>;
   findByCodigo: (data: ExaustorFindByCodigo) => Promise<Object | null>
-  update: (data: ExaustorUpdate) => Promise<void>;
+  update: (data: ExaustorUpdate) => Promise<Object | null>;
   delete: (data: ExaustorDelete) => Promise<void>;
 }

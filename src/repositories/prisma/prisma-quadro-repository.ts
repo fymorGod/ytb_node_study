@@ -190,36 +190,46 @@ export class PrismaQuadroRepository implements QuadroRepository {
   }
 
   async update({ id, codigo, categoria, status, dps, disjuntor, tipo_equipamento, station_id }: QuadroUpdate) {
-    await prisma.quadro.update({
+    const dataToUpdate:any = {
+      codigo,
+      categoria,
+      status,
+    }
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+
+    if (disjuntor) {
+      dataToUpdate.Disjuntor = {
+        connect: {
+          id: disjuntor
+        }
+      }
+    }
+    if (dps) {
+      dataToUpdate.Dps = {
+        connect: {
+          id: dps
+        }
+      }
+    }
+    return await prisma.quadro.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        categoria,
-        status,
-        Disjuntor: {
-          connect: {
-            id: disjuntor
-          }
-        },
-        Dps: {
-          connect: {
-            id: dps
-          }
-        },
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-       
-      }
+      data: dataToUpdate
     });
   }
 

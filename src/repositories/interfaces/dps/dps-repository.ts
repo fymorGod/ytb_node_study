@@ -44,6 +44,6 @@ export interface DpsRepository {
   get: () => Promise<Object>;
   find: (data: DpsFind) => Promise<Object | null>;
   findByCodigo: (data: DpsFindByCodigo) => Promise<Object | null>
-  update: (data: DpsUpdate) => Promise<void>;
+  update: (data: DpsUpdate) => Promise<Object | null>;
   delete: (data: DpsDelete) => Promise<void>;
 }

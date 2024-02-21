@@ -166,29 +166,35 @@ export class PrismaDpsRepository implements DpsRepository {
   }
 
   async update({ id,codigo, marca, modelo, categoria, status, corrente_maxima, classe_dps, tipo_equipamento, station_id }: DpsUpdate) {
-    await prisma.dps.update({
+    const dataToUpdate:any = {
+      codigo,
+      marca,
+      modelo,
+      categoria,
+      status,
+      corrente_maxima,
+      classe_dps,
+    }
+    if (station_id) {
+      dataToUpdate.Station = {
+        connect: {
+          id: station_id
+        }
+      }
+    }
+
+    if (tipo_equipamento) {
+      dataToUpdate.TipoEquipamento = {
+        connect: {
+          name: tipo_equipamento
+        }
+      }
+    }
+    return await prisma.dps.update({
       where: {
         id,
       },
-      data: {
-        codigo,
-        marca,
-        modelo,
-        categoria,
-        status,
-        corrente_maxima,
-        classe_dps,
-        TipoEquipamento: {
-          connect: {
-            name: tipo_equipamento
-          },
-        },
-        Station: {
-          connect: {
-            id: station_id
-          },
-        },
-      }
+      data: dataToUpdate
     });
   }
 

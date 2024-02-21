@@ -44,6 +44,6 @@ export interface NobreakRepository {
   get: () => Promise<Object>;
   find: (data: NobreakFind) => Promise<Object | null>;
   findByCodigo: (data: NobreakFindByCodigo) => Promise<Object | null>
-  update: (data: NobreakUpdate) => Promise<void>;
+  update: (data: NobreakUpdate) => Promise<Object | null>;
   delete: (data: NobreakDelete) => Promise<void>;
 }

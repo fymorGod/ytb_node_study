@@ -46,6 +46,6 @@ export interface ArcondicionadoRepository {
   get: () => Promise<Object>;
   find: (data: ArcondicionadoFind) => Promise<Object | null>;
   findByCodigo: (data: ArcondicionadoFindByCodigo) => Promise<Object | null>;
-  update: (data: ArcondicionadoUpdate) => Promise<void>;
+  update: (data: ArcondicionadoUpdate) => Promise<Object | null>;
   delete: (data: ArcondicionadoDelete) => Promise<void>;
 }
