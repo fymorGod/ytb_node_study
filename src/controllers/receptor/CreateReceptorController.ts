@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaReceptorRepository } from "../../repositories/prisma/prisma-receptor-repository";
 import { CreateReceptorService } from "../../services/receptor/CreateReceptorService";
-import { PrismaTransmissorRepository } from "../../repositories/prisma/prisma-transmissor-repository";
-import { FindTransmissorController } from "../transmissor/FindTransmissorController";
-
 
 class CreateReceptorControler {
   

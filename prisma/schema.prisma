@@ -77,6 +77,7 @@ model Documento {
   Documento_Transmissor    Documento_Transmissor[]
   Documento_Checklist      Documento_Checklist[]
   Documento_Usuario        Documento_Usuario[]
+  Documento_Quadro         Documento_Quadro[]
 
   @@map("documentos")
 }
@@ -448,6 +449,18 @@ model Documento_Tarefa {
   @@map("documentos_tarefas")
 }
 
+model Documento_Quadro {
+  id          String     @id @default(uuid())
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  Documento   Documento? @relation(fields: [documentoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documentoId String?
+  Quadro      Quadro?    @relation(fields: [quadroId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  quadroId    String?
+
+  @@map("documentos_quadro")
+}
+
 model Tarefa {
   id                    String               @id @default(uuid())
   description           String
@@ -553,17 +566,18 @@ model Disjuntor {
 }
 
 model Quadro {
-  id                String           @id @default(uuid())
-  codigo            String           @unique
+  id                String             @id @default(uuid())
+  codigo            String             @unique
   categoria         TypeCategoria
   status            TypeStatus
   Dps               Dps[]
   Disjuntor         Disjuntor[]
-  created_at        DateTime         @default(now())
-  updated_at        DateTime         @updatedAt
-  TipoEquipamento   TipoEquipamento? @relation(fields: [tipoEquipamentoId], references: [id])
+  Documento_Quadro  Documento_Quadro[]
+  created_at        DateTime           @default(now())
+  updated_at        DateTime           @updatedAt
+  TipoEquipamento   TipoEquipamento?   @relation(fields: [tipoEquipamentoId], references: [id])
   tipoEquipamentoId String?
-  Station           Station?         @relation(fields: [stationId], references: [id])
+  Station           Station?           @relation(fields: [stationId], references: [id])
   stationId         String?
 }
 

@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { PrismaCaboRepository } from "../../repositories/prisma/prisma-cabo-repository";
 import { UpdateCaboService } from "../../services/cabos/UpdateCaboService";
+import { PrismaDocumentRepository } from "../../repositories/prisma/documents/prisma-document-repository";
+import { PrismaDocumentCaboRepository } from "../../repositories/prisma/documents/prisma-document_cabo_repository";
+import { CreateDocument_CaboService } from "../../services/documents/CreateDocumentCabo";
+import { CreateDocumentService } from "../../services/documents/CreateDocumentoService";
 
 class UpdateCaboController {
   async handle(req: Request, res: Response) {
@@ -10,7 +14,8 @@ class UpdateCaboController {
     const { codigo, marca, modelo, categoria, status, tipos_cabo, tamanho, tipo_equipamento, station_id } = req.body;
 
     const prismaCaboRepository = new PrismaCaboRepository()
-
+    const prismaDocumentRepository = new PrismaDocumentRepository();
+    const prismaDocumentsCaboRepository = new PrismaDocumentCaboRepository();
     const updateCaboService = new UpdateCaboService(prismaCaboRepository)
 
     const cabo = await updateCaboService.execute({
@@ -28,7 +33,70 @@ class UpdateCaboController {
     if (cabo instanceof Error) {
       return res.status(400).json({ error: cabo.message })
     }
+  // Criando os documentos
+  if (req.files != null || req.files != undefined) {
 
+    // Se o usuário enviar algum documento (PDF ou PNG)
+    if (Object.keys(req.files).length > 0) {
+
+      const createDocumentService = new CreateDocumentService(prismaDocumentRepository);
+      const createDocumentCaboService = new CreateDocument_CaboService(prismaDocumentsCaboRepository);
+
+      // Verificando se o documento inserido foi PNG
+      if (Object.keys(req.files).includes("foto")) {
+
+        const indice = Object.keys(req.files).indexOf("foto")
+
+        const path = "http://192.168.6.2:3333/files/" + Object.values(req.files)[indice][0].filename;
+        const filename = "http://192.168.6.2:3333/files/" + Object.values(req.files)[indice][0].filename;
+        const originalName = Object.values(req.files)[indice][0].originalname.replace(/\s/g, '_');
+        const fileFormat = Object.values(req.files)[indice][0].mimetype;
+
+        const docCriado = await createDocumentService.execute({ path, filename, originalName, fileFormat });
+
+        // Retornando mensagem de erro caso aconteça algum errro na criação do doc
+        if (docCriado instanceof Error) {
+          return res.status(400).json(docCriado.message);
+        }
+
+        const documentoId = docCriado?.document?.id;
+        console.log(documentoId)
+        const caboId = Object(cabo).id;
+        console.log(caboId)
+
+        // Criando o documento da condensadora
+        const doc_caboCreated = await createDocumentCaboService.execute({ documentoId, caboId });
+
+        if (doc_caboCreated instanceof Error) {
+          return res.status(400).json(doc_caboCreated);
+        }
+      }
+
+      // Verificando se o documento inserido foi PDF
+      if (Object.keys(req.files).includes("file")) {
+
+        const indice = Object.keys(req.files).indexOf("file")
+
+        const path = "http://192.168.6.2:3333/files/" + Object.values(req.files)[indice][0].filename;
+        const filename = "http://192.168.6.2:3333/files/" + Object.values(req.files)[indice][0].filename;
+        const originalName = Object.values(req.files)[indice][0].originalname.replace(/\s/g, '_');
+        const fileFormat = Object.values(req.files)[indice][0].mimetype;
+
+        const docCriado = await createDocumentService.execute({ path, filename, originalName, fileFormat });
+
+        const documentoId = docCriado?.document?.id;
+        const caboId = Object(cabo).id;
+        console.log(documentoId)
+        console.log(caboId)
+        const doc_caboCreated = await createDocumentCaboService.execute({ documentoId, caboId });
+
+        if (doc_caboCreated instanceof Error) {
+          return res.status(400).json(doc_caboCreated);
+        }
+      }
+    }
+
+  }
     return res.status(200).json({
       message: "Cabo atualizado com sucesso",
       cabo
