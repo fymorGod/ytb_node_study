@@ -148,7 +148,7 @@ router
 router
   .route("/v1/arcondicionados/:id")
   .get(new FindArcondicionadoController().handle)
-  .put(new UpdateArcondicionadoController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateArcondicionadoController().handle)
   .delete(new DeleteArcondicionadoController().handle)
 
 //Rotas para Cabos
@@ -159,7 +159,7 @@ router
 router
   .route("/v1/cabos/:id")
   .get(new FindCaboController().handle)
-  .put(new UpdateCaboController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateCaboController().handle)
   .delete(new DeleteCaboController().handle)
 
 //Rotas para Combinadores
@@ -170,7 +170,7 @@ router
 router
   .route("/v1/combinador/:id")
   .get(new FindCombinadorController().handle)
-  .put(new UpdateCombinadorController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateCombinadorController().handle)
   .delete(new DeleteCombinadorController().handle)
 
 //Rotas para Disjuntor
@@ -192,7 +192,7 @@ router
 router
   .route("/v1/dps/:id")
   .get(new FindDpsController().handle)
-  .put(new UpdateDpsController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateDpsController().handle)
   .delete(new DeleteDpsController().handle)
 
 //Rotas para Exaustor
@@ -203,7 +203,7 @@ router
 router
   .route("/v1/exaustor/:id")
   .get(new FindExaustorController().handle)
-  .put(new UpdateExaustorController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateExaustorController().handle)
   .delete(new DeleteExaustorController().handle)
 
 //Rotas para Nobreak
@@ -214,7 +214,7 @@ router
 router
   .route("/v1/nobreak/:id")
   .get(new FindNobreakController().handle)
-  .put(new UpdateNobreakController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateNobreakController().handle)
   .delete(new DeleteNobreakController().handle)
 
 //Rotas para Parabolica
@@ -225,7 +225,7 @@ router
 router
   .route("/v1/parabolica/:id")
   .get(new FindParabolicaController().handle)
-  .put(new UpdateParabolicaController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateParabolicaController().handle)
   .delete(new DeleteParabolicaController().handle)
 
 //Rotas para Receptor
@@ -236,7 +236,7 @@ router
 router
   .route("/v1/receptor/:id")
   .get(new FindReceptorController().handle)
-  .put(new UpdateReceptorController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateReceptorController().handle)
   .delete(new DeleteReceptorController().handle)
 
 
@@ -248,7 +248,7 @@ router
 router
   .route("/v1/switch/:id")
   .get(new FindSwitchController().handle)
-  .put(new UpdateSwitchController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateSwitchController().handle)
   .delete(new DeleteSwitchController().handle)
 
 //Rotas para Torre
@@ -259,7 +259,7 @@ router
 router
   .route("/v1/torre/:id")
   .get(new FindTorreController().handle)
-  .put(new UpdateTorreController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateTorreController().handle)
   .delete(new DeleteTorreController().handle)
 
 //Rotas para Transmissor
@@ -270,7 +270,7 @@ router
 router
   .route("/v1/transmissor/:id")
   .get(new FindTransmissorController().handle)
-  .put(new UpdateTransmissorController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateTransmissorController().handle)
   .delete(new DeleteTransmissorController().handle)
 
 //Rotas para Quadro
@@ -281,7 +281,7 @@ router
 router
   .route("/v1/quadro/:id")
   .get(new FindQuadroController().handle)
-  .put(new UpdateQuadroController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateQuadroController().handle)
   .delete(new DeleteQuadroController().handle)
 
 //Rotas para Station
@@ -292,7 +292,7 @@ router
 router
   .route("/v1/station/:id")
   .get(new FindStationController().handle)
-  .put(new UpdateStationController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateStationController().handle)
   .delete(new DeleteStationController().handle)
 
 //Rotas para Telemetria
@@ -303,7 +303,7 @@ router
 router
   .route("/v1/telemetria/:id")
   .get(new FindTelemetriaController().handle)
-  .put(new UpdateTelemetriaController().handle)
+  .put(multer(multerConfig).fields([{name: "file"}, { name: "foto"}]),new UpdateTelemetriaController().handle)
   .delete(new DeleteTelemetriaController().handle)
 
 //Rotas para Tarefas
